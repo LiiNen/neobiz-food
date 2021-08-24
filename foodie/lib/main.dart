@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodie/statelessWidgets.dart';
-import 'restApi.dart' as api;
+import 'restApi/restApi.dart' as api;
 
 import 'loginView/loginView.dart';
 

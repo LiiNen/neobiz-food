@@ -1,9 +1,7 @@
 // https://flutter.dev/docs/cookbook/networking/fetch-data
 
 import 'dart:convert';
-import 'dart:io';
 
-import 'package:foodie/functions.dart';
 import 'package:http/http.dart' as http;
 
 String baseUrl = 'https://www.epicure.co.kr';
@@ -46,27 +44,7 @@ String path_check_version_code = "service/check_version_code.php";
 String path_check_passwd = "usr/check_passwd.php";
 String path_find_dong_list = "service/find_dong_list.php";
 
-// {uid: userId, name: userName, tel: tel, phone: phone, email: email}
-Future login(String id, String pw) async {
-  var _query = '?mode=login';
-  var _body = Map<String, String>();
-  _body['id'] = id;
-  _body['passwd'] = pw;
 
-  var response = await http.post(Uri.parse('$baseUrl$route$path_login$_query'), body: _body);
-  if(response.statusCode == 200) {
-    var user = json.decode(response.body);
-    if(user['mode'] == 'login_sucess') {
-      showToast('login success');
-    } else {
-      showToast('login fail');
-    }
-    return user['result'];
-  }
-  else {
-    print('네트워크 상태 확인');
-  }
-}
 
 Future trialScrap() async {
   final response = await http.get(Uri.parse('$baseUrl$route$path_trial_scrap'));

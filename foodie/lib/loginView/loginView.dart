@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:foodie/restApi.dart' as api;
+import 'package:foodie/functions.dart';
+import 'package:foodie/restApi/signInApi.dart';
 import 'package:foodie/statelessWidgets.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginView extends StatefulWidget {
   @override
@@ -43,8 +45,21 @@ class _LoginView extends State<LoginView> {
   }
 
   void _loginAction() async {
-    var responseBody = await api.login(idController.text, pwController.text);
-    print('response body');
-    print(responseBody);
+    LoginStatus loginStatus = await login(id: idController.text, pw: pwController.text);
+    if(loginStatus.done) {
+      final pref = await SharedPreferences.getInstance();
+      bool _isInstalled = pref.getBool('isInstalled') ?? false;
+      showToast('login success');
+      if(!_isInstalled) {
+        setIsInstalled();
+        // login 2
+      }
+      else {
+        // login 3
+      }
+    }
+    else {
+      showToast('login failed');
+    }
   }
 }
