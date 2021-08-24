@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:foodie/statelessWidgets.dart';
 import 'restApi.dart' as api;
 
+import 'loginView/loginView.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -12,7 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        home: MainPage()
+      home: LoginView()
     );
   }
 }
@@ -26,7 +28,6 @@ class _MainPage extends State<MainPage> {
 
   @override
   void initState() {
-    api.login();
     super.initState();
   }
 

@@ -3,7 +3,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 void showToast(String message){
   Fluttertoast.showToast(msg: message,
-      gravity: ToastGravity.BOTTOM
+    gravity: ToastGravity.BOTTOM
   );
 }
 
@@ -21,14 +21,15 @@ TextStyle textStyle({color: Colors.black, weight: int, size: double}) {
       break;
   }
   return TextStyle(
-      color: color,
-      fontWeight: fontWeight,
-      fontFamily: "AppleSDGothicNeo",
-      fontStyle:  FontStyle.normal,
-      fontSize: size
+    color: color,
+    fontWeight: fontWeight,
+    fontFamily: "AppleSDGothicNeo",
+    fontStyle:  FontStyle.normal,
+    fontSize: size
   );
 }
 
 textFieldClear(TextEditingController controller) {
   controller.clear();
 }
+

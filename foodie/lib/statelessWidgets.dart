@@ -13,7 +13,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget{
       centerTitle: true,
       automaticallyImplyLeading: false,
       title: Container(
-        child: Text('hello')
+        child: Text('hello', style: TextStyle(color: Colors.white),)
       )
     );
   }
