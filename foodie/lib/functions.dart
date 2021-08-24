@@ -33,3 +33,8 @@ textFieldClear(TextEditingController controller) {
   controller.clear();
 }
 
+navigatorPush({required BuildContext context, required Widget route, bool isReplace=false}) {
+  isReplace
+    ? Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => route))
+    : Navigator.push(context, MaterialPageRoute(builder: (context) => route));
+}

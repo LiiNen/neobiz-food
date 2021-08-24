@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:foodie/functions.dart';
 import 'package:foodie/statelessWidgets.dart';
-import 'restApi/restApi.dart' as api;
 
-import 'loginView/loginView.dart';
+import 'loginView/signInView.dart';
+import 'loginView/signUpView.dart';
 
 void main() {
   runApp(MyApp());
@@ -14,10 +15,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: LoginView()
+      home: MainPage()
     );
   }
 }
+
+
+double maxWidth = 0;
 
 class MainPage extends StatefulWidget {
   @override
@@ -33,9 +37,18 @@ class _MainPage extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
+    maxWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: MainAppBar(),
-      body: Text('he')
+      body: Column(
+        children: [
+          confirmButton(title: 'signIn', confirmAction: pushSignIn),
+          confirmButton(title: 'signUp', confirmAction: pushSignUp),
+        ]
+      )
     );
   }
+
+  void pushSignIn() {navigatorPush(context: context, route: SignInView());}
+  void pushSignUp() {navigatorPush(context: context, route: SignUpView());}
 }

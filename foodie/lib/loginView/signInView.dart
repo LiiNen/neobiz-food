@@ -4,11 +4,11 @@ import 'package:foodie/restApi/signInApi.dart';
 import 'package:foodie/statelessWidgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class LoginView extends StatefulWidget {
+class SignInView extends StatefulWidget {
   @override
-  State<LoginView> createState() => _LoginView();
+  State<SignInView> createState() => _SignInView();
 }
-class _LoginView extends State<LoginView> {
+class _SignInView extends State<SignInView> {
   TextEditingController idController = TextEditingController();
   TextEditingController pwController = TextEditingController();
 
