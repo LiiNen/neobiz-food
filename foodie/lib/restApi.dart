@@ -46,33 +46,24 @@ String path_check_passwd = "usr/check_passwd.php";
 String path_find_dong_list = "service/find_dong_list.php";
 
 
-// Future login() async {
-//   final _query = {
-//     'mode': 'LOGIN',
-//     'id': 'epicure',
-//     'pw': '584472'
-//   };
-//   final _body = {
-//     'id': 'epicure',
-//     'pw': '584472'
-//   };
-//   var uri = Uri.parse('$baseUrl$path_login');
-//
-//
-//   var response = await http.post(Uri.parse('$baseUrl$route$path_login?mode=login'),
-//     body: '{"id": "epicure", "passwd": "584472"}',
-//
-//   );
-//
-//   if(response.statusCode == 200) {
-//     print(response.body);
-//     return response.body;
-//   }
-//   else {
-//     print('error');
-//     return response.body;
-//   }
-// }
+Future login() async {
+  var _body = Map<String, String>();
+  _body['id'] = 'epicure';
+  _body['passwd'] = '584472';
+
+  var response = await http.post(Uri.parse('$baseUrl$route$path_login?mode=login'),
+    body: _body,
+  );
+
+  if(response.statusCode == 200) {
+    print(json.decode(response.body));
+    return response.body;
+  }
+  else {
+    print('error');
+    return response.body;
+  }
+}
 
 Future trialScrap() async {
   final response = await http.get(Uri.parse('$baseUrl$route$path_trial_scrap'));

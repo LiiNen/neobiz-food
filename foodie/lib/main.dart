@@ -26,7 +26,7 @@ class _MainPage extends State<MainPage> {
 
   @override
   void initState() {
-    api.trialScrap();
+    api.login();
     super.initState();
   }
 
