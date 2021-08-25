@@ -60,13 +60,16 @@ class _FindAccountView extends State<FindAccountView> {
     switch(result) {
       case 0:
         // email send successfully
+        showToast('email successfully send');
         navigatorPush(context: context, route: SignInView());
         break;
       case 1:
         // error information
+        showToast('error');
         break;
       case -1:
         // network error
+        showToast('network error');
         break;
     }
   }
