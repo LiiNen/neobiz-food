@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:foodie/functions.dart';
+import 'package:foodie/statelessWidgets.dart';
+
+import 'loginView/signInView.dart';
+import 'loginView/signUpView.dart';
 
 void main() {
   runApp(MyApp());
@@ -14,7 +19,6 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
 
 double maxWidth = 0;
 
@@ -34,10 +38,16 @@ class _MainPage extends State<MainPage> {
   Widget build(BuildContext context) {
     maxWidth = MediaQuery.of(context).size.width;
     return Scaffold(
+      appBar: MainAppBar(),
       body: Column(
         children: [
+          confirmButton(title: 'signIn', confirmAction: pushSignIn),
+          confirmButton(title: 'signUp', confirmAction: pushSignUp),
         ]
       )
     );
   }
+
+  void pushSignIn() {navigatorPush(context: context, route: SignInView());}
+  void pushSignUp() {navigatorPush(context: context, route: SignUpView());}
 }
