@@ -29,6 +29,7 @@ Future<LoginStatus> signInApi({required String mode, required Map<String, dynami
 
   if(response.statusCode == 200) {
     var responseBody = json.decode(response.body);
+    print(responseBody);
     var _mode = responseBody['mode'];
 
     if(_mode == 'login_sucess' || _mode == 'loged_in') {
@@ -40,6 +41,8 @@ Future<LoginStatus> signInApi({required String mode, required Map<String, dynami
       if(result['uid'] != null) pref.setString('uid', result['uid']);
       pref.setString('phone', result['phone']);
       pref.setString('tel', result['tel']);
+
+      pref.setStringList('loginInfo', [requestBody['id'], requestBody['passwd']]);
     }
     if(_mode == 'leave_success') {
       leave = true;
