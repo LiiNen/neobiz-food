@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:foodie/restApi/signInApi.dart';
+import 'package:foodie/restApi/snsLoginApi.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'restApi.dart';
@@ -10,7 +11,7 @@ import 'package:foodie/collections/functions.dart';
 
 /// @post signup
 /// response {}
-void signUp({required String email, required String id, required String name, required String hphone, required String passwd, required String address1}) async {
+void signUp({required String email, required String id, required String name, required String hphone, required String passwd, required String address1, String snsType = ''}) async {
   var mode = 'new';
   var requestBody = Map<String, dynamic>();
   requestBody['email'] = email;
@@ -21,8 +22,13 @@ void signUp({required String email, required String id, required String name, re
   requestBody['passwd'] = passwd;
   requestBody['address1'] = address1;
   requestBody['type'] = 'normal';
-
-  signUpApi(mode: '?mode=$mode', requestBody: requestBody);
+  if(snsType != '') {
+    requestBody['sns_type'] = snsType; /// google, facebook, naver
+    requestBody['sns_id'] = email.split('@')[0]
+      + (snsType == 'naver' ? '' : '_${snsType[0]}');
+    snsLogin(requestBody: requestBody);
+  }
+  else signUpApi(mode: '?mode=$mode', requestBody: requestBody);
 }
 
 Future signUpApi({required String mode, required Map<String, dynamic> requestBody}) async {

@@ -3,6 +3,7 @@ import 'package:foodie/collections/functions.dart';
 import 'package:foodie/collections/regexps.dart';
 
 import 'package:foodie/collections/statelessWidgets.dart';
+import 'package:foodie/restApi/signUpApi.dart';
 
 class SignUpView extends StatefulWidget {
   @override
@@ -15,6 +16,7 @@ class _SignUpView extends State<SignUpView> {
   TextEditingController _phoneController = TextEditingController();
   TextEditingController _pwController = TextEditingController();
   TextEditingController _pwConfirmController = TextEditingController();
+  TextEditingController _addressController = TextEditingController();
 
   FocusNode _nameFocusNode = FocusNode();
   FocusNode _idFocusNode = FocusNode();
@@ -22,22 +24,30 @@ class _SignUpView extends State<SignUpView> {
   FocusNode _phoneFocusNode = FocusNode();
   FocusNode _pwFocusNode = FocusNode();
   FocusNode _pwConfirmFocusNode = FocusNode();
+  FocusNode _addressFocusNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: MainAppBar(),
-      body: Container(
-        child: Column(
-          children: [
-            textField(controller: _nameController, focusNode: _nameFocusNode, hintText: 'name', nextFocusNode: _idFocusNode),
-            textField(controller: _idController, focusNode: _idFocusNode, hintText: 'id', nextFocusNode: _emailFocusNode),
-            textField(controller: _emailController, focusNode: _emailFocusNode, hintText: 'email', nextFocusNode: _phoneFocusNode),
-            textField(controller: _phoneController, focusNode: _phoneFocusNode, hintText: 'phone', nextFocusNode: _pwFocusNode, isNum: true),
-            textField(controller: _pwController, focusNode: _pwFocusNode, hintText: 'pw', nextFocusNode: _pwConfirmFocusNode),
-            textField(controller: _pwConfirmController, focusNode: _pwConfirmFocusNode, hintText: 'pwConfirm', hasNext: false),
-            confirmButton(title: '가입하기', confirmAction: signUpAction),
-          ],
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: Scaffold(
+        resizeToAvoidBottomInset: true,
+        appBar: MainAppBar(),
+        body: SingleChildScrollView(
+          child: Container(
+            child: Column(
+              children: [
+                textField(controller: _nameController, focusNode: _nameFocusNode, hintText: 'name', nextFocusNode: _emailFocusNode),
+                textField(controller: _emailController, focusNode: _emailFocusNode, hintText: 'email', nextFocusNode: _phoneFocusNode),
+                textField(controller: _phoneController, focusNode: _phoneFocusNode, hintText: 'phone', nextFocusNode: _emailFocusNode, isNum: true),
+                textField(controller: _addressController, focusNode: _addressFocusNode, hintText: 'address', nextFocusNode: _idFocusNode),
+                textField(controller: _idController, focusNode: _idFocusNode, hintText: 'id', nextFocusNode: _pwFocusNode),
+                textField(controller: _pwController, focusNode: _pwFocusNode, hintText: 'pw', nextFocusNode: _pwConfirmFocusNode),
+                textField(controller: _pwConfirmController, focusNode: _pwConfirmFocusNode, hintText: 'pwConfirm', hasNext: false),
+                confirmButton(title: '가입하기', confirmAction: signUpAction),
+              ],
+            )
+          )
         )
       )
     );
@@ -54,8 +64,8 @@ class _SignUpView extends State<SignUpView> {
         onChanged: (value) {setState(() {});},
         onSubmitted: (value) {
           setState(() {
-            if(hasNext) {nextFocusNode!.requestFocus();}
-            else {print('done');}
+            if(hasNext) { nextFocusNode!.requestFocus(); }
+            else signUpAction();
           });
         },
         keyboardType: !isNum ? TextInputType.text : TextInputType.number,
@@ -83,6 +93,8 @@ class _SignUpView extends State<SignUpView> {
 
     } else if(_pwController.text != _pwConfirmController.text) {
       /// different pws
+    } else {
+      signUp(email: _emailController.text, id: _idController.text, name: _nameController.text, hphone: _phoneController.text, passwd: _pwController.text, address1: _addressController.text);
     }
   }
 }
