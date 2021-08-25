@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:foodie/functions.dart';
+import 'package:foodie/collections/functions.dart';
 import 'package:foodie/restApi/signInApi.dart';
-import 'package:foodie/statelessWidgets.dart';
+import 'package:foodie/collections/statelessWidgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SignInView extends StatefulWidget {

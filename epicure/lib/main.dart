@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:foodie/functions.dart';
-import 'package:foodie/statelessWidgets.dart';
+import 'package:foodie/collections/functions.dart';
+import 'package:foodie/collections/statelessWidgets.dart';
 
 import 'loginView/signInView.dart';
 import 'loginView/signUpView.dart';

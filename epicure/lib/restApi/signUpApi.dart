@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'restApi.dart';
 import 'package:http/http.dart' as http;
 
-import 'package:foodie/functions.dart';
+import 'package:foodie/collections/functions.dart';
 
 /// @post signup
 /// response {}
