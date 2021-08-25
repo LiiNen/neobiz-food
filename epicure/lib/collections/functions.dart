@@ -38,3 +38,12 @@ navigatorPush({required BuildContext context, required Widget route, bool isRepl
     ? Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => route))
     : Navigator.push(context, MaterialPageRoute(builder: (context) => route));
 }
+
+phoneFieldAuto(String value, TextEditingController controller) {
+  var length = value.length;
+  if(length == 4 || length == 9) {
+    if(value[length - 1] == '-') controller.text = value.substring(0, length - 1);
+    else controller.text = value.substring(0, length - 1) + '-' + value[length-1];
+    controller.selection = TextSelection.fromPosition(TextPosition(offset: controller.text.length));
+  }
+}

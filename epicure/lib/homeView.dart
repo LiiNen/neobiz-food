@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:foodie/collections/functions.dart';
 
+import 'collections/routers.dart';
 import 'collections/statelessWidgets.dart';
 
 class HomeView extends StatefulWidget {
@@ -25,9 +25,9 @@ class _WelcomeView extends State<WelcomeView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MainAppBar(title: 'welcome view'),
-      body: confirmButton(title: 'next', confirmAction: homeRoute)
+      body: confirmButton(title: 'next', confirmAction: homeAction)
     );
   }
 
-  void homeRoute() { navigatorPush(context: context, route: HomeView()); }
+  void homeAction() { homeRoute(context); }
 }

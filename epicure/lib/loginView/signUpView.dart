@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:foodie/collections/functions.dart';
 import 'package:foodie/collections/regexps.dart';
+import 'package:foodie/collections/routers.dart';
 
 import 'package:foodie/collections/statelessWidgets.dart';
+import 'package:foodie/restApi/signInApi.dart';
 import 'package:foodie/restApi/signUpApi.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SignUpView extends StatefulWidget {
   @override
@@ -39,7 +42,7 @@ class _SignUpView extends State<SignUpView> {
               children: [
                 _textField(controller: _nameController, focusNode: _nameFocusNode, hintText: 'name', nextFocusNode: _emailFocusNode),
                 _textField(controller: _emailController, focusNode: _emailFocusNode, hintText: 'email', nextFocusNode: _phoneFocusNode),
-                _textField(controller: _phoneController, focusNode: _phoneFocusNode, hintText: 'phone', nextFocusNode: _emailFocusNode, isNum: true),
+                _textField(controller: _phoneController, focusNode: _phoneFocusNode, hintText: 'phone', nextFocusNode: _addressFocusNode, isNum: true),
                 _textField(controller: _addressController, focusNode: _addressFocusNode, hintText: 'address', nextFocusNode: _idFocusNode),
                 _textField(controller: _idController, focusNode: _idFocusNode, hintText: 'id', nextFocusNode: _pwFocusNode),
                 _textField(controller: _pwController, focusNode: _pwFocusNode, hintText: 'pw', nextFocusNode: _pwConfirmFocusNode),
@@ -61,20 +64,26 @@ class _SignUpView extends State<SignUpView> {
         focusNode: focusNode,
         decoration: defaultInputDecoration(hintText: hintText),
         style: textStyle(weight: 400, size: 12.0),
-        onChanged: (value) {setState(() {});},
+        onChanged: (value) {
+          if(isNum) {
+            setState(() {
+              phoneFieldAuto(value, _phoneController);
+            });
+          }
+        },
         onSubmitted: (value) {
           setState(() {
             if(hasNext) { nextFocusNode!.requestFocus(); }
             else signUpAction();
           });
         },
-        keyboardType: !isNum ? TextInputType.text : TextInputType.number,
+        keyboardType: !isNum ? TextInputType.text : TextInputType.phone,
         textInputAction: hasNext ? TextInputAction.next : TextInputAction.done,
       )
     );
   }
 
-  signUpAction() {
+  signUpAction() async {
     if(_nameController.text == '') {
 
     } else if(_idController.text == '') {
@@ -94,7 +103,22 @@ class _SignUpView extends State<SignUpView> {
     } else if(_pwController.text != _pwConfirmController.text) {
       /// different pws
     } else {
-      signUp(email: _emailController.text, id: _idController.text, name: _nameController.text, hphone: _phoneController.text, passwd: _pwController.text, address1: _addressController.text);
+      var _success = await signUp(email: _emailController.text, id: _idController.text, name: _nameController.text, hphone: _phoneController.text, passwd: _pwController.text, address1: _addressController.text);
+      if(_success) {
+        final pref = await SharedPreferences.getInstance();
+        bool _isInstalled = pref.getBool('isInstalled') ?? false;
+        showToast('login success');
+
+        if(!_isInstalled) {
+          setIsInstalled();
+          // welcome activity
+          welcomeRoute(context);
+        }
+        else {
+          // home activity
+          homeRoute(context);
+        }
+      }
     }
   }
 }

@@ -4,8 +4,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
-String baseUrl = 'https://www.epicure.co.kr';
-String route = '/android/';
+String baseUrl = 'https://www.epicure.co.kr/android/';
 
 String path_login = "usr/login.php";
 String path_regist = "usr/regist.php";
@@ -47,7 +46,7 @@ String path_find_dong_list = "service/find_dong_list.php";
 
 
 Future trialScrap() async {
-  final response = await http.get(Uri.parse('$baseUrl$route$path_trial_scrap'));
+  final response = await http.get(Uri.parse('$baseUrl$path_trial_scrap'));
   if(response.statusCode == 200) {
     print(json.decode(response.body));
     print(json.decode(response.body)['content'][0]);

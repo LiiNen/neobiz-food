@@ -25,13 +25,13 @@ Future<LoginStatus> signInApi({required String mode, required Map<String, dynami
   bool done = false;
   bool leave = false;
 
-  var response = await http.post(Uri.parse('$baseUrl$route$path_login$mode'), body: requestBody);
+  var response = await http.post(Uri.parse('$baseUrl$path_login$mode'), body: requestBody);
 
   if(response.statusCode == 200) {
     var responseBody = json.decode(response.body);
     print(responseBody);
-    var _mode = responseBody['mode'];
 
+    var _mode = responseBody['mode'];
     if(_mode == 'login_sucess' || _mode == 'loged_in') {
       done = true;
       var result = responseBody['result'];

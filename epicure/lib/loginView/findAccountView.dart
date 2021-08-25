@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:foodie/collections/functions.dart';
 import 'package:foodie/collections/statelessWidgets.dart';
+import 'package:foodie/loginView/signInView.dart';
+import 'package:foodie/restApi/findAccountApi.dart';
 
 class FindAccountView extends StatefulWidget {
   @override
@@ -53,7 +55,19 @@ class _FindAccountView extends State<FindAccountView> {
     );
   }
 
-  findAccountAction() {
-    print('try to find');
+  findAccountAction() async {
+    var result = await findAccount(name: _nameController.text, email: _emailController.text);
+    switch(result) {
+      case 0:
+        // email send successfully
+        navigatorPush(context: context, route: SignInView());
+        break;
+      case 1:
+        // error information
+        break;
+      case -1:
+        // network error
+        break;
+    }
   }
 }

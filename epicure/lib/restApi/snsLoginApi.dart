@@ -28,7 +28,7 @@ findSnsUser({required String snsUid, required String snsType, String tel='', Str
 }
 
 findSnsUserApi({required Map<String, dynamic> requestBody}) async {
-  var response = await http.post(Uri.parse('$baseUrl$route$path_find_sns_user'), body: requestBody);
+  var response = await http.post(Uri.parse('$baseUrl$path_find_sns_user'), body: requestBody);
   String _id = '';
   String _pw = '';
 

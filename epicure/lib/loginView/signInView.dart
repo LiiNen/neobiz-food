@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodie/collections/functions.dart';
+import 'package:foodie/collections/routers.dart';
 import 'package:foodie/restApi/signInApi.dart';
 import 'package:foodie/collections/statelessWidgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -70,18 +71,15 @@ class _SignInView extends State<SignInView> {
       if(!_isInstalled) {
         setIsInstalled();
         // login 2
-        welcomeRoute();
+        welcomeRoute(context);
       }
       else {
         // login 3
-        homeRoute();
+        homeRoute(context);
       }
     }
     else {
       showToast('login failed');
     }
   }
-
-  void homeRoute() { navigatorPush(context: context, route: HomeView()); }
-  void welcomeRoute() { navigatorPush(context: context, route: WelcomeView()); }
 }
