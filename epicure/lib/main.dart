@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:foodie/collections/functions.dart';
 import 'package:foodie/collections/statelessWidgets.dart';
+import 'package:foodie/loginView/findAccountView.dart';
 
 import 'loginView/signInView.dart';
 import 'loginView/signUpView.dart';
@@ -43,6 +44,7 @@ class _MainPage extends State<MainPage> {
         children: [
           confirmButton(title: 'signIn', confirmAction: pushSignIn),
           confirmButton(title: 'signUp', confirmAction: pushSignUp),
+          confirmButton(title: 'findAccount', confirmAction: pushFindAccount),
         ]
       )
     );
@@ -50,4 +52,5 @@ class _MainPage extends State<MainPage> {
 
   void pushSignIn() {navigatorPush(context: context, route: SignInView());}
   void pushSignUp() {navigatorPush(context: context, route: SignUpView());}
+  void pushFindAccount() {navigatorPush(context: context, route: FindAccountView());}
 }

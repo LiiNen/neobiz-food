@@ -37,13 +37,13 @@ class _SignUpView extends State<SignUpView> {
           child: Container(
             child: Column(
               children: [
-                textField(controller: _nameController, focusNode: _nameFocusNode, hintText: 'name', nextFocusNode: _emailFocusNode),
-                textField(controller: _emailController, focusNode: _emailFocusNode, hintText: 'email', nextFocusNode: _phoneFocusNode),
-                textField(controller: _phoneController, focusNode: _phoneFocusNode, hintText: 'phone', nextFocusNode: _emailFocusNode, isNum: true),
-                textField(controller: _addressController, focusNode: _addressFocusNode, hintText: 'address', nextFocusNode: _idFocusNode),
-                textField(controller: _idController, focusNode: _idFocusNode, hintText: 'id', nextFocusNode: _pwFocusNode),
-                textField(controller: _pwController, focusNode: _pwFocusNode, hintText: 'pw', nextFocusNode: _pwConfirmFocusNode),
-                textField(controller: _pwConfirmController, focusNode: _pwConfirmFocusNode, hintText: 'pwConfirm', hasNext: false),
+                _textField(controller: _nameController, focusNode: _nameFocusNode, hintText: 'name', nextFocusNode: _emailFocusNode),
+                _textField(controller: _emailController, focusNode: _emailFocusNode, hintText: 'email', nextFocusNode: _phoneFocusNode),
+                _textField(controller: _phoneController, focusNode: _phoneFocusNode, hintText: 'phone', nextFocusNode: _emailFocusNode, isNum: true),
+                _textField(controller: _addressController, focusNode: _addressFocusNode, hintText: 'address', nextFocusNode: _idFocusNode),
+                _textField(controller: _idController, focusNode: _idFocusNode, hintText: 'id', nextFocusNode: _pwFocusNode),
+                _textField(controller: _pwController, focusNode: _pwFocusNode, hintText: 'pw', nextFocusNode: _pwConfirmFocusNode),
+                _textField(controller: _pwConfirmController, focusNode: _pwConfirmFocusNode, hintText: 'pwConfirm', hasNext: false),
                 confirmButton(title: '가입하기', confirmAction: signUpAction),
               ],
             )
@@ -53,7 +53,7 @@ class _SignUpView extends State<SignUpView> {
     );
   }
 
-  Widget textField({required TextEditingController controller, required FocusNode focusNode, required String hintText,
+  Widget _textField({required TextEditingController controller, required FocusNode focusNode, required String hintText,
     bool hasNext=true, FocusNode? nextFocusNode, bool isNum=false}) {
     return Container(
       child: TextField(
