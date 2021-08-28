@@ -26,6 +26,7 @@ class MainTitleBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      alignment: Alignment.centerLeft,
       child: Text(title)
     );
   }
