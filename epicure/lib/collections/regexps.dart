@@ -1,3 +1,6 @@
+bool nameRegexCheck(String input) {
+  return RegExp(r'[ㄱ-ㅎ|가-힣]{2,4}').hasMatch(input) && input.length >= 2 && input.length <=4;
+}
 
 bool idRegexCheck(String input) {
   return RegExp(r'^(a-z)[0-9a-z]{3,14}').hasMatch(input) && input.length >= 4 && input.length <= 15;
@@ -8,7 +11,8 @@ bool emailRegexCheck(String input) {
 }
 
 bool phoneRegexCheck(String input) {
-  return RegExp(r'^(010)[0-9]{8}').hasMatch(input) && input.length == 11;
+  return true;
+  // return RegExp(r'^(010)[0-9]{8}').hasMatch(input) && input.length == 11;
 }
 
 bool pwRegexCheck(String input) {

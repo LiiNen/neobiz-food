@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:foodie/collections/functions.dart';
 import 'package:foodie/collections/regexps.dart';
 import 'package:foodie/collections/routers.dart';
@@ -85,23 +86,25 @@ class _SignUpView extends State<SignUpView> {
 
   signUpAction() async {
     if(_nameController.text == '') {
-
+      print('name blank');
+    } else if(!nameRegexCheck(_nameController.text)) {
+      print('only kor name');
     } else if(_idController.text == '') {
-
+      print('id blank');
     } else if(_emailController.text == '') {
-
+      print('email blank');
     } else if(!emailRegexCheck(_emailController.text)) {
-      /// wrong email
+      print('email wrong');
     } else if(_phoneController.text == '' ) {
-
+      print('phone blank');
     } else if(!phoneRegexCheck(_phoneController.text)) {
-      
+      print('phone regex');
     } else if(_pwController.text == '') {
-
+      print('pw blank');
     } else if(!pwRegexCheck(_pwController.text)) {
-
+      print('pw regex');
     } else if(_pwController.text != _pwConfirmController.text) {
-      /// different pws
+      print('pw diff');
     } else {
       var _success = await signUp(email: _emailController.text, id: _idController.text, name: _nameController.text, hphone: _phoneController.text, passwd: _pwController.text, address1: _addressController.text);
       if(_success) {

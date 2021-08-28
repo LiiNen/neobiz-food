@@ -1,7 +1,4 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:foodie/collections/functions.dart';
 import 'package:foodie/collections/statelessWidgets.dart';
 import 'package:foodie/loginView/findAccountView.dart';
@@ -38,32 +35,11 @@ class _MainPage extends State<MainPage> {
     super.initState();
   }
 
-  Future<bool> _onWillPop() async {
-    return (await showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text('App terminate'),
-        content: Text('Do you want to exit epicure?'),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(false),
-            child: new Text('No'),
-          ),
-          TextButton(
-            onPressed: () => SystemNavigator.pop(),
-            child: new Text('Yes'),
-          ),
-        ],
-      ),
-    )) ?? false;
-
-  }
-
   @override
   Widget build(BuildContext context) {
     maxWidth = MediaQuery.of(context).size.width;
     return WillPopScope(
-      onWillPop: _onWillPop,
+      onWillPop: () => onWillPop(context),
       child: Scaffold(
         appBar: MainAppBar(),
         body: Column(

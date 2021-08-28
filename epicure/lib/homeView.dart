@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:foodie/collections/functions.dart';
 
 import 'collections/routers.dart';
 import 'collections/statelessWidgets.dart';
+import 'mainGridView/mainGridView.dart';
 
 class HomeView extends StatefulWidget {
   @override
@@ -10,8 +12,12 @@ class HomeView extends StatefulWidget {
 class _HomeView extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: MainAppBar(title: 'home view'),
+    return WillPopScope(
+      onWillPop: () => onWillPop(context),
+      child: Scaffold(
+        appBar: MainAppBar(title: 'home view'),
+        body: MainGridView(),
+      )
     );
   }
 }
