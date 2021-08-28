@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:foodie/collections/statelessWidgets.dart';
 
-class LocalView extends StatefulWidget {
+class SettingView extends StatefulWidget {
   @override
-  State<LocalView> createState() => _LocalView();
+  State<SettingView> createState() => _SettingView();
 }
-class _LocalView extends State<LocalView> {
+class _SettingView extends State<SettingView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,7 +14,7 @@ class _LocalView extends State<LocalView> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            MainTitleBar(title: '대한민국'),
+            MainTitleBar(title: '설정'),
           ],
         )
       )

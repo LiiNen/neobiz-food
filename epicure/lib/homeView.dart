@@ -15,8 +15,13 @@ class _HomeView extends State<HomeView> {
     return WillPopScope(
       onWillPop: () => onWillPop(context),
       child: Scaffold(
-        appBar: MainAppBar(title: 'home view'),
-        body: MainGridView(),
+        appBar: MainAppBar(),
+        body: Column(
+          children: [
+            MainTitleBar(title: 'home view'),
+            Flexible(child: MainGridView())
+          ],
+        )
       )
     );
   }
@@ -30,8 +35,13 @@ class _WelcomeView extends State<WelcomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MainAppBar(title: 'welcome view'),
-      body: confirmButton(title: 'next', confirmAction: homeAction)
+      appBar: MainAppBar(),
+      body: Column(
+        children: [
+          MainTitleBar(title: 'welcome view'),
+          confirmButton(title: 'next', confirmAction: homeAction)
+        ]
+      )
     );
   }
 

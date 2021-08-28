@@ -20,11 +20,12 @@ class _FindAccountView extends State<FindAccountView> {
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
         resizeToAvoidBottomInset: true,
-        appBar: MainAppBar(title: 'find id/pw'),
+        appBar: MainAppBar(),
         body: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
+              MainTitleBar(title: 'find id/pw'),
               _textField(controller: _nameController, focusNode: _nameFocusNode, hintText: 'name', nextFocusNode: _emailFocusNode),
               _textField(controller: _emailController, focusNode: _emailFocusNode, hintText: 'email', hasNext: false),
               confirmButton(title: 'find!', confirmAction: findAccountAction)
