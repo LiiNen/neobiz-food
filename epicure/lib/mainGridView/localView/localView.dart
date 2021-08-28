@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:foodie/collections/statelessWidgets.dart';
+import 'package:foodie/mainGridView/localView/localRegionView.dart';
 import 'package:foodie/restApi/searchLocalApi.dart';
+import 'package:foodie/collections/functions.dart';
 
 class LocalItem {
   String title;
@@ -60,7 +62,7 @@ class _LocalView extends State<LocalView> {
                   child: GestureDetector(
                     onTap: () {
                       print(localItemList[index].title);
-                      searchLocal(doNum: index, siName: '');
+                      navigatorPush(context: context, route: LocalRegionView(title: localItemList[index].title, titleIndex: index));
                     }
                   )
                 ),
