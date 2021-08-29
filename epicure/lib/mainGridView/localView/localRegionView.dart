@@ -26,7 +26,8 @@ class _LocalRegionView extends State<LocalRegionView> {
 
   // TODO: json map parsing to flutter
   getRegion() async {
-    localRegionItemList = await searchLocal(doNum: titleIndex, siName: '', mode: 'region');
+    var temp = await searchLocal(doNum: titleIndex, siName: '', mode: 'region');
+    localRegionItemList = json.decode(temp);
 
     print(localRegionItemList[0]);
     setState(() {
@@ -46,5 +47,28 @@ class _LocalRegionView extends State<LocalRegionView> {
         )
       )
     );
+  }
+
+  localRegionItemBuilder() {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      height: (localRegionItemList.length/2).floor() * MediaQuery.of(context).size.width / 2,
+      child: GridView.count(crossAxisCount: 2),
+      children: List.generate(localRegionItemList.length, (index) {
+        return Container(
+          child: Stack(
+            children: [
+              Positioned.fill(
+                child: GestureDetector(
+                  onTap: () {
+                    print(localRegionItemList[index]);
+                  }
+                )
+              )
+            ]
+          )
+        );
+      })
+    )
   }
 }
