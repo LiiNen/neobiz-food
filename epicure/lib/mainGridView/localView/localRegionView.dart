@@ -1,9 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:foodie/collections/statelessWidgets.dart';
 import 'package:foodie/restApi/searchLocalApi.dart';
 
 
-List<Map<String, dynamic>> localRegionItemList = [];
+var localRegionItemList = [];
 
 class LocalRegionView extends StatefulWidget {
   final String title;
@@ -27,7 +29,7 @@ class _LocalRegionView extends State<LocalRegionView> {
   // TODO: json map parsing to flutter
   getRegion() async {
     var temp = await searchLocal(doNum: titleIndex, siName: '', mode: 'region');
-    localRegionItemList = json.decode(temp);
+    localRegionItemList = temp;
 
     print(localRegionItemList[0]);
     setState(() {
@@ -53,22 +55,24 @@ class _LocalRegionView extends State<LocalRegionView> {
     return Container(
       width: MediaQuery.of(context).size.width,
       height: (localRegionItemList.length/2).floor() * MediaQuery.of(context).size.width / 2,
-      child: GridView.count(crossAxisCount: 2),
-      children: List.generate(localRegionItemList.length, (index) {
-        return Container(
-          child: Stack(
-            children: [
-              Positioned.fill(
-                child: GestureDetector(
-                  onTap: () {
-                    print(localRegionItemList[index]);
-                  }
+      child: GridView.count(
+        crossAxisCount: 2,
+        children: List.generate(localRegionItemList.length, (index) {
+          return Container(
+            child: Stack(
+              children: [
+                Positioned.fill(
+                  child: GestureDetector(
+                    onTap: () {
+                      print(localRegionItemList[index]);
+                    }
+                  )
                 )
-              )
-            ]
-          )
-        );
-      })
-    )
+              ]
+            )
+          );
+        })
+      ),
+    );
   }
 }
