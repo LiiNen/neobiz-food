@@ -37,21 +37,17 @@ class _LocalView extends State<LocalView> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: MainAppBar(),
-      body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            MainTitleBar(title: '대한민국'),
-            localItemBuilder()
-          ],
-        )
+      body: Column(
+        children: <Widget>[
+          MainTitleBar(title: '대한민국'),
+          localItemBuilder()
+        ],
       )
     );
   }
 
   localItemBuilder() {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.width,
+    return Expanded(
       child: GridView.count(
         crossAxisCount: 4,
         children: List.generate(localItemList.length, (index) {
@@ -60,15 +56,16 @@ class _LocalView extends State<LocalView> {
               children: [
                 Positioned.fill(
                   child: GestureDetector(
+                    behavior: HitTestBehavior.translucent,
                     onTap: () {
                       print(localItemList[index].title);
                       navigatorPush(context: context, route: LocalRegionView(title: localItemList[index].title, titleIndex: index));
-                    }
+                    },
+                    child: Center(
+                        child: Text(localItemList[index].title)
+                    )
                   )
                 ),
-                Center(
-                  child: Text(localItemList[index].title)
-                )
               ]
             )
           );
