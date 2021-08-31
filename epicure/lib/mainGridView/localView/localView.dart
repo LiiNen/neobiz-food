@@ -59,7 +59,7 @@ class _LocalView extends State<LocalView> {
                     behavior: HitTestBehavior.translucent,
                     onTap: () {
                       print(localItemList[index].title);
-                      navigatorPush(context: context, route: LocalRegionView(title: localItemList[index].title, titleIndex: index));
+                      navigatorPush(context: context, route: LocalRegionView(title: '대한민국 ${localItemList[index].fullTitle}', titleIndex: index));
                     },
                     child: Center(
                         child: Text(localItemList[index].title)

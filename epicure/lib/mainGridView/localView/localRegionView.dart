@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:foodie/collections/functions.dart';
 import 'package:foodie/collections/statelessWidgets.dart';
 import 'package:foodie/restApi/searchLocalApi.dart';
+import 'localRegionSearchView.dart';
 
 class LocalRegionView extends StatefulWidget {
   final String title;
@@ -59,9 +61,14 @@ class _LocalRegionView extends State<LocalRegionView> {
                     behavior: HitTestBehavior.translucent,
                     onTap: () {
                       print(localRegionItemList[index]);
+                      navigatorPush(context: context, route: LocalRegionSearchView(title: '$title ${localRegionItemList[index]['name']}', titleIndex: titleIndex, region: localRegionItemList[index]['name']));
                     },
-                    child: Center(
-                      child: Text(localRegionItemList[index]['name'])
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Text(localRegionItemList[index]['name']),
+                        Text(localRegionItemList[index]['count'].toString())
+                      ]
                     )
                   )
                 )

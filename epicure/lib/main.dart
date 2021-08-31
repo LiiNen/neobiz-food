@@ -23,7 +23,6 @@ class MyApp extends StatelessWidget {
 
 double maxWidth = 0;
 bool isSubscribe = false;
-int curPage = 1;
 
 class MainPage extends StatefulWidget {
   @override

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:foodie/main.dart';
 
 Future<bool> onWillPop(BuildContext context) async {
   return (await showDialog(
@@ -68,8 +67,4 @@ phoneFieldAuto(String value, TextEditingController controller) {
     else controller.text = value.substring(0, length - 1) + '-' + value[length-1];
     controller.selection = TextSelection.fromPosition(TextPosition(offset: controller.text.length));
   }
-}
-
-setCurPage(int num) {
-  curPage = num;
 }
