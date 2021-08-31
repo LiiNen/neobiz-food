@@ -68,3 +68,12 @@ phoneFieldAuto(String value, TextEditingController controller) {
     controller.selection = TextSelection.fromPosition(TextPosition(offset: controller.text.length));
   }
 }
+
+presetRequestBody() {
+  var preset = Map<String, dynamic>();
+  preset['theme'] = '';
+  preset['menu'] = -1;
+  preset['dong'] = -1;
+  preset['search'] = '';
+  return preset;
+}
