@@ -24,6 +24,8 @@ class _LocalRegionSearchView extends State<LocalRegionSearchView> {
     getSearchList();
   }
 
+
+  /// todo : wrong api route???
   /// localRegionSearchItemList : List
   /// localRegionItemList[index]
   /// { name: String, rank: int, kind: String, food_2nd: String
@@ -33,7 +35,6 @@ class _LocalRegionSearchView extends State<LocalRegionSearchView> {
   getSearchList() async {
     var temp = await searchLocal(doNum: titleIndex, siName: region, mode: 'shop', curPage: -1);
     localRegionSearchItemList = temp;
-    print(localRegionSearchItemList[0]['shop_1st']);
     setState(() {});
   }
 
@@ -42,9 +43,53 @@ class _LocalRegionSearchView extends State<LocalRegionSearchView> {
     return Scaffold(
       appBar: MainAppBar(),
       body: Column(
-        children: [
+        children: <Widget> [
           MainTitleBar(title: title),
-        ],
+        ] + (localRegionSearchItemList.length != 0 ? [localRegionSearchObjectBuilder()] : []),
+      )
+    );
+  }
+
+  localRegionSearchObjectBuilder() {
+    return Expanded(child: ListView.builder(
+      shrinkWrap: true,
+      itemCount: localRegionSearchItemList.length,
+      itemBuilder: (BuildContext context, int index) {
+        return localRegionSearchObject(localRegionSearchItemList[index]);
+      },
+    ));
+  }
+  
+  localRegionSearchObject(item) {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      child: GestureDetector(
+        behavior: HitTestBehavior.translucent,
+        onTap: () {
+          print(item['name']);
+        },
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                (
+                  item['photo'] is String ?
+                  Image.network(item['photo'], width: 20, height: 20,
+                    errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+                    return FlutterLogo(size: 20);
+                  }) : FlutterLogo(size: 20)
+                ),
+                Column(
+                  children: [
+                    Text(item['name']),
+                    Text('${item['kind']} | ${item['food_2nd']}'),
+                  ]
+                )
+              ]
+            )
+          ]
+        )
       )
     );
   }
