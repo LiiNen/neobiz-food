@@ -70,10 +70,12 @@ phoneFieldAuto(String value, TextEditingController controller) {
 }
 
 presetRequestBody() {
-  var preset = Map<String, dynamic>();
-  preset['theme'] = '';
-  preset['menu'] = -1;
-  preset['dong'] = -1;
-  preset['search'] = '';
+  var preset = Map();
+  preset = {
+    'theme': '',
+    'menu': '-1',
+    'dong': '-1',
+    'search': '',
+  };
   return preset;
 }

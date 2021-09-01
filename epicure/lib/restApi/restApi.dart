@@ -1,4 +1,5 @@
-// https://flutter.dev/docs/cookbook/networking/fetch-data
+/// all APIs does not support json
+/// must use String in requestBody
 
 import 'dart:convert';
 
