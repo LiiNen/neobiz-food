@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:foodie/collections/functions.dart';
 import 'package:foodie/collections/statelessWidgets.dart';
+import 'package:foodie/mainGridView/commonViewCollection/searchListBuilder.dart';
 import 'package:foodie/restApi/searchLocalApi.dart';
 
 class LocalRegionSearchView extends StatefulWidget {
@@ -44,56 +45,7 @@ class _LocalRegionSearchView extends State<LocalRegionSearchView> {
       body: Column(
         children: <Widget> [
           MainTitleBar(title: title),
-        ] + (localRegionSearchItemList.length != 0 ? [localRegionSearchObjectBuilder()] : []),
-      )
-    );
-  }
-
-  localRegionSearchObjectBuilder() {
-    return Expanded(child: ListView.builder(
-      shrinkWrap: true,
-      itemCount: localRegionSearchItemList.length,
-      itemBuilder: (BuildContext context, int index) {
-        return localRegionSearchObject(localRegionSearchItemList[index]);
-      },
-    ));
-  }
-  
-  localRegionSearchObject(item) {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      height: 60,
-      child: GestureDetector(
-        behavior: HitTestBehavior.translucent,
-        onTap: () {
-          print(item['name']);
-        },
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                (
-                  item['photo'] is String ?
-                  Image.network(item['photo'], width: 40, height: 40,
-                    errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
-                    return FlutterLogo(size: 40);
-                  }) : FlutterLogo(size: 40)
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(item['name']),
-                    Text('${item['kind']} | ${item['food_2nd']}'),
-                  ]
-                )
-              ]
-            ),
-            Icon(Icons.arrow_forward_outlined, size: 40)
-          ]
-        )
+        ] + (localRegionSearchItemList.length != 0 ? [SearchListBuilder(searchList: localRegionSearchItemList,)] : []),
       )
     );
   }

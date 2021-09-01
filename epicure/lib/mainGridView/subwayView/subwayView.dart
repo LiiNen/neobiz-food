@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:foodie/collections/functions.dart';
 import 'package:foodie/collections/statelessWidgets.dart';
+import 'package:foodie/mainGridView/subwayView/subwayLineView.dart';
 import 'package:foodie/restApi/searchSubwayApi.dart';
 
 class SubwayView extends StatefulWidget {
@@ -46,7 +48,7 @@ class _SubwayView extends State<SubwayView> {
             child: GestureDetector(
               behavior: HitTestBehavior.translucent,
               onTap: () {
-
+                navigatorPush(context: context, route: SubwayLineView(title: '역세권 | ${subwayRegionList[index]['name']}'));
               },
               child: Center(
                 child: Text(subwayRegionList[index]['name'])
