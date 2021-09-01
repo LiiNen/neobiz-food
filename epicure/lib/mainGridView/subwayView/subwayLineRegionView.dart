@@ -8,22 +8,24 @@ import 'package:foodie/restApi/searchSubwayApi.dart';
 class SubwayLineRegionView extends StatefulWidget {
   final String title;
   final int titleIndex;
-  SubwayLineRegionView({required this.title, required this.titleIndex});
+  final int areaNo;
+  SubwayLineRegionView({required this.title, required this.titleIndex, required this.areaNo});
   @override
-  State<SubwayLineRegionView> createState() => _SubwayLineRegionView(title: title, titleIndex: titleIndex);
+  State<SubwayLineRegionView> createState() => _SubwayLineRegionView(title: title, titleIndex: titleIndex, areaNo: areaNo);
 }
 class _SubwayLineRegionView extends State<SubwayLineRegionView> {
   String title;
   int titleIndex;
-  _SubwayLineRegionView({required this.title, required this.titleIndex});
+  int areaNo;
+  _SubwayLineRegionView({required this.title, required this.titleIndex, required this.areaNo});
 
   var subwayLineRegionItemList = [];
   @override
   void initState() {
     super.initState();
-    getSubwaySearchList();
+    getSubwayRegionList();
   }
-  getSubwaySearchList() async {
+  getSubwayRegionList() async {
     var temp = await searchSubway(subwayQueryData: subwayQuery(lineNo: titleIndex), mode: 'region');
     subwayLineRegionItemList = temp;
     setState(() {});
@@ -36,7 +38,7 @@ class _SubwayLineRegionView extends State<SubwayLineRegionView> {
         [] :
         [
           MainTitleBar(title: title),
-          RegionGridBuilder(regionList: subwayLineRegionItemList, isSubway: true, routerComponent: {'title': title})
+          RegionGridBuilder(regionList: subwayLineRegionItemList, isSubway: true, routerComponent: {'title': title, 'areaNo': areaNo, 'lineNo': titleIndex})
         ]
       )
     );

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:foodie/collections/functions.dart';
 import 'package:foodie/mainGridView/localView/localRegionSearchView.dart';
 import 'package:foodie/mainGridView/subwayView/subwayLineRegionSearchView.dart';
+import 'package:foodie/mainGridView/subwayView/subwayView.dart';
 
 class RegionGridBuilder extends StatefulWidget{
   final List regionList;
@@ -34,7 +35,7 @@ class _RegionGridBuilder extends State<RegionGridBuilder> {
                     onTap: () {
                       print(regionList[index]);
                       if(isLocal) navigatorPush(context: context, route: LocalRegionSearchView(title: '${routerComponent['title']} ${regionList[index]['name']}', titleIndex: routerComponent['titleIndex'], region: regionList[index]['name']));
-                      else if(isSubway) navigatorPush(context: context, route: SubwayLineRegionSearchView(title: '${routerComponent['title']} ${regionList[index]['name']}', titleIndex: regionList[index]['no']));
+                      else if(isSubway) navigatorPush(context: context, route: SubwayLineRegionSearchView(title: '${routerComponent['title']} ${regionList[index]['name']}', subwayQuery: subwayQuery(areaNo: routerComponent['areaNo'], lineNo: routerComponent['lineNo'], stationNo: regionList[index]['no'])));
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,

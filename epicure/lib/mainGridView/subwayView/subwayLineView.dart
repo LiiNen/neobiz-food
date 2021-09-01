@@ -46,7 +46,7 @@ class _SubwayLineView extends State<SubwayLineView> {
           subwayLineBuilder(),
         ] + [Expanded(
           child: _isSelected
-            ? SubwayLineRegionView(title: _selectedTitle, titleIndex: _selectedTitleIndex,)
+            ? SubwayLineRegionView(title: _selectedTitle, titleIndex: _selectedTitleIndex, areaNo: titleIndex)
             : Center(child: Text('select one'))
         )],
       )
