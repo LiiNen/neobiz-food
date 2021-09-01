@@ -25,8 +25,6 @@ class _LocalRegionSearchView extends State<LocalRegionSearchView> {
     getSearchList();
   }
 
-
-  /// todo : wrong api route???
   /// localRegionSearchItemList : List
   /// localRegionItemList[index]
   /// { name: String, rank: int, kind: String, food_2nd: String
@@ -64,6 +62,7 @@ class _LocalRegionSearchView extends State<LocalRegionSearchView> {
   localRegionSearchObject(item) {
     return Container(
       width: MediaQuery.of(context).size.width,
+      height: 60,
       child: GestureDetector(
         behavior: HitTestBehavior.translucent,
         onTap: () {
@@ -71,24 +70,28 @@ class _LocalRegionSearchView extends State<LocalRegionSearchView> {
         },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 (
                   item['photo'] is String ?
-                  Image.network(item['photo'], width: 20, height: 20,
+                  Image.network(item['photo'], width: 40, height: 40,
                     errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
-                    return FlutterLogo(size: 20);
-                  }) : FlutterLogo(size: 20)
+                    return FlutterLogo(size: 40);
+                  }) : FlutterLogo(size: 40)
                 ),
                 Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(item['name']),
                     Text('${item['kind']} | ${item['food_2nd']}'),
                   ]
                 )
               ]
-            )
+            ),
+            Icon(Icons.arrow_forward_outlined, size: 40)
           ]
         )
       )
