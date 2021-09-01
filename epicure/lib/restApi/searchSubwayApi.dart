@@ -2,13 +2,12 @@ import 'dart:convert';
 import 'restApi.dart';
 import 'package:http/http.dart' as http;
 
-searchSubway({Map? subwayQueryData, required String mode}) async {
-  String query = '?';
-  if(subwayQueryData == null) {
-    query = query + 'area_no=-1&line=-1&station=-1&cur_page=1';
-  } else {
-    query = query + 'area_no=${subwayQueryData['areaNo']}&line=${subwayQueryData['lineNo']}&station=${subwayQueryData['stationNo']}&cur_page=1';
-  }
+searchSubway({required Map subwayQueryData, required String mode}) async {
+  String query = '?'
+      'area_no=${subwayQueryData['areaNo']}'
+      '&line=${subwayQueryData['lineNo']}'
+      '&station=${subwayQueryData['stationNo']}'
+      '&cur_page=1';
   var requestBody = Map();
   requestBody['mode'] = mode;
   return searchSubwayApi(query: query, requestBody: requestBody);
@@ -26,7 +25,10 @@ searchSubwayApi({required String query, required Map requestBody}) async {
 
     var _type = responseBody['type'];
     if(_type == 'region') {
-      return responseBody['do_list'];
+      if(responseBody['do_list'] != null) return responseBody['do_list'];
+      else if(responseBody['linelist'] != null) return responseBody['linelist'];
+      else if(responseBody['stationlist'] != null) return responseBody['stationlist'];
+      else print('what body?');
     }
   }
   else {

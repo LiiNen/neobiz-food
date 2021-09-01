@@ -23,7 +23,7 @@ class _LocalRegionSearchView extends State<LocalRegionSearchView> {
   @override
   void initState() {
     super.initState();
-    getSearchList();
+    getLocalSearchList();
   }
 
   /// localRegionSearchItemList : List
@@ -32,7 +32,7 @@ class _LocalRegionSearchView extends State<LocalRegionSearchView> {
   ///   photo: String(url), no: int, paid: n, y,
   ///   shop_1st: int,int,  shop_2nd: int,int
   ///   area 1st: int, area 2nd: int, area 3rd: int, theme: String }
-  getSearchList() async {
+  getLocalSearchList() async {
     var temp = await searchLocal(doNum: titleIndex, siName: region, mode: 'shop', curPage: 1, presetBody: presetRequestBody());
     localRegionSearchItemList = temp;
     setState(() {});

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:foodie/collections/functions.dart';
 import 'package:foodie/collections/statelessWidgets.dart';
+import 'package:foodie/mainGridView/commonViewCollection/regionGridBuilder.dart';
 import 'package:foodie/restApi/searchLocalApi.dart';
 import 'localRegionSearchView.dart';
 
@@ -39,44 +40,12 @@ class _LocalRegionView extends State<LocalRegionView> {
     return Scaffold(
       appBar: MainAppBar(),
       body: Column(
-        children: [
-          MainTitleBar(title: title),
-          localRegionItemBuilder()
-        ],
+        children: <Widget>[
+          MainTitleBar(title: title)
+        ] + (localRegionItemList.length != 0
+        ? [RegionGridBuilder(regionList: localRegionItemList, isLocal: true, routerComponent: {'title': title, 'titleIndex': titleIndex})]
+        : [])
       )
-    );
-  }
-
-  localRegionItemBuilder() {
-    return Expanded(
-      child: GridView.count(
-        crossAxisCount: 2,
-        childAspectRatio: 3,
-        children: List.generate(localRegionItemList.length, (index) {
-          return Container(
-            child: Stack(
-              children: [
-                Positioned.fill(
-                  child: GestureDetector(
-                    behavior: HitTestBehavior.translucent,
-                    onTap: () {
-                      print(localRegionItemList[index]);
-                      navigatorPush(context: context, route: LocalRegionSearchView(title: '$title ${localRegionItemList[index]['name']}', titleIndex: titleIndex, region: localRegionItemList[index]['name']));
-                    },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Text(localRegionItemList[index]['name']),
-                        Text(localRegionItemList[index]['count'].toString())
-                      ]
-                    )
-                  )
-                )
-              ]
-            )
-          );
-        })
-      ),
     );
   }
 }
