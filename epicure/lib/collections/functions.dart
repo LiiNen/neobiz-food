@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 Future<bool> onWillPop(BuildContext context) async {
@@ -78,4 +79,15 @@ presetRequestBody() {
     'search': '',
   };
   return preset;
+}
+
+swiperPagination() {
+  return SwiperPagination(
+    alignment: Alignment.bottomCenter,
+    margin: EdgeInsets.all(4),
+    builder: DotSwiperPaginationBuilder(
+      color: Color(0xffd9dee7), size: 6.0,
+      activeColor: Color(0xff0058cc), activeSize: 6.0
+    )
+  );
 }

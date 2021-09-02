@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:foodie/collections/functions.dart';
+
+import 'detailView.dart';
 
 class SearchListBuilder extends StatefulWidget {
   final List searchList;
@@ -30,6 +33,7 @@ class _SearchListBuilder extends State<SearchListBuilder> {
       child: GestureDetector(
         behavior: HitTestBehavior.translucent,
         onTap: () {
+          navigatorPush(context: context, route: DetailView(no: item['no']));
           print(item['name']);
         },
         child: Row(
