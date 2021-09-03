@@ -47,7 +47,7 @@ class _DetailView extends State<DetailView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MainAppBar(detailTitle: detailJson != null ? detailJson['name'] : null),
+      appBar: MainAppBar(detailTitle: detailJson != null ? detailJson['name'] : '맛집 불러오는 중...'),
       body: detailJson == null ? Center(child: CircularProgressIndicator(strokeWidth: 10,))
         : (
         Container(

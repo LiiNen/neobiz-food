@@ -45,7 +45,36 @@ class _LocalRegionSearchView extends State<LocalRegionSearchView> {
       body: Column(
         children: <Widget> [
           MainTitleBar(title: title),
+          localFilter(),
         ] + (localRegionSearchItemList.length != 0 ? [SearchListBuilder(searchList: localRegionSearchItemList,)] : []),
+      )
+    );
+  }
+
+  localFilter() {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          localFilterContainer('구역별'),
+          localFilterContainer('메뉴별'),
+          localFilterContainer('상황별'),
+        ],
+      )
+    );
+  }
+  localFilterContainer(String filterName) {
+    return GestureDetector(
+      onTap: () {},
+      child: Container(
+        margin: EdgeInsets.only(left: 10),
+        width: 30, height: 30,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15),
+          border: Border.all(color: Colors.black)
+        ),
+        child: Center(child: Text(filterName))
       )
     );
   }
