@@ -4,9 +4,10 @@ import 'functions.dart';
 import '../main.dart';
 
 class MainAppBar extends StatelessWidget implements PreferredSizeWidget{
-  MainAppBar() : preferredSize = Size.fromHeight(40.0);
+  MainAppBar({this.detailTitle}) : preferredSize = Size.fromHeight(40.0);
   @override
   final Size preferredSize;
+  final String? detailTitle;
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +16,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget{
       backgroundColor: Colors.white,
       centerTitle: true,
       title: Container(
-        child: Text('epicure', style: TextStyle(color: Colors.black),)
+        child: Text(detailTitle != null ? detailTitle! : 'epicure', style: TextStyle(color: Colors.black),)
       ),
     );
   }

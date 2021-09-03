@@ -29,7 +29,7 @@ void showToast(String message){
   );
 }
 
-TextStyle textStyle({color: Colors.black, weight: int, size: double}) {
+TextStyle textStyle({color: Colors.black, weight: int, size: 14.0}) {
   FontWeight fontWeight = FontWeight.normal;
   switch(weight) {
     case 400:
