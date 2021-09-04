@@ -4,6 +4,7 @@ import 'package:foodie/collections/statelessWidgets.dart';
 import 'package:foodie/restApi/detailInfoApi.dart';
 
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:foodie/restApi/searchScrapApi.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DetailView extends StatefulWidget {
@@ -57,6 +58,7 @@ class _DetailView extends State<DetailView> {
               ListView(
                 shrinkWrap: true,
                 children: [
+                  scrapActionBar(),
                   detailPhotoSwiper(),
                   menuContainer(),
                   blogContainer(),
@@ -67,6 +69,24 @@ class _DetailView extends State<DetailView> {
         )
       )
     );
+  }
+
+  scrapActionBar() {
+    return Container(
+      height: 100,
+      child: GestureDetector(
+        behavior: HitTestBehavior.translucent,
+        onTap: () {
+          scrapAction();
+        },
+        child: Center(
+          child: Text('찜하기', style: textStyle(weight: 600, size: 14.0))
+        )
+      )
+    );
+  }
+  scrapAction() {
+    searchScrap(type: 'insert', no: no);
   }
 
   detailPhotoSwiper() {

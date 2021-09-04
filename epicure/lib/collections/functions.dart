@@ -77,6 +77,9 @@ presetRequestBody() {
     'menu': '-1',
     'dong': '-1',
     'search': '',
+    'filter': '',
+    'mode': '',
+    'menu_no': '',
   };
   return preset;
 }
