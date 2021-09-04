@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:foodie/collections/functions.dart';
-import 'package:foodie/mainGridView/settingView/settingView.dart';
-import 'package:foodie/mainGridView/subwayView/subwayView.dart';
 
 import 'localView/localView.dart';
+import 'subwayView/subwayView.dart';
+import 'townView/townView.dart';
+import 'settingView/settingView.dart';
 
 class MainGridItem {
   String title;
@@ -14,7 +15,7 @@ class MainGridItem {
 List<MainGridItem> _mainGridItemList = [
   MainGridItem(title: '지역별', icon: Icon(Icons.location_on), route: LocalView()),
   MainGridItem(title: '역세권', icon: Icon(Icons.directions_subway), route: SubwayView()),
-  MainGridItem(title: '맛집촌', icon: Icon(Icons.flag)),
+  MainGridItem(title: '맛집촌', icon: Icon(Icons.flag), route: TownView()),
   MainGridItem(title: '내주변', icon: Icon(Icons.map_outlined)),
   MainGridItem(title: '찜한 맛집', icon: Icon(Icons.star)),
   MainGridItem(title: '설정', icon: Icon(Icons.settings), route: SettingView()),

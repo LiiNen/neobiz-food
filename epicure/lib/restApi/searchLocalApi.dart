@@ -11,7 +11,6 @@ searchLocal({required int doNum, required String siName, required String mode, i
   var requestBody = Map();
   if(presetBody != null) requestBody = presetBody;
   requestBody['mode'] = mode;
-  print(requestBody);
   return searchLocalApi(query: query, requestBody: requestBody);
 }
 
