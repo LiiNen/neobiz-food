@@ -37,7 +37,6 @@ class _SubwayView extends State<SubwayView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: true,
       appBar: MainAppBar(),
       body: Column(
         children: [

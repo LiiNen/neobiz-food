@@ -5,6 +5,7 @@ import 'localView/localView.dart';
 import 'subwayView/subwayView.dart';
 import 'townView/townView.dart';
 import 'settingView/settingView.dart';
+import 'scrapView/scrapView.dart';
 
 class MainGridItem {
   String title;
@@ -17,7 +18,7 @@ List<MainGridItem> _mainGridItemList = [
   MainGridItem(title: '역세권', icon: Icon(Icons.directions_subway), route: SubwayView()),
   MainGridItem(title: '맛집촌', icon: Icon(Icons.flag), route: TownView()),
   MainGridItem(title: '내주변', icon: Icon(Icons.map_outlined)),
-  MainGridItem(title: '찜한 맛집', icon: Icon(Icons.star)),
+  MainGridItem(title: '찜한 맛집', icon: Icon(Icons.star), route: ScrapView()),
   MainGridItem(title: '설정', icon: Icon(Icons.settings), route: SettingView()),
 ];
 
