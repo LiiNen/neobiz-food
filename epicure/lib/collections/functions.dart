@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:foodie/main.dart';
+import 'package:share/share.dart';
 
 Future<bool> onWillPop(BuildContext context) async {
   return (await showDialog(
@@ -92,5 +94,15 @@ swiperPagination() {
       color: Color(0xffd9dee7), size: 6.0,
       activeColor: Color(0xff0058cc), activeSize: 6.0
     )
+  );
+}
+
+// TODO : wrong message? -> check android
+void shareLink(BuildContext context, String content) async {
+  String title = 'epicure share';
+  Share.share(
+    title,
+    subject: content,
+    sharePositionOrigin: Rect.fromLTWH(0, 100, maxWidth, MediaQuery.of(context).size.height - 100)
   );
 }

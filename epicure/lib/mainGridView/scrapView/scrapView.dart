@@ -62,7 +62,7 @@ class _ScrapView extends State<ScrapView> {
             IconSlideAction(
               color: Colors.yellow,
               onTap: () {
-                // TODO : 공유하기 만들기
+                shareLink(context, item['name']);
               },
               iconWidget: Container(
                 child: Text('공유', style: textStyle(color: Colors.white, weight: 400, size: 12.0))
