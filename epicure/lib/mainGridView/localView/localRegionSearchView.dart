@@ -57,16 +57,18 @@ class _LocalRegionSearchView extends State<LocalRegionSearchView> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          localFilterContainer('구역별'),
-          localFilterContainer('메뉴별'),
-          localFilterContainer('상황별'),
+          localFilterContainer('구역별', regionFilter),
+          localFilterContainer('메뉴별', menuFilter),
+          localFilterContainer('상황별', themeFilter),
         ],
       )
     );
   }
-  localFilterContainer(String filterName) {
+  localFilterContainer(String filterName, action) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        action(localRegionSearchItemList);
+      },
       child: Container(
         margin: EdgeInsets.only(left: 10),
         width: 30, height: 30,
@@ -77,5 +79,65 @@ class _LocalRegionSearchView extends State<LocalRegionSearchView> {
         child: Center(child: Text(filterName))
       )
     );
+  }
+
+  regionFilter(List targetList) {
+
+  }
+
+  List<String> menuFilterList = ['한식', '중식', '일식', '양식', '에스닉', '퓨전', '뷔페', '디저트', '펍&바'];
+  List<int> checkedMenu = [];
+
+  menuFilter(List targetList) async {
+    print(targetList.length);
+    return (await showDialog(
+      context: context,
+      builder: (context) {
+        return StatefulBuilder(
+          builder: (BuildContext context, StateSetter setState) {
+            return AlertDialog(
+              content: Center(child: Container(
+                width: MediaQuery.of(context).size.width,
+                margin: EdgeInsets.symmetric(horizontal: 18),
+                height: 400,
+                child: GridView.count(
+                  crossAxisCount: 3,
+                  children: List.generate(menuFilterList.length, (index) {
+                    return Container(
+                      child: GestureDetector(
+                        behavior: HitTestBehavior.translucent,
+                        onTap: () {
+                          print(index);
+                          print(checkedMenu);
+                          setState(() {
+                            print(checkedMenu.indexOf(index));
+                            checkedMenu.indexOf(index) != -1 ? checkedMenu.remove(index) : checkedMenu.add(index);
+                            print(checkedMenu);
+                          });
+                        },
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(menuFilterList[index]),
+                            Icon(checkedMenu.indexOf(index) != -1 ? Icons.radio_button_checked : Icons.radio_button_off)
+                          ]
+                        )
+                      ),
+                    );
+                  }),
+                )
+              ))
+            );
+          }
+        );
+      }
+    )) ?? false;
+  }
+  menuFilterDialog() {
+
+  }
+  themeFilter(List targetList) {
+
   }
 }
