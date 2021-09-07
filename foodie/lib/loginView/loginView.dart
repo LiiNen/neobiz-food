@@ -3,6 +3,8 @@ import 'package:foodie/collections/decorationContainers.dart';
 import 'package:foodie/collections/exitDialog.dart';
 import 'package:foodie/collections/functions.dart';
 
+import 'signUpView.dart';
+
 class LoginView extends StatefulWidget {
   @override
   State<LoginView> createState() => _LoginView();
@@ -34,6 +36,15 @@ class _LoginView extends State<LoginView> {
                   loginButton(title: '로그인', action: () => {},),
                   SizedBox(height: 96),
                   loginButton(title: '간편 로그인', action: () => {showSocialLogin()},),
+                  Row(
+                    children: [
+                      GestureDetector(
+                        behavior: HitTestBehavior.translucent,
+                        onTap: () {navigatorPush(context: context, widget: SignUpView());},
+                        child: Text('회원가입')
+                      )
+                    ],
+                  )
                 ],
               )
             )

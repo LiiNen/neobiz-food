@@ -16,13 +16,13 @@ TextStyle textStyle({color: Colors.black, weight: int, size: double}) {
   return TextStyle(
       color: color,
       fontWeight: fontWeight,
-      fontFamily: "AppleSDGothicNeo",
+      fontFamily: "NotoSansKR",
       fontStyle:  FontStyle.normal,
       fontSize: size
   );
 }
 
-navigatorPush({context, widget, replacement=false}) {
+navigatorPush({required context, required widget, replacement=false}) {
   replacement
     ? Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => widget))
     : Navigator.push(context, MaterialPageRoute(builder: (context) => widget));

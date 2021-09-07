@@ -1,0 +1,110 @@
+import 'package:flutter/material.dart';
+import 'package:foodie/collections/decorationContainers.dart';
+import 'package:foodie/collections/functions.dart';
+import 'package:foodie/loginView/userTypeDialog.dart';
+
+import 'loginView.dart';
+
+class SignUpView extends StatefulWidget{
+  @override
+  State<SignUpView> createState() => _SignUpView();
+}
+class _SignUpView extends State<SignUpView> {
+  TextEditingController nameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController pwController = TextEditingController();
+  TextEditingController pwConfirmController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+  TextEditingController addressController = TextEditingController();
+
+  String _userType = '';
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance!
+        .addPostFrameCallback((_) => checkUserType());
+  }
+  checkUserType() async {
+    _userType = await showUserTypeDialog(context);
+    print(_userType);
+    if(_userType == '') Navigator.pop(context);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        resizeToAvoidBottomInset: true,
+        appBar: LoginViewAppBar(title: '회원가입'),
+        body: SingleChildScrollView(
+          child: Container(
+            margin: EdgeInsets.symmetric(horizontal: 18),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: 16),
+                loginStep(step: 1, title: '회원정보 입력'),
+                SizedBox(height: 30),
+                signUpTextField('이름', nameController),
+                signUpTextField('이메일', emailController),
+                signUpTextField('비밀번호', pwController),
+                signUpTextField('비밀번호 확인', pwConfirmController),
+                signUpTextField('휴대전화', phoneController),
+                signUpTextField('주소', addressController),
+                SizedBox(height: 12),
+                loginNextButton(context: context, route: LoginView())
+              ]
+            )
+          )
+        )
+      )
+    );
+  }
+
+  signUpTextField(String hintText, TextEditingController signUpController) {
+    return Container(
+      margin: EdgeInsets.only(bottom: 28),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Container(
+            child: TextField(
+              controller: signUpController,
+              obscureText: (hintText == '비밀번호' || hintText == '비밀번호 확인' ? true : false),
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                hintText: hintText,
+                hintStyle: textStyle(color: Color(0xff8e8e8e), weight: 400, size: 15.0),
+              )
+            )
+          ),
+          // SizedBox(height: 8),
+          lineDivider()
+        ]
+      )
+    );
+  }
+}
+
+loginStep({required int step, required String title}) {
+  return Container(
+    child: Text('STEP $step\n$title', style: textStyle(weight: 500, size: 19.0))
+  );
+}
+
+loginNextButton({String title='다음', required BuildContext context, required Widget route}) {
+  return GestureDetector(
+    onTap: () {navigatorPush(context: context, widget: route);},
+    behavior: HitTestBehavior.translucent,
+    child: Container(
+      width: MediaQuery.of(context).size.width,
+      height: 70,
+      child: Center(
+        child: Text(title, style: textStyle(weight: 500, size: 16.0),)
+      )
+    )
+  );
+}
