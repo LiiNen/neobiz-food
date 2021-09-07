@@ -33,7 +33,7 @@ class _LoginView extends State<LoginView> {
                   SizedBox(height: 38),
                   loginButton(title: '로그인', action: () => {},),
                   SizedBox(height: 96),
-                  loginButton(title: '간편 로그인', action: () => {},),
+                  loginButton(title: '간편 로그인', action: () => {showSocialLogin()},),
                 ],
               )
             )
@@ -75,12 +75,12 @@ class _LoginView extends State<LoginView> {
     );
   }
 
-  loginButton({required title, required action}){
+  loginButton({required title, required action, double height=58}){
     bool isSimple = (title == '간편 로그인');
     return GestureDetector(
       onTap: () {action();},
       child: Container(
-        height: 58,
+        height: height,
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
           border: Border.all(
@@ -93,6 +93,59 @@ class _LoginView extends State<LoginView> {
         ),
         child: Center(child: Text(title, style: textStyle(color: Color(0xff8e8e8e), weight: 500, size: 16.0)))
       )
+    );
+  }
+
+  showSocialLogin() {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context){
+        return Container(
+          color: Colors.transparent,
+          child: Container(
+            margin: EdgeInsets.symmetric(horizontal: 18),
+            padding: EdgeInsets.only(bottom: 18),
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+              // TODO : border not adjusted 
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(10),
+                topRight: Radius.circular(10),
+              ),
+              color: Colors.white,
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  margin: EdgeInsets.symmetric(vertical: 16),
+                  child: Text('간편 로그인', style: textStyle(color: Color(0xff8e8e8e), weight: 500, size: 16.0)),
+                ),
+                lineDivider(),
+                SizedBox(height: 18),
+                Container(
+                  margin: EdgeInsets.symmetric(vertical: 10),
+                  child: loginButton(title: '카카오톡 로그인', action: (){}, height: 48)
+                ),
+                Container(
+                  margin: EdgeInsets.symmetric(vertical: 10),
+                  child: loginButton(title: '네이버 로그인', action: (){}, height: 48)
+                ),
+                Container(
+                  margin: EdgeInsets.symmetric(vertical: 10),
+                  child: loginButton(title: '구글 로그인', action: (){}, height: 48)
+                ),
+                Container(
+                  margin: EdgeInsets.symmetric(vertical: 10),
+                  child: loginButton(title: '애플 로그인', action: (){}, height: 48)
+                ),
+                SizedBox(height: 18)
+              ],
+            )
+          )
+        );
+      }
     );
   }
 }
