@@ -3,6 +3,7 @@ import 'package:foodie/collections/functions.dart';
 import 'package:foodie/collections/statelessWidgets.dart';
 import 'package:foodie/mainGridView/commonViewCollection/searchListBuilder.dart';
 import 'package:foodie/restApi/searchLocalApi.dart';
+import 'package:foodie/mainGridView/commonViewCollection/searchFilters.dart';
 
 class LocalRegionSearchView extends StatefulWidget {
   final String title;
@@ -19,6 +20,10 @@ class _LocalRegionSearchView extends State<LocalRegionSearchView> {
   _LocalRegionSearchView({required this.title, required this.titleIndex, required this.region});
 
   var localRegionSearchItemList = [];
+  var _checkedRegion = [];
+  var _checkedMenu = [];
+  var _checkedTheme = [];
+  var _filteredItemList = [];
 
   @override
   void initState() {
@@ -46,8 +51,10 @@ class _LocalRegionSearchView extends State<LocalRegionSearchView> {
         children: <Widget> [
           MainTitleBar(title: title),
           localFilter(),
-        ] + (localRegionSearchItemList.length != 0 ? [SearchListBuilder(searchList: localRegionSearchItemList,)] : []),
-      )
+        ] + (localRegionSearchItemList.length != 0 ? (_filteredItemList.length != 0 ?
+          [SearchListBuilder(searchList: _filteredItemList,)] : [SearchListBuilder(searchList: localRegionSearchItemList,)]) : []
+        )
+      ),
     );
   }
 
@@ -66,8 +73,13 @@ class _LocalRegionSearchView extends State<LocalRegionSearchView> {
   }
   localFilterContainer(String filterName, action) {
     return GestureDetector(
-      onTap: () {
-        action(localRegionSearchItemList);
+      onTap: () async {
+        if(filterName == '구역별') _checkedRegion = await action(context, localRegionSearchItemList, _checkedRegion);
+        if(filterName == '메뉴별') _checkedMenu = await action(context, localRegionSearchItemList, _checkedMenu);
+        if(filterName == '상황별') _checkedTheme = await action(context, localRegionSearchItemList, _checkedTheme);
+        setState(() {
+          _filteredItemList = setFilteredItemList(localRegionSearchItemList, _checkedRegion, _checkedMenu, _checkedTheme);
+        });
       },
       child: Container(
         margin: EdgeInsets.only(left: 10),
@@ -79,65 +91,5 @@ class _LocalRegionSearchView extends State<LocalRegionSearchView> {
         child: Center(child: Text(filterName))
       )
     );
-  }
-
-  regionFilter(List targetList) {
-
-  }
-
-  List<String> menuFilterList = ['한식', '중식', '일식', '양식', '에스닉', '퓨전', '뷔페', '디저트', '펍&바'];
-  List<int> checkedMenu = [];
-
-  menuFilter(List targetList) async {
-    print(targetList.length);
-    return (await showDialog(
-      context: context,
-      builder: (context) {
-        return StatefulBuilder(
-          builder: (BuildContext context, StateSetter setState) {
-            return AlertDialog(
-              content: Center(child: Container(
-                width: MediaQuery.of(context).size.width,
-                margin: EdgeInsets.symmetric(horizontal: 18),
-                height: 400,
-                child: GridView.count(
-                  crossAxisCount: 3,
-                  children: List.generate(menuFilterList.length, (index) {
-                    return Container(
-                      child: GestureDetector(
-                        behavior: HitTestBehavior.translucent,
-                        onTap: () {
-                          print(index);
-                          print(checkedMenu);
-                          setState(() {
-                            print(checkedMenu.indexOf(index));
-                            checkedMenu.indexOf(index) != -1 ? checkedMenu.remove(index) : checkedMenu.add(index);
-                            print(checkedMenu);
-                          });
-                        },
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(menuFilterList[index]),
-                            Icon(checkedMenu.indexOf(index) != -1 ? Icons.radio_button_checked : Icons.radio_button_off)
-                          ]
-                        )
-                      ),
-                    );
-                  }),
-                )
-              ))
-            );
-          }
-        );
-      }
-    )) ?? false;
-  }
-  menuFilterDialog() {
-
-  }
-  themeFilter(List targetList) {
-
   }
 }
