@@ -28,7 +28,7 @@ class _SubscribeInitView extends State<SubscribeInitView> {
             SizedBox(height: 5),
             subscribeContainer('이메일'),
             subscribeContainer('SNS'),
-            loginNextButton(title: '완료', context: context, route: LoginView(), action: showCompleteDialog, isReplace: true),
+            loginNextButton(title: '완료', context: context, route: LoginView(), dialog: showCompleteDialog, isReplace: true),
           ],
         )
       )

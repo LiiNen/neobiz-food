@@ -53,13 +53,17 @@ class _SignUpView extends State<SignUpView> {
                 signUpTextField('휴대전화', phoneController),
                 signUpTextField('주소', addressController),
                 SizedBox(height: 12),
-                loginNextButton(context: context, route: SubscribeInitView())
+                loginNextButton(context: context, route: SubscribeInitView(), condition: checkSignUp()),
               ]
             )
           )
         )
       )
     );
+  }
+
+  bool checkSignUp() {
+    return true;
   }
 }
 
@@ -94,11 +98,13 @@ loginStep({required int step, required String title}) {
   );
 }
 
-loginNextButton({String title='다음', required BuildContext context, required Widget route, dynamic action, bool isReplace=false}) {
+loginNextButton({String title='다음', required BuildContext context, required Widget route, dynamic dialog, bool condition=false, bool isReplace=false}) {
   return GestureDetector(
     onTap: () {
-      if(action != null) action(context);
-      navigatorPush(context: context, widget: route, replacement: isReplace);
+      if(dialog != null) dialog(context).then(
+        ((_) {navigatorPush(context: context, widget: route, replacement: isReplace);})
+      );
+      else if(condition) navigatorPush(context: context, widget: route, replacement: isReplace);
     },
     behavior: HitTestBehavior.translucent,
     child: Container(

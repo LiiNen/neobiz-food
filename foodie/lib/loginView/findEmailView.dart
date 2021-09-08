@@ -27,7 +27,7 @@ class _FindEmailView extends State<FindEmailView> {
               children: [
                 signUpTextField('이름', nameController),
                 signUpTextField('이메일', emailController),
-                loginNextButton(context: context, route: LoginView())
+                loginNextButton(context: context, route: LoginView(), condition: true)
               ]
             )
           )
