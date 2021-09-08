@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:foodie/collections/decorationContainers.dart';
 import 'package:foodie/collections/functions.dart';
+import 'package:foodie/loginView/subscribeInitView.dart';
 import 'package:foodie/loginView/userTypeDialog.dart';
-
-import 'loginView.dart';
 
 class SignUpView extends StatefulWidget{
   @override
@@ -45,7 +44,6 @@ class _SignUpView extends State<SignUpView> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 16),
                 loginStep(step: 1, title: '회원정보 입력'),
                 SizedBox(height: 30),
                 signUpTextField('이름', nameController),
@@ -55,7 +53,7 @@ class _SignUpView extends State<SignUpView> {
                 signUpTextField('휴대전화', phoneController),
                 signUpTextField('주소', addressController),
                 SizedBox(height: 12),
-                loginNextButton(context: context, route: LoginView())
+                loginNextButton(context: context, route: SubscribeInitView())
               ]
             )
           )
@@ -91,13 +89,17 @@ class _SignUpView extends State<SignUpView> {
 
 loginStep({required int step, required String title}) {
   return Container(
+    margin: EdgeInsets.only(top: 16),
     child: Text('STEP $step\n$title', style: textStyle(weight: 500, size: 19.0))
   );
 }
 
-loginNextButton({String title='다음', required BuildContext context, required Widget route}) {
+loginNextButton({String title='다음', required BuildContext context, required Widget route, dynamic action, bool isReplace=false}) {
   return GestureDetector(
-    onTap: () {navigatorPush(context: context, widget: route);},
+    onTap: () {
+      if(action != null) action(context);
+      navigatorPush(context: context, widget: route, replacement: isReplace);
+    },
     behavior: HitTestBehavior.translucent,
     child: Container(
       width: MediaQuery.of(context).size.width,
