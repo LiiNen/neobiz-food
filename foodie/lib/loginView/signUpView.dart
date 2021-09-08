@@ -61,30 +61,30 @@ class _SignUpView extends State<SignUpView> {
       )
     );
   }
+}
 
-  signUpTextField(String hintText, TextEditingController signUpController) {
-    return Container(
-      margin: EdgeInsets.only(bottom: 28),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          Container(
-            child: TextField(
-              controller: signUpController,
-              obscureText: (hintText == '비밀번호' || hintText == '비밀번호 확인' ? true : false),
-              decoration: InputDecoration(
-                border: InputBorder.none,
-                hintText: hintText,
-                hintStyle: textStyle(color: Color(0xff8e8e8e), weight: 400, size: 15.0),
-              )
+signUpTextField(String hintText, TextEditingController signUpController) {
+  return Container(
+    margin: EdgeInsets.only(bottom: 28),
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        Container(
+          child: TextField(
+            controller: signUpController,
+            obscureText: (hintText == '비밀번호' || hintText == '비밀번호 확인' ? true : false),
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              hintText: hintText,
+              hintStyle: textStyle(color: Color(0xff8e8e8e), weight: 400, size: 15.0),
             )
-          ),
-          // SizedBox(height: 8),
-          lineDivider()
-        ]
-      )
-    );
-  }
+          )
+        ),
+        // SizedBox(height: 8),
+        lineDivider()
+      ]
+    )
+  );
 }
 
 loginStep({required int step, required String title}) {

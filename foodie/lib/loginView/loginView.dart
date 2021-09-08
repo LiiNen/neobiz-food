@@ -4,6 +4,7 @@ import 'package:foodie/collections/exitDialog.dart';
 import 'package:foodie/collections/functions.dart';
 
 import 'signUpView.dart';
+import 'findEmailView.dart';
 
 class LoginView extends StatefulWidget {
   @override
@@ -37,11 +38,17 @@ class _LoginView extends State<LoginView> {
                   SizedBox(height: 96),
                   loginButton(title: '간편 로그인', action: () => {showSocialLogin()},),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       GestureDetector(
                         behavior: HitTestBehavior.translucent,
                         onTap: () {navigatorPush(context: context, widget: SignUpView());},
                         child: Text('회원가입')
+                      ),
+                      GestureDetector(
+                        behavior: HitTestBehavior.translucent,
+                        onTap: () {navigatorPush(context: context, widget: FindEmailView());},
+                        child: Text('회원정보 찾기')
                       )
                     ],
                   )
