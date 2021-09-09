@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:foodie/collections/decorationContainers.dart';
 
+import 'findDialog.dart';
 import 'loginView.dart';
 import 'signUpView.dart';
 
@@ -27,7 +28,7 @@ class _FindEmailView extends State<FindEmailView> {
               children: [
                 signUpTextField('이름', nameController),
                 signUpTextField('이메일', emailController),
-                loginNextButton(context: context, route: LoginView(), condition: true)
+                loginNextButton(context: context, route: LoginView(), dialog: showFindDialog)
               ]
             )
           )

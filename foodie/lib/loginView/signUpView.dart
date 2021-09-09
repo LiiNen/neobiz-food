@@ -98,7 +98,7 @@ loginStep({required int step, required String title}) {
   );
 }
 
-loginNextButton({String title='다음', required BuildContext context, required Widget route, dynamic dialog, bool condition=false, bool isReplace=false}) {
+loginNextButton({String title='다음', required BuildContext context, required Widget route, dynamic dialog, bool condition=true, bool isReplace=false}) {
   return GestureDetector(
     onTap: () {
       if(dialog != null) dialog(context).then(
