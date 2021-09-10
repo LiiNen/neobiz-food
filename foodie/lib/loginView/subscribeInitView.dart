@@ -18,7 +18,7 @@ class _SubscribeInitView extends State<SubscribeInitView> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: LoginViewAppBar(title: '회원가입'),
+      appBar: DefaultAppBar(title: '회원가입'),
       body: Container(
         margin: EdgeInsets.symmetric(horizontal: 18),
         child: Column(

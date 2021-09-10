@@ -20,7 +20,7 @@ class _FindEmailView extends State<FindEmailView> {
       child: Scaffold(
         backgroundColor: Colors.white,
         resizeToAvoidBottomInset: true,
-        appBar: LoginViewAppBar(title: '회원정보 찾기'),
+        appBar: DefaultAppBar(title: '회원정보 찾기'),
         body: SingleChildScrollView(
           child: Container(
             margin: EdgeInsets.symmetric(horizontal: 18),

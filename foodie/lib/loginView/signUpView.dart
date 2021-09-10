@@ -37,7 +37,7 @@ class _SignUpView extends State<SignUpView> {
       child: Scaffold(
         backgroundColor: Colors.white,
         resizeToAvoidBottomInset: true,
-        appBar: LoginViewAppBar(title: '회원가입'),
+        appBar: DefaultAppBar(title: '회원가입'),
         body: SingleChildScrollView(
           child: Container(
             margin: EdgeInsets.symmetric(horizontal: 18),

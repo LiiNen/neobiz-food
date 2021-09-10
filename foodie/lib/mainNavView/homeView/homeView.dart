@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodie/collections/decorationContainers.dart';
 import 'package:foodie/collections/functions.dart';
 
 import 'homeBannerContainer.dart';
@@ -24,20 +25,13 @@ class _HomeView extends State<HomeView> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  categoryTitle(),
+                  subTitleContainer(title: '카테고리'),
                 ] + categorySelectionContainer()
               )
             )
           ]
         )
       )
-    );
-  }
-
-  categoryTitle() {
-    return Container(
-      margin: EdgeInsets.only(top: 12),
-      child: Text('카테고리')
     );
   }
 
