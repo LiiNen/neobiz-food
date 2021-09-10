@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:foodie/collections/decorationContainers.dart';
 import 'package:foodie/collections/exitDialog.dart';
 import 'package:foodie/collections/functions.dart';
+import 'package:foodie/mainNavView/mainNavView.dart';
 
 import 'signUpView.dart';
 import 'findEmailView.dart';
@@ -34,9 +35,10 @@ class _LoginView extends State<LoginView> {
                   loginTextField('email', emailController),
                   loginTextField('pw', pwController),
                   SizedBox(height: 38),
-                  loginButton(title: '로그인', action: () => {},),
+                  loginButton(title: '로그인', action: () => {_loginAction()},),
                   SizedBox(height: 96),
                   loginButton(title: '간편 로그인', action: () => {showSocialLogin()},),
+                  SizedBox(height: 32),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -59,6 +61,11 @@ class _LoginView extends State<LoginView> {
         )
       )
     );
+  }
+
+  _loginAction() {
+
+    navigatorPush(context: context, widget: MainNavView(), replacement: true);
   }
 
   loginTextField(String type, TextEditingController loginController) {
