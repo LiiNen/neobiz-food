@@ -20,9 +20,9 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 }
 
-subTitleContainer({required String title}) {
+subTitleContainer({required String title, double topMargin=16}) {
   return Container(
-    margin: EdgeInsets.only(top: 16),
+    margin: EdgeInsets.only(top: topMargin),
     child: Text(title, style: textStyle(weight: 500, size: 19.0))
   );
 }
