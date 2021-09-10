@@ -3,6 +3,7 @@ import 'package:foodie/collections/decorationContainers.dart';
 import 'package:foodie/collections/functions.dart';
 
 import 'homeBannerContainer.dart';
+import 'homeDrawer.dart';
 
 class HomeView extends StatefulWidget {
   @override
@@ -13,6 +14,7 @@ class _HomeView extends State<HomeView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: homeViewAppBar(),
+      endDrawer: HomeDrawer(),
       body: Container(
         width: MediaQuery.of(context).size.width,
         child: ListView(
