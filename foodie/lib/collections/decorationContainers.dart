@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:foodie/collections/functions.dart';
 
 class LoginViewAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -27,6 +28,17 @@ lineDivider({color: const Color(0xffe8e8e8)}) {
         color: color,
         width: 1
       )
+    )
+  );
+}
+
+swiperPagination() {
+  return SwiperPagination(
+    alignment: Alignment.bottomCenter,
+    margin: EdgeInsets.all(4),
+    builder: DotSwiperPaginationBuilder(
+        color: Color(0xffd9dee7), size: 6.0,
+        activeColor: Color(0xff0058cc), activeSize: 6.0
     )
   );
 }
