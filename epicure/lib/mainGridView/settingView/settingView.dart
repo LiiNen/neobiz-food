@@ -10,7 +10,8 @@ class SettingItem {
   bool isVoucher;
   bool isToggle;
   Widget? route;
-  SettingItem({required this.title, required this.icon, this.isVoucher=false, this.isToggle=false, this.route});
+  dynamic action;
+  SettingItem({required this.title, required this.icon, this.isVoucher=false, this.isToggle=false, this.route, this.action});
 }
 
 List<SettingItem> settingItemList = [
@@ -23,7 +24,7 @@ List<SettingItem> settingItemList = [
   SettingItem(title: '찜한 맛집 리스트', icon: Icon(Icons.star)),
   SettingItem(title: '평가한 맛집', icon: Icon(Icons.rice_bowl_rounded)),
   SettingItem(title: '회원탈퇴', icon: Icon(Icons.exit_to_app)),
-  SettingItem(title: '로그아웃', icon: Icon(Icons.exit_to_app)),
+  SettingItem(title: '로그아웃', icon: Icon(Icons.exit_to_app), action: signOutAction),
 ];
 
 class SettingView extends StatefulWidget {
@@ -64,6 +65,9 @@ class _SettingView extends State<SettingView> {
                 onTap: () {
                   if(e.isToggle) {
 
+                  }
+                  else if(e.action != null) {
+                    e.action(context);
                   }
                   else {
                     navigatorPush(context: context, route: e.route!);

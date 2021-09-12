@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:foodie/collections/functions.dart';
 import 'package:foodie/collections/statelessWidgets.dart';
 import 'package:foodie/loginView/findAccountView.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import 'loginView/signInView.dart';
 import 'loginView/signUpView.dart';
@@ -11,6 +12,10 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  Future<InitializationStatus> _initGoogleMobileAds() {
+    return MobileAds.instance.initialize();
+  }
+
   const MyApp({Key? key}) : super(key: key);
 
   @override

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:foodie/collections/routers.dart';
 import 'package:foodie/main.dart';
 import 'package:share/share.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -108,7 +109,7 @@ void shareLink(BuildContext context, String content) async {
   );
 }
 
-signOutAction() async {
+signOutAction(BuildContext context) async {
   final pref = await SharedPreferences.getInstance();
   pref.setString('name', '');
   pref.setString('email', '');
@@ -116,4 +117,5 @@ signOutAction() async {
   pref.setString('phone', '');
   pref.setString('tel', '');
   pref.setStringList('loginInfo', []);
+  mainRoute(context);
 }
