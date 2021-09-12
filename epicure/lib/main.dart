@@ -4,6 +4,7 @@ import 'package:foodie/collections/statelessWidgets.dart';
 import 'package:foodie/loginView/findAccountView.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
+import 'collections/asyncFunctions.dart';
 import 'loginView/signInView.dart';
 import 'loginView/signUpView.dart';
 

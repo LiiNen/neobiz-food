@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodie/collections/asyncFunctions.dart';
 import 'package:foodie/collections/functions.dart';
 import 'package:foodie/mainGridView/localView/localView.dart';
 import 'package:foodie/mainGridView/scrapView/scrapView.dart';
