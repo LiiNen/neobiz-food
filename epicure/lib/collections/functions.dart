@@ -4,6 +4,7 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:foodie/main.dart';
 import 'package:share/share.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 Future<bool> onWillPop(BuildContext context) async {
   return (await showDialog(
@@ -105,4 +106,14 @@ void shareLink(BuildContext context, String content) async {
     subject: content,
     sharePositionOrigin: Rect.fromLTWH(0, 100, maxWidth, MediaQuery.of(context).size.height - 100)
   );
+}
+
+signOutAction() async {
+  final pref = await SharedPreferences.getInstance();
+  pref.setString('name', '');
+  pref.setString('email', '');
+  pref.setString('uid', '');
+  pref.setString('phone', '');
+  pref.setString('tel', '');
+  pref.setStringList('loginInfo', []);
 }

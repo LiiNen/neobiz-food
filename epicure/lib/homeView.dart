@@ -19,10 +19,20 @@ class _HomeView extends State<HomeView> {
         body: Column(
           children: [
             MainTitleBar(title: 'home view'),
+            signOutButton(),
             Flexible(child: MainGridView())
           ],
         )
       )
+    );
+  }
+  signOutButton() {
+    return GestureDetector(
+      behavior: HitTestBehavior.translucent,
+      onTap: () {
+        signOutAction().then((_) {loginRoute(context);});
+      },
+      child: Text('로그아웃')
     );
   }
 }
