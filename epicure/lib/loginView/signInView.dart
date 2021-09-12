@@ -5,8 +5,6 @@ import 'package:foodie/restApi/signInApi.dart';
 import 'package:foodie/collections/statelessWidgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../homeView.dart';
-
 class SignInView extends StatefulWidget {
   @override
   State<SignInView> createState() => _SignInView();
@@ -75,7 +73,7 @@ class _SignInView extends State<SignInView> {
       }
       else {
         // login 3
-        homeRoute(context);
+        navRoute(context);
       }
     }
     else {
