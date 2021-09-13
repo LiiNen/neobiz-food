@@ -36,7 +36,6 @@ class _LocalView extends State<LocalView> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      appBar: MainAppBar(),
       body: Column(
         children: <Widget>[
           MainTitleBar(title: '대한민국'),

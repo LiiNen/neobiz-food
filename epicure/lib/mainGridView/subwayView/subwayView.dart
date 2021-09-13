@@ -37,7 +37,6 @@ class _SubwayView extends State<SubwayView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MainAppBar(),
       body: Column(
         children: [
           MainTitleBar(title: '역세권'),

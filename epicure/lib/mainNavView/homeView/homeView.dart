@@ -6,6 +6,7 @@ import 'package:foodie/mainGridView/localView/localView.dart';
 import 'package:foodie/mainGridView/subwayView/subwayView.dart';
 import 'package:foodie/mainGridView/townView/townView.dart';
 import 'package:foodie/mainNavView/homeView/homeBannerContainer.dart';
+import 'package:foodie/mainNavView/searchView/searchNavView.dart';
 
 class HomeView extends StatefulWidget {
   @override
@@ -47,11 +48,11 @@ class _HomeView extends State<HomeView> {
       height: 40,
       child: Row(
         children: [
-          typeSelectionItem(title: '지역별', route: LocalView()),
+          typeSelectionItem(title: '지역별', route: SearchNavView(initIndex: 0,)),
           SizedBox(width: 10,),
-          typeSelectionItem(title: '역세권', route: SubwayView()),
+          typeSelectionItem(title: '역세권', route: SearchNavView(initIndex: 1,)),
           SizedBox(width: 10,),
-          typeSelectionItem(title: '맛집촌', route: TownView()),
+          typeSelectionItem(title: '맛집촌', route: SearchNavView(initIndex: 2,)),
         ],
       )
     );

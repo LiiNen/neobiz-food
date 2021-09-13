@@ -6,6 +6,7 @@ import 'package:foodie/mainGridView/scrapView/scrapView.dart';
 import 'package:foodie/mainGridView/settingView/settingView.dart';
 import 'package:foodie/mainGridView/subwayView/subwayView.dart';
 import 'package:foodie/mainGridView/townView/townView.dart';
+import 'package:foodie/mainNavView/searchView/searchNavView.dart';
 
 import 'homeView/homeView.dart';
 
@@ -55,7 +56,7 @@ class _MainNavView extends State<MainNavView> {
   // navigation items view
   List<Widget> _navItemView = <Widget>[
     HomeView(),
-    LocalView(),
+    SearchNavView(),
     SubwayView(),
     ScrapView(),
     TownView(),

@@ -30,7 +30,6 @@ class _TownView extends State<TownView> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      appBar: MainAppBar(),
       body: Column(
         children: [
           MainTitleBar(title: '맛집촌'),

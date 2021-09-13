@@ -21,6 +21,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget{
     );
   }
 }
+
 class MainTitleBar extends StatelessWidget {
   final String title;
   MainTitleBar({this.title=''});
