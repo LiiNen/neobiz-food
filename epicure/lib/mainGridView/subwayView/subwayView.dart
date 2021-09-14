@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:foodie/collections/functions.dart';
 import 'package:foodie/collections/statelessWidgets.dart';
+import 'package:foodie/mainGridView/subwayView/subwayLineContainer.dart';
 import 'package:foodie/mainGridView/subwayView/subwayLineView.dart';
 import 'package:foodie/restApi/searchSubwayApi.dart';
 
@@ -19,6 +20,8 @@ class SubwayView extends StatefulWidget {
 }
 class _SubwayView extends State<SubwayView> {
   var subwayRegionList = [];
+  bool _isSelected = false;
+  int _selectedIndex = -1;
 
   @override
   void initState() {
@@ -38,32 +41,46 @@ class _SubwayView extends State<SubwayView> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
-        children: [
+        children: <Widget>[
           MainTitleBar(title: '역세권'),
-          subwayRegionBuilder()
-
-        ],
+          subwayBuilder(),
+        ] + (_isSelected ? [SubwayLineContainer(titleIndex: _selectedIndex)] : []),
       )
     );
   }
 
-  subwayRegionBuilder() {
-    return Expanded(
-      child: GridView.count(
-        crossAxisCount: 3,
+  subwayBuilder() {
+    return Container(
+      height: 30,
+      child: ListView(
+        scrollDirection: Axis.horizontal,
+        shrinkWrap: true,
         children: List.generate(subwayRegionList.length, (index) {
           return Container(
+            margin: EdgeInsets.symmetric(horizontal: 10),
+            width: 80,
             child: GestureDetector(
               behavior: HitTestBehavior.translucent,
               onTap: () {
-                navigatorPush(context: context, route: SubwayLineView(title: '역세권 | ${subwayRegionList[index]['name']}', titleIndex: subwayRegionList[index]['no']));
+                /// todo: add components to behind it, not to nav push
+                setState(() {
+                  _isSelected = true;
+                  _selectedIndex = subwayRegionList[index]['no'];
+                });
+                // navigatorPush(context: context, route: SubwayLineView(title: '역세권 | ${subwayRegionList[index]['name']}', titleIndex: subwayRegionList[index]['no']));
               },
-              child: Center(
-                child: Text(subwayRegionList[index]['name'])
+              child: Container(
+                decoration: BoxDecoration(
+                  border: Border.all(width: 1),
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                child: Center(
+                  child: Text(subwayRegionList[index]['name'])
+                )
               )
             )
           );
-        }),
+        })
       )
     );
   }
