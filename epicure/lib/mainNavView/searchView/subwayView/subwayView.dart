@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:foodie/collections/functions.dart';
 import 'package:foodie/collections/statelessWidgets.dart';
-import 'package:foodie/mainGridView/subwayView/subwayLineContainer.dart';
-import 'package:foodie/mainGridView/subwayView/subwayLineRegionSearchView.dart';
-import 'package:foodie/mainGridView/subwayView/subwayLineView.dart';
 import 'package:foodie/restApi/searchSubwayApi.dart';
+import 'subwayLineRegionSearchView.dart';
 
 Map subwayQuery({int areaNo=-1, int lineNo=-1, int stationNo=-1, int curPage=-1}) {
   return {

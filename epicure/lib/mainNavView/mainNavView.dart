@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:foodie/collections/asyncFunctions.dart';
 import 'package:foodie/collections/functions.dart';
-import 'package:foodie/mainGridView/localView/localView.dart';
 import 'package:foodie/mainGridView/scrapView/scrapView.dart';
 import 'package:foodie/mainGridView/settingView/settingView.dart';
-import 'package:foodie/mainGridView/subwayView/subwayView.dart';
 import 'package:foodie/mainGridView/townView/townView.dart';
 import 'package:foodie/mainNavView/searchView/searchNavView.dart';
 
 import 'homeView/homeView.dart';
+import 'searchView/subwayView/subwayView.dart';
 
 class MainNavView extends StatefulWidget {
   @override

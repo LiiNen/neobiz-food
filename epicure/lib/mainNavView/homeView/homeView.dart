@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:foodie/collections/asyncFunctions.dart';
 import 'package:foodie/collections/functions.dart';
 import 'package:foodie/collections/statelessWidgets.dart';
-import 'package:foodie/mainGridView/localView/localView.dart';
-import 'package:foodie/mainGridView/subwayView/subwayView.dart';
-import 'package:foodie/mainGridView/townView/townView.dart';
 import 'package:foodie/mainNavView/homeView/homeBannerContainer.dart';
 import 'package:foodie/mainNavView/searchView/searchNavView.dart';
 

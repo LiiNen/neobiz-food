@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:foodie/collections/functions.dart';
 import 'package:foodie/mainGridView/localView/localRegionSearchView.dart';
-import 'package:foodie/mainGridView/subwayView/subwayLineRegionSearchView.dart';
-import 'package:foodie/mainGridView/subwayView/subwayView.dart';
+import 'package:foodie/mainNavView/searchView/subwayView/subwayLineRegionSearchView.dart';
+import 'package:foodie/mainNavView/searchView/subwayView/subwayView.dart';
 
 class RegionGridBuilder extends StatefulWidget{
   final List regionList;
