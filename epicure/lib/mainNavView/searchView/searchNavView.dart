@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:foodie/mainGridView/localView/localView.dart';
 import 'package:foodie/mainGridView/townView/townView.dart';
 
 import 'subwayView/subwayView.dart';
+import 'localView/localView.dart';
 
 class SearchNavView extends StatefulWidget {
   final int initIndex;
