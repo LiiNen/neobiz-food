@@ -32,8 +32,6 @@ class _SubwayView extends State<SubwayView> {
     _getSubway();
   }
 
-  /// subwayRegionList : List
-  /// subwayRegionList[index] : {no: int, name: String, count: int}
   _getSubway() async {
     var temp = await searchSubway(subwayQueryData: subwayQuery(), mode: 'region');
     setState(() {

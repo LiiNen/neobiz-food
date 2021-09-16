@@ -4,6 +4,8 @@ import 'package:foodie/mainGridView/localView/localRegionView.dart';
 import 'package:foodie/restApi/searchLocalApi.dart';
 import 'package:foodie/collections/functions.dart';
 
+import 'localRegionSearchView.dart';
+
 class LocalItem {
   String title;
   String fullTitle;
@@ -32,43 +34,121 @@ class LocalView extends StatefulWidget {
   State<LocalView> createState() => _LocalView();
 }
 class _LocalView extends State<LocalView> {
+  var _selectedIndex = -1;
+  var _lineNum = 5;
+
+  var _localRegionList = [];
+
+  _getRegion() async {
+    var temp = await searchLocal(doNum: _selectedIndex, siName: '', mode: 'region');
+    setState(() {
+      _localRegionList = temp;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       body: Column(
         children: <Widget>[
-          MainTitleBar(title: '대한민국'),
-          localItemBuilder()
+          localBuilder(),
+          localRegionBuilder()
         ],
       )
     );
   }
 
-  localItemBuilder() {
+  localBuilder() {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      height: 300,
+      child: Container(
+        margin: EdgeInsets.symmetric(vertical: 20, horizontal: 24),
+        child: localColumnBuilder()
+      )
+    );
+  }
+  localColumnBuilder() {
+    var _columnLength = (localItemList.length / _lineNum).ceil();
+    List<int> _startIndexList = [];
+    for(var i = 0; i < _columnLength; i++) {
+      _startIndexList.add(i*_lineNum);
+    }
+    List<Widget> _rowBuilderList = List.generate(_startIndexList.length * 2 - 1, (index) {
+      if(index%2 == 0) return localRowBuilder(_startIndexList[(index/2).floor()]);
+      else return SizedBox(height: 8);
+    });
+
+    return Column(
+      children: _rowBuilderList
+    );
+  }
+  localRowBuilder(int startIndex) {
+    List<Widget> _elementBuilderList = List.generate(_lineNum * 2 - 1, (index) {
+      if(index%2 == 0) return localElementBuilder(startIndex + (index/2).floor());
+      else return SizedBox(width: 8);
+    });
+
+    return Expanded(child: Row(
+      children: _elementBuilderList
+    ));
+  }
+  localElementBuilder(int index) {
+    return Expanded(child: localItemList.length > index ? Container(
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.black, width: 1),
+        color: Colors.white
+      ),
+      child: GestureDetector(
+        behavior: HitTestBehavior.translucent,
+        onTap: () {
+          setState(() {
+            _selectedIndex = index;
+            _localRegionList = [];
+            _getRegion();
+          });
+        },
+        child: Center(
+          child: Text(localItemList[index].title)
+        )
+      )
+    ) : Container());
+  }
+
+  localRegionBuilder() {
     return Expanded(
-      child: GridView.count(
-        crossAxisCount: 4,
-        children: List.generate(localItemList.length, (index) {
-          return Container(
-            child: Stack(
-              children: [
-                Positioned.fill(
-                  child: GestureDetector(
-                    behavior: HitTestBehavior.translucent,
-                    onTap: () {
-                      print(localItemList[index].title);
-                      navigatorPush(context: context, route: LocalRegionView(title: '대한민국 ${localItemList[index].fullTitle}', titleIndex: index));
-                    },
-                    child: Center(
-                        child: Text(localItemList[index].title)
-                    )
+      child: ListView.separated(
+        shrinkWrap: true,
+        itemCount: _localRegionList.length,
+        itemBuilder: (BuildContext context, int index) {
+          return GestureDetector(
+            behavior: HitTestBehavior.translucent,
+            onTap: () {
+              navigatorPush(context: context, route: LocalRegionSearchView(title: '${localItemList[_selectedIndex].fullTitle} ${_localRegionList[index]['name']}', titleIndex: _selectedIndex, region: _localRegionList[index]['name']));
+            },
+            child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 24),
+              height: 42,
+              decoration: BoxDecoration(
+                color: Colors.white
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(_localRegionList[index]['name']),
+                  Row(
+                    children: [
+                      Text(_localRegionList[index]['count'].toString()),
+                      FlutterLogo(size: 10)
+                    ]
                   )
-                ),
-              ]
+                ]
+              )
             )
           );
-        })
+        },
+        separatorBuilder: (BuildContext context, int index) => const Divider(height: 1),
       )
     );
   }
