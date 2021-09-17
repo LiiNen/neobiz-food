@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:foodie/collections/functions.dart';
 import 'searchView.dart';
 
@@ -16,13 +17,39 @@ class SearchNavAppBar extends StatelessWidget implements PreferredSizeWidget{
       centerTitle: true,
       backgroundColor: Colors.white,
       elevation: 0,
-      // TODO: text align not in vertical center with actions button
-      title: Center(child: Text('지역으로 검색하기', style: textStyle(color: Colors.black, weight: 700, size: 18.0))),
+      automaticallyImplyLeading: false,
+      title: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          GestureDetector(
+            behavior: HitTestBehavior.translucent,
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: Container(
+              width: 26, height: 26,
+              child: Center(
+                child: SvgPicture.asset('asset/svgIcon/icoBack.svg', width: 6.5, height: 13)
+              )
+            )
+          ),
+          Text('지역으로 검색하기', style: textStyle(color: Colors.black, weight: 700, size: 18.0)),
+          GestureDetector(
+            behavior: HitTestBehavior.translucent,
+            onTap: () {
+              navigatorPush(context: context, route: SearchView());
+            },
+            child: SvgPicture.asset('asset/svgIcon/icoSearch.svg', width: 26, height: 26)
+          )
+        ]
+      ),
       bottom: TabBar(
         controller: controller,
         indicatorColor: Colors.black,
         indicator: UnderlineTabIndicator(
           borderSide: BorderSide(width: 2.0),
+          // TODO: indicator size resizing
           insets: EdgeInsets.symmetric(horizontal: 18.0)
         ),
         labelColor: Colors.black,
@@ -32,13 +59,6 @@ class SearchNavAppBar extends StatelessWidget implements PreferredSizeWidget{
           Tab(text: '맛집촌'),
         ]
       ),
-      actions: [
-        IconButton(
-          icon: Icon(Icons.search, color: Colors.black,),
-          onPressed: () {
-            navigatorPush(context: context, route: SearchView());
-          })
-      ],
     );
   }
 }

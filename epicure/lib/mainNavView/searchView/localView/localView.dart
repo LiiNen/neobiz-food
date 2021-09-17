@@ -33,7 +33,7 @@ class LocalView extends StatefulWidget {
 }
 class _LocalView extends State<LocalView> {
   var _selectedIndex = -1;
-  var _lineNum = 5;
+  var _lineNum = 6;
 
   var _localRegionList = [];
 
@@ -60,7 +60,7 @@ class _LocalView extends State<LocalView> {
   localBuilder() {
     return Container(
       width: MediaQuery.of(context).size.width,
-      height: 300,
+      height: 200,
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 20, horizontal: 24),
         child: localColumnBuilder()
@@ -96,6 +96,7 @@ class _LocalView extends State<LocalView> {
     return Expanded(child: localItemList.length > index ? Container(
       decoration: BoxDecoration(
         border: Border.all(color: Colors.black, width: 1),
+        borderRadius: BorderRadius.circular(2),
         color: Colors.white
       ),
       child: GestureDetector(
