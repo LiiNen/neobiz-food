@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodie/mainGridView/townView/townView.dart';
+import 'package:foodie/mainNavView/searchView/searchNavAppBar.dart';
 
 import 'subwayView/subwayView.dart';
 import 'localView/localView.dart';
@@ -30,7 +31,7 @@ class _SearchNavView extends State<SearchNavView> with SingleTickerProviderState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: searchNavAppBar(),
+      appBar: SearchNavAppBar(controller: searchTabController),
       body: TabBarView(
         controller: searchTabController,
         children: _searchItemView
@@ -43,19 +44,4 @@ class _SearchNavView extends State<SearchNavView> with SingleTickerProviderState
     SubwayView(),
     TownView()
   ];
-
-  searchNavAppBar() {
-    return AppBar(
-      centerTitle: true,
-      title: Text('search'),
-      bottom: TabBar(
-        controller: searchTabController,
-        tabs: [
-          Tab(text: '지역별'),
-          Tab(text: '역세권'),
-          Tab(text: '맛집촌'),
-        ]
-      ),
-    );
-  }
 }
