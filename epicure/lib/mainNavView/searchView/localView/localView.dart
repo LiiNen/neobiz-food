@@ -60,7 +60,8 @@ class _LocalView extends State<LocalView> {
   localBuilder() {
     return Container(
       width: MediaQuery.of(context).size.width,
-      height: 200,
+      // TODO: HACK: with caculation
+      height: (MediaQuery.of(context).size.width-20-(_lineNum-1)*8)/6*3+48,
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 20, horizontal: 24),
         child: localColumnBuilder()
@@ -93,25 +94,16 @@ class _LocalView extends State<LocalView> {
     ));
   }
   localElementBuilder(int index) {
-    return Expanded(child: localItemList.length > index ? Container(
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.black, width: 1),
-        borderRadius: BorderRadius.circular(2),
-        color: Colors.white
-      ),
-      child: GestureDetector(
-        behavior: HitTestBehavior.translucent,
-        onTap: () {
-          setState(() {
-            _selectedIndex = index;
-            _localRegionList = [];
-            _getRegion();
-          });
-        },
-        child: Center(
-          child: Text(localItemList[index].title)
-        )
-      )
+    return Expanded(child: localItemList.length > index ? GestureDetector(
+      behavior: HitTestBehavior.translucent,
+      onTap: () {
+        setState(() {
+          _selectedIndex = index;
+          _localRegionList = [];
+          _getRegion();
+        });
+      },
+      child: buildSquare(isSelected: _selectedIndex == index, title: localItemList[index].title)
     ) : Container());
   }
 

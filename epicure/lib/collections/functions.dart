@@ -117,3 +117,16 @@ lineDivider({color: const Color(0xffe8e8e8)}) {
   );
 }
 
+Widget buildSquare({required bool isSelected, required String title}) {
+  return AspectRatio(
+    aspectRatio: 1.0,
+    child: Container(
+      // TODO: shadow code with designer
+      decoration: BoxDecoration(
+        color: isSelected ? Color(0xff4F4F4F) : Colors.white,
+        borderRadius: BorderRadius.circular(2)
+      ),
+      child: Center(child: Text(title, style: textStyle(color: isSelected ? Colors.white : Color(0xff4F4F4F), weight: 600, size: 14.0 ),))
+    )
+  );
+}

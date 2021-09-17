@@ -53,10 +53,8 @@ class _SubwayView extends State<SubwayView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       body: Column(
         children: <Widget>[
-          MainTitleBar(title: '역세권'),
           subwayBuilder(),
         ] + (_isSelected ? [subwayLineBuilder()] : []),
       )
@@ -65,41 +63,33 @@ class _SubwayView extends State<SubwayView> {
 
   subwayBuilder() {
     return Container(
-      height: 30,
-      child: ListView(
-        scrollDirection: Axis.horizontal,
-        shrinkWrap: true,
-        children: List.generate(_subwayList.length, (index) {
-          return Container(
-            margin: EdgeInsets.symmetric(horizontal: 10),
-            width: 80,
-            child: GestureDetector(
-              behavior: HitTestBehavior.translucent,
-              onTap: () {
-                setState(() {
-                  _isSelected = true;
-                  _selectedIndex = _subwayList[index]['no'];
-                  _isLineSelected = false;
-                  _lineSelectedIndex = -1;
+      padding: EdgeInsets.symmetric(horizontal: 24, vertical: 20),
+      child: Row(
+        children: _subwayList.length != 0 ? List.generate(_subwayList.length * 2 - 1, (index) {
+          int _listIndex = (index/2).floor();
+          if(index%2 == 0) {
+            var _temp = _subwayList[_listIndex];
+            return Expanded(
+              child: GestureDetector(
+                behavior: HitTestBehavior.translucent,
+                onTap: () {
+                  setState(() {
+                    _isSelected = true;
+                    _selectedIndex = _subwayList[_listIndex]['no'];
+                    _isLineSelected = false;
+                    _lineSelectedIndex = -1;
 
-                  _subwayLineList = [];
-                  _subwayLineRegionList = [];
-                  _getSubwayLine();
-                });
-                // navigatorPush(context: context, route: SubwayLineView(title: '역세권 | ${subwayRegionList[index]['name']}', titleIndex: subwayRegionList[index]['no']));
-              },
-              child: Container(
-                decoration: BoxDecoration(
-                  border: Border.all(width: 1),
-                  borderRadius: BorderRadius.circular(4),
-                ),
-                child: Center(
-                  child: Text(_subwayList[index]['name'])
-                )
+                    _subwayLineList = [];
+                    _subwayLineRegionList = [];
+                    _getSubwayLine();
+                  });
+                },
+                child: buildSquare(isSelected: _selectedIndex == _temp['no'], title: _temp['name'],)
               )
-            )
-          );
-        })
+            );
+          }
+          else return SizedBox(width: 8);
+        }) : []
       )
     );
   }
