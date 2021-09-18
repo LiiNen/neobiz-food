@@ -50,7 +50,7 @@ class SearchNavAppBar extends StatelessWidget implements PreferredSizeWidget{
         indicator: UnderlineTabIndicator(
           borderSide: BorderSide(width: 2.0),
           // TODO: indicator size resizing
-          insets: EdgeInsets.symmetric(horizontal: 18.0)
+          insets: EdgeInsets.symmetric(horizontal: 44.0)
         ),
         labelColor: Colors.black,
         tabs: [

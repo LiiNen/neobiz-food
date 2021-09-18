@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:foodie/restApi/searchLocalApi.dart';
 import 'package:foodie/collections/functions.dart';
 
@@ -34,13 +35,18 @@ class LocalView extends StatefulWidget {
 class _LocalView extends State<LocalView> {
   var _selectedIndex = -1;
   var _lineNum = 6;
-
+  var _sum = 0;
   var _localRegionList = [];
 
   _getRegion() async {
     var temp = await searchLocal(doNum: _selectedIndex, siName: '', mode: 'region');
+    var tempSum = 0;
+    for(var i = 0; i < temp.length; i++) {
+      tempSum = tempSum + temp[i]['count'] as int;
+    }
     setState(() {
       _localRegionList = temp;
+      _sum = tempSum;
     });
   }
 
@@ -108,15 +114,17 @@ class _LocalView extends State<LocalView> {
   }
 
   localRegionBuilder() {
-    return Expanded(
+    if(_localRegionList.length == 0) return Container();
+    else return Expanded(
       child: ListView.separated(
         shrinkWrap: true,
-        itemCount: _localRegionList.length,
+        itemCount: _localRegionList.length + 1,
         itemBuilder: (BuildContext context, int index) {
           return GestureDetector(
             behavior: HitTestBehavior.translucent,
             onTap: () {
-              navigatorPush(context: context, route: LocalRegionSearchView(title: '${localItemList[_selectedIndex].fullTitle} ${_localRegionList[index]['name']}', titleIndex: _selectedIndex, region: _localRegionList[index]['name']));
+              if(index==0) print('all');
+              else navigatorPush(context: context, route: LocalRegionSearchView(title: '${localItemList[_selectedIndex].fullTitle} ${_localRegionList[index-1]['name']}', titleIndex: _selectedIndex, region: _localRegionList[index-1]['name']));
             },
             child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 24),
@@ -127,11 +135,12 @@ class _LocalView extends State<LocalView> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(_localRegionList[index]['name']),
+                  index==0 ? Text('전체') : Text(_localRegionList[index-1]['name']),
                   Row(
                     children: [
-                      Text(_localRegionList[index]['count'].toString()),
-                      FlutterLogo(size: 10)
+                      Text(threeDigit(index==0 ? _sum : _localRegionList[index-1]['count'])),
+                      SizedBox(width: 8.75),
+                      SvgPicture.asset('asset/svgIcon/icoNext.svg', width: 4.5, height: 9)
                     ]
                   )
                 ]

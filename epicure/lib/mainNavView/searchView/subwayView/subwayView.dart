@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:foodie/collections/functions.dart';
 import 'package:foodie/collections/statelessWidgets.dart';
 import 'package:foodie/restApi/searchSubwayApi.dart';
@@ -53,6 +54,7 @@ class _SubwayView extends State<SubwayView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Column(
         children: <Widget>[
           subwayBuilder(),
@@ -63,6 +65,7 @@ class _SubwayView extends State<SubwayView> {
 
   subwayBuilder() {
     return Container(
+      color: Color(0xffF3F3F3),
       padding: EdgeInsets.symmetric(horizontal: 24, vertical: 20),
       child: Row(
         children: _subwayList.length != 0 ? List.generate(_subwayList.length * 2 - 1, (index) {
@@ -104,6 +107,7 @@ class _SubwayView extends State<SubwayView> {
             shrinkWrap: true,
             itemCount: _subwayLineList.length,
             itemBuilder: (BuildContext context, int index) {
+              bool _condition = _subwayLineList[index]['no'] == _lineSelectedIndex;
               return GestureDetector(
                 behavior: HitTestBehavior.translucent,
                 onTap: () {
@@ -118,13 +122,15 @@ class _SubwayView extends State<SubwayView> {
                 child: Container(
                   height: 42,
                   decoration: BoxDecoration(
-                    color: _subwayLineList[index]['no'] == _lineSelectedIndex ? Colors.green : Colors.white
+                    color: _condition ? Colors.white : Color(0xffF1F1F1)
                   ),
-                  child: Center(child: Text(_subwayLineList[index]['name']))
+                  child: Center(
+                    child: Text(_subwayLineList[index]['name'], style: textStyle(color: _condition ? Color(0xff242424) : Color(0xffAEAEAE)))
+                  )
                 )
               );
             },
-            separatorBuilder: (BuildContext context, int index) => const Divider(height: 1),
+            separatorBuilder: (BuildContext context, int index) => const Divider(height: 1, color: Color(0xffE1E1E1)),
           )
         )
       ] + (_isLineSelected ? [subwayLineDetailBuilder()] : [])
@@ -155,7 +161,8 @@ class _SubwayView extends State<SubwayView> {
                   Row(
                     children: [
                       Text(_subwayLineRegionList[index]['count'].toString()),
-                      FlutterLogo(size: 10)
+                      SizedBox(width: 8.75),
+                      SvgPicture.asset('asset/svgIcon/icoNext.svg', width: 4.5, height: 9)
                     ]
                   )
                 ]

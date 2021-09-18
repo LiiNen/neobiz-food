@@ -4,6 +4,7 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:foodie/collections/routers.dart';
 import 'package:foodie/main.dart';
+import 'package:intl/intl.dart';
 import 'package:share/share.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -129,4 +130,10 @@ Widget buildSquare({required bool isSelected, required String title}) {
       child: Center(child: Text(title, style: textStyle(color: isSelected ? Colors.white : Color(0xff4F4F4F), weight: 600, size: 14.0 ),))
     )
   );
+}
+
+String threeDigit(var input) {
+  RegExp reg = RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))');
+  String Function(Match) mathFunc = (Match match) => '${match[1]},';
+  return input.toString().replaceAllMapped(reg, mathFunc);
 }
