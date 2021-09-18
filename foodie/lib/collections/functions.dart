@@ -6,6 +6,9 @@ TextStyle textStyle({color: Colors.black, weight: int, size: double}) {
     case 400:
       fontWeight = FontWeight.w400;
       break;
+    case 500:
+      fontWeight = FontWeight.w500;
+      break;
     case 600:
       fontWeight = FontWeight.w600;
       break;
