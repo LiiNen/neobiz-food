@@ -26,33 +26,44 @@ class _LoginView extends State<LoginView> {
           body: SingleChildScrollView(
             child: Container(
               width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height,
               padding: EdgeInsets.symmetric(horizontal: 18),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SizedBox(height: 137),
-                  FlutterLogo(size: 50),
-                  SizedBox(height: 90),
-                  loginTextField('email', emailController),
-                  loginTextField('pw', pwController),
-                  SizedBox(height: 38),
-                  loginButton(title: '로그인', action: () => {_loginAction()},),
-                  SizedBox(height: 96),
-                  loginButton(title: '간편 로그인', action: () => {showSocialLogin()},),
-                  SizedBox(height: 32),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  Column(
                     children: [
-                      GestureDetector(
-                        behavior: HitTestBehavior.translucent,
-                        onTap: () {navigatorPush(context: context, widget: SignUpView());},
-                        child: Text('회원가입')
+                      SizedBox(height: 137),
+                      FlutterLogo(size: 50),
+                      SizedBox(height: 90),
+                      loginTextField('email', emailController),
+                      loginTextField('pw', pwController),
+                      SizedBox(height: 38),
+                      loginButton(title: '로그인', action: () => {_loginAction()},),
+                    ]
+                  ),
+                  Column(
+                    children: [
+                      loginButton(title: '간편 로그인', action: () => {showSocialLogin()},),
+                      SizedBox(height: 30),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          GestureDetector(
+                              behavior: HitTestBehavior.translucent,
+                              onTap: () {navigatorPush(context: context, widget: SignUpView());},
+                              child: Text('회원가입')
+                          ),
+                          SizedBox(width: 6),
+                          GestureDetector(
+                              behavior: HitTestBehavior.translucent,
+                              onTap: () {navigatorPush(context: context, widget: FindEmailView());},
+                              child: Text('회원정보 찾기')
+                          )
+                        ],
                       ),
-                      GestureDetector(
-                        behavior: HitTestBehavior.translucent,
-                        onTap: () {navigatorPush(context: context, widget: FindEmailView());},
-                        child: Text('회원정보 찾기')
-                      )
-                    ],
+                      SizedBox(height: 60)
+                    ]
                   )
                 ],
               )

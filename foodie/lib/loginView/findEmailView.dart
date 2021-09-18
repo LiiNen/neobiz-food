@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodie/collections/decorationContainers.dart';
+import 'package:foodie/collections/statelessAppBar.dart';
 
 import 'findDialog.dart';
 import 'loginView.dart';

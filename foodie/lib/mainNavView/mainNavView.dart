@@ -38,6 +38,7 @@ class _MainNavView extends State<MainNavView> {
             BottomNavigationBarItem(label: 'MY', icon: Icon(Icons.person_rounded)),
             BottomNavigationBarItem(label: '설정', icon: Icon(Icons.settings_rounded))
           ],
+          selectedItemColor: Colors.black,
         ),
         body: Center(
           child: _mainNavItemView.elementAt(_selectedIndex),

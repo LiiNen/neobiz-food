@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:foodie/collections/decorationContainers.dart';
 import 'package:foodie/collections/functions.dart';
+import 'package:foodie/collections/statelessAppBar.dart';
 import 'package:foodie/loginView/subscribeInitView.dart';
 import 'package:foodie/loginView/userTypeDialog.dart';
 

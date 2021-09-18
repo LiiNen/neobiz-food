@@ -2,24 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:foodie/collections/functions.dart';
 
-class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
-  DefaultAppBar({required this.title}) : preferredSize = Size.fromHeight(56.0);
-  @override
-  final Size preferredSize;
-  final String title;
-
-  @override
-  Widget build(BuildContext context) {
-    return AppBar(
-      automaticallyImplyLeading: true,
-      brightness: Brightness.light,
-      backgroundColor: const Color(0xffffffff),
-      centerTitle: true,
-      title: Text(title, style: textStyle(weight: 500, size: 16.0),)
-    );
-  }
-}
-
 subTitleContainer({required String title, double topMargin=16}) {
   return Container(
     margin: EdgeInsets.only(top: topMargin),

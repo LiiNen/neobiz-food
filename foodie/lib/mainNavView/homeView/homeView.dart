@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:foodie/collections/decorationContainers.dart';
 import 'package:foodie/collections/functions.dart';
+import 'package:foodie/collections/statelessAppBar.dart';
 
 import 'homeBannerContainer.dart';
 import 'homeDrawer.dart';
@@ -13,7 +14,7 @@ class _HomeView extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: homeViewAppBar(),
+      appBar: HomeViewAppBar(),
       endDrawer: HomeDrawer(),
       body: Container(
         width: MediaQuery.of(context).size.width,
@@ -94,10 +95,3 @@ List<CategoryItem> categoryItemList = [
   CategoryItem(title: '맛집촌'),
   CategoryItem(title: '위치기반'),
 ];
-
-homeViewAppBar() {
-  return AppBar(
-    centerTitle: true,
-    title: Text('foodie'),
-  );
-}
