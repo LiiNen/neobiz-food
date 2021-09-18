@@ -3,8 +3,6 @@ import 'package:foodie/collections/asyncFunctions.dart';
 import 'package:foodie/collections/functions.dart';
 import 'package:foodie/mainGridView/scrapView/scrapView.dart';
 import 'package:foodie/mainGridView/settingView/settingView.dart';
-import 'package:foodie/mainGridView/townView/townView.dart';
-import 'package:foodie/mainNavView/searchView/searchNavView.dart';
 import 'package:foodie/mainNavView/searchView/searchView.dart';
 
 import 'homeView/homeView.dart';
@@ -42,7 +40,6 @@ class _MainNavView extends State<MainNavView> {
             BottomNavigationBarItem(label: 'EXPLORE', icon: Icon(Icons.search)),
             BottomNavigationBarItem(label: 'MAP', icon: Icon(Icons.location_on)),
             BottomNavigationBarItem(label: 'HISTORY', icon: Icon(Icons.access_time_rounded)),
-            BottomNavigationBarItem(label: 'TOWN', icon: Icon(Icons.people)),
             BottomNavigationBarItem(label: 'MY', icon: Icon(Icons.person_rounded))
           ],
         ),
@@ -59,7 +56,6 @@ class _MainNavView extends State<MainNavView> {
     SearchView(),
     SubwayView(),
     ScrapView(),
-    TownView(),
     SettingView(),
   ];
 }

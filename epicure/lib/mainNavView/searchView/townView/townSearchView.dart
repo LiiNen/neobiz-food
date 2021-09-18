@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:foodie/collections/functions.dart';
-import 'package:foodie/collections/statelessWidgets.dart';
 import 'package:foodie/mainGridView/commonViewCollection/searchListBuilder.dart';
+import 'package:foodie/mainNavView/searchView/searchResultAppBar.dart';
 import 'package:foodie/restApi/searchTownApi.dart';
 
 class TownSearchView extends StatefulWidget {
@@ -33,10 +33,9 @@ class _TownSearchView extends State<TownSearchView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MainAppBar(),
+      appBar: SearchResultAppBar(title: title),
       body: Column(
         children: <Widget>[
-          MainTitleBar(title: title),
         ] + (townSearchItemList.length != 0 ? [SearchListBuilder(searchList: townSearchItemList,)] : [])
       )
     );
