@@ -31,3 +31,7 @@ swiperPagination() {
     )
   );
 }
+
+serviceColor() {
+  return Color(0xffff851c);
+}

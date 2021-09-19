@@ -14,6 +14,13 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
       brightness: Brightness.light,
       backgroundColor: const Color(0xffffffff),
       centerTitle: true,
+      leading: GestureDetector(
+        behavior: HitTestBehavior.translucent,
+        onTap: () {
+          Navigator.pop(context);
+        },
+        // todo: back icon
+      ),
       title: Text(title, style: textStyle(color: Colors.black, weight: 500, size: 16.0),)
     );
   }

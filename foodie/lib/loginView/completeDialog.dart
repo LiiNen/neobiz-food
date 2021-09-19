@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodie/collections/decorationContainers.dart';
 import 'package:foodie/collections/functions.dart';
 
 showCompleteDialog(BuildContext context) async {
@@ -11,6 +12,7 @@ showCompleteDialog(BuildContext context) async {
 class CompleteDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
+      contentPadding: EdgeInsets.all(0),
       content: Container(
         width: 324, height: 228,
         child: Center(
@@ -26,13 +28,15 @@ class CompleteDialog extends StatelessWidget {
                 behavior: HitTestBehavior.translucent,
                 onTap: () {Navigator.pop(context);},
                 child: Container(
+                  width: 154, height: 49,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(
                       Radius.circular(4),
-                    )
+                    ),
+                    color: serviceColor()
                   ),
                   child: Center(
-                    child: Text('확인', style: textStyle(weight: 500, size: 16.0))
+                    child: Text('확인', style: textStyle(color: Colors.white, weight: 700, size: 16.0))
                   )
                 )
               )

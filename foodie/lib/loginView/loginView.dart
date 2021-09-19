@@ -120,14 +120,14 @@ class _LoginView extends State<LoginView> {
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
           border: Border.all(
-            color: isSimple ? Color(0xffe0e0e0) : Color(0xffededed)
+            color: isSimple ? Color(0xffe0e0e0) : serviceColor()
           ),
           borderRadius: BorderRadius.all(
             Radius.circular(4),
           ),
-          color: isSimple ? Colors.white : Color(0xffededed),
+          color: isSimple ? Colors.white : serviceColor(),
         ),
-        child: Center(child: Text(title, style: textStyle(color: Color(0xff8e8e8e), weight: 500, size: 16.0)))
+        child: Center(child: Text(title, style: textStyle(color: isSimple ? Color(0xff8e8e8e) : Colors.white, weight: 700, size: 16.0)))
       )
     );
   }

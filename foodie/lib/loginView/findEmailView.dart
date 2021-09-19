@@ -29,11 +29,14 @@ class _FindEmailView extends State<FindEmailView> {
               children: [
                 signUpTextField('이름', nameController),
                 signUpTextField('이메일', emailController),
-                loginNextButton(context: context, route: LoginView(), dialog: showFindDialog)
               ]
             )
           )
-        )
+        ),
+        bottomNavigationBar: Padding(
+          padding: EdgeInsets.all(0.0),
+          child: loginNextButton(title: '찾기', context: context, route: LoginView(), dialog: showFindDialog)
+        ),
       )
     );
   }

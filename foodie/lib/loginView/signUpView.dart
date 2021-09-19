@@ -54,11 +54,14 @@ class _SignUpView extends State<SignUpView> {
                 signUpTextField('휴대전화', phoneController),
                 signUpTextField('주소', addressController),
                 SizedBox(height: 12),
-                loginNextButton(context: context, route: SubscribeInitView(), condition: checkSignUp()),
               ]
             )
-          )
-        )
+          ),
+        ),
+        bottomNavigationBar: Padding(
+          padding: EdgeInsets.all(0.0),
+          child: loginNextButton(context: context, route: SubscribeInitView(), condition: checkSignUp()),
+        ),
       )
     );
   }
@@ -111,8 +114,11 @@ loginNextButton({String title='다음', required BuildContext context, required 
     child: Container(
       width: MediaQuery.of(context).size.width,
       height: 70,
+      decoration: BoxDecoration(
+        color: serviceColor()
+      ),
       child: Center(
-        child: Text(title, style: textStyle(weight: 500, size: 16.0),)
+        child: Text(title, style: textStyle(color: Colors.white, weight: 700, size: 16.0),)
       )
     )
   );

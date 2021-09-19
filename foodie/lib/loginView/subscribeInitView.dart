@@ -29,10 +29,13 @@ class _SubscribeInitView extends State<SubscribeInitView> {
             SizedBox(height: 5),
             subscribeContainer('이메일'),
             subscribeContainer('SNS'),
-            loginNextButton(title: '완료', context: context, route: LoginView(), dialog: showCompleteDialog, isReplace: true),
           ],
         )
-      )
+      ),
+      bottomNavigationBar: Padding(
+        padding: EdgeInsets.all(0.0),
+        child: loginNextButton(title: '완료', context: context, route: LoginView(), dialog: showCompleteDialog, isReplace: true),
+      ),
     );
   }
 
