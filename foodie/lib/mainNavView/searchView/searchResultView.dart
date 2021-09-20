@@ -5,6 +5,7 @@ import 'package:foodie/mainNavView/homeView/homeBannerContainer.dart';
 import 'package:foodie/restApi/presetRequestBody.dart';
 import 'package:foodie/restApi/searchLocalApi.dart';
 import 'package:foodie/restApi/searchTownApi.dart';
+import 'package:foodie/shopView/shopView.dart';
 
 class SearchResultView extends StatefulWidget {
   final String title;
@@ -113,28 +114,32 @@ class _SearchResultView extends State<SearchResultView> {
     if(_item['food'] != null) _infoText = _infoText + ' | ${_item['food']}';
     if(_item['food_2nd'] != null) _infoText = _infoText + ' | ${_item['food_2nd']}';
 
-    return Expanded(child: Container(
-      margin: EdgeInsets.symmetric(vertical: 12),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          AspectRatio(
-            aspectRatio: 1.375,
-            // todo: photo img if exists
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(4)),
-                border: Border.all(color: Color(0xffededed), width: 1),
-                color: Color(0xffededed),
-              ),
-            )
-          ),
-          SizedBox(height: 7),
-          Text(_item['name'], style: textStyle(color: Color(0xff8e8e8e), weight: 500, size: 16.0)),
-          SizedBox(height: 2),
-          Text(_infoText, style: textStyle(color: Color(0xff8e8e8e), weight: 400, size: 13.0)),
-          // button?
-        ]
+    return Expanded(child: GestureDetector(
+      behavior: HitTestBehavior.translucent,
+      onTap: () {navigatorPush(context: context, widget: ShopView(shopNo: _item['no'], infoText: _infoText,));},
+      child: Container(
+        margin: EdgeInsets.symmetric(vertical: 12),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            AspectRatio(
+              aspectRatio: 1.375,
+              // todo: photo img if exists
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(4)),
+                  border: Border.all(color: Color(0xffededed), width: 1),
+                  color: Color(0xffededed),
+                ),
+              )
+            ),
+            SizedBox(height: 7),
+            Text(_item['name'], style: textStyle(color: Color(0xff8e8e8e), weight: 500, size: 16.0)),
+            SizedBox(height: 2),
+            Text(_infoText, style: textStyle(color: Color(0xff8e8e8e), weight: 400, size: 13.0)),
+            // button?
+          ]
+        )
       )
     ));
   }
@@ -166,9 +171,7 @@ class _SearchResultView extends State<SearchResultView> {
     if(_item['food_2nd'] != null) _infoText = _infoText + ' | ${_item['food_2nd']}';
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
-      onTap: () {
-        //navigator push detail page
-      },
+      onTap: () {navigatorPush(context: context, widget: ShopView(shopNo: _item['no'], infoText: _infoText));},
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 6),
         width: MediaQuery.of(context).size.width,
