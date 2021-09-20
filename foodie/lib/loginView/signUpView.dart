@@ -98,7 +98,14 @@ signUpTextField(String hintText, TextEditingController signUpController) {
 loginStep({required int step, required String title}) {
   return Container(
     margin: EdgeInsets.only(top: 16),
-    child: Text('STEP $step\n$title', style: textStyle(weight: 500, size: 19.0))
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text('STEP $step', style: textStyle(color: serviceColor(), weight: 700, size: 19.0)),
+        SizedBox(height: 1),
+        Text(title, style: textStyle(weight: 700, size: 19.0))
+      ]
+    )
   );
 }
 

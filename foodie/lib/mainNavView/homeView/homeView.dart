@@ -43,38 +43,50 @@ class _HomeView extends State<HomeView> {
       return categoryItemContainer(categoryItemList[index]);
     });
     return [
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          categoryItemContainerList[0],
-          categoryItemContainerList[1],
-        ]
-      ),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          categoryItemContainerList[2],
-          categoryItemContainerList[3],
-        ]
+      Container(
+        margin: EdgeInsets.symmetric(horizontal: 21),
+        child: Column(
+          children: [
+            Row(
+                children: [
+                  categoryItemContainerList[0],
+                  SizedBox(width: 58),
+                  categoryItemContainerList[1],
+                ]
+            ),
+            Row(
+                children: [
+                  categoryItemContainerList[2],
+                  SizedBox(width: 58),
+                  categoryItemContainerList[3],
+                ]
+            )
+          ]
+        )
       )
     ];
   }
 
   categoryItemContainer(CategoryItem categoryItem) {
-    return Container(
-      margin: EdgeInsets.only(top: 16),
-      child: GestureDetector(
-        behavior: HitTestBehavior.translucent,
-        onTap: () {
-          if(categoryItem.route != null) navigatorPush(context: context, widget: categoryItem.route);
-        },
-        child: Container(
-          child: Column(
-            children: [
-              FlutterLogo(size: 112),
-              SizedBox(height: 8),
-              Text(categoryItem.title),
-            ],
+    return Expanded(
+      child: Container(
+        margin: EdgeInsets.only(top: 16),
+        child: GestureDetector(
+          behavior: HitTestBehavior.translucent,
+          onTap: () {
+            if(categoryItem.route != null) navigatorPush(context: context, widget: categoryItem.route);
+          },
+          child: Container(
+            child: Column(
+              children: [
+                AspectRatio(
+                  aspectRatio: 1,
+                  child: FlutterLogo()
+                ),
+                SizedBox(height: 8),
+                Text(categoryItem.title),
+              ],
+            )
           )
         )
       )
