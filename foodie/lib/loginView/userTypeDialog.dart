@@ -32,19 +32,24 @@ showUserTypeDialog(BuildContext context) async {
                               isShop = false;
                             });
                           },
-                          child: Container(
-                            decoration: BoxDecoration(
-                              border: (isUser ? Border.all(color: Colors.blue) : Border.all(color: Colors.transparent))
-                            ),
-                            child: Column(
-                              children: [
-                                FlutterLogo(size: 98),
-                                SizedBox(height: 2),
-                                Text('개인', style: textStyle(weight: 500, size: 15.0))
-                              ],
-                            )
+                          child: Column(
+                            children: [
+                              Container(
+                                width: 81, height: 81,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.all(Radius.circular(25)),
+                                    border: isUser ? Border.all(color: serviceColor(), width: 2) : Border.all(color: Color(0xffe0e0e0), width: 1)
+                                ),
+                                child: Center(
+                                  child: Image.asset('asset/image/loginUser.png')
+                                )
+                              ),
+                              SizedBox(height: 2),
+                              Text('개인', style: textStyle(weight: 500, size: 15.0))
+                            ],
                           )
                         ),
+                        SizedBox(width: 26),
                         GestureDetector(
                           behavior: HitTestBehavior.translucent,
                           onTap: () {
@@ -54,12 +59,18 @@ showUserTypeDialog(BuildContext context) async {
                             });
                           },
                           child: Container(
-                            decoration: BoxDecoration(
-                              border: (isShop ? Border.all(color: Colors.blue) : null)
-                            ),
                             child: Column(
                               children: [
-                                FlutterLogo(size: 98),
+                                Container(
+                                  width: 81, height: 81,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.all(Radius.circular(25)),
+                                    border: isShop ? Border.all(color: serviceColor(), width: 2) : Border.all(color: Color(0xffe0e0e0), width: 1)
+                                  ),
+                                  child: Center(
+                                      child: Image.asset('asset/image/loginShop.png')
+                                  )
+                                ),
                                 SizedBox(height: 2),
                                 Text('점주', style: textStyle(weight: 500, size: 15.0))
                               ],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:foodie/collections/functions.dart';
 
 class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -14,14 +15,24 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
       brightness: Brightness.light,
       backgroundColor: const Color(0xffffffff),
       centerTitle: true,
-      leading: GestureDetector(
-        behavior: HitTestBehavior.translucent,
-        onTap: () {
-          Navigator.pop(context);
-        },
-        // todo: back icon
-      ),
-      title: Text(title, style: textStyle(color: Colors.black, weight: 500, size: 16.0),)
+      title: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          GestureDetector(
+            behavior: HitTestBehavior.translucent,
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: Container(
+              width: 16, height: 32,
+              child: Center(child: SvgPicture.asset('asset/svgIcon/icoBack.svg', width: 8, height: 16,))
+            )
+          ),
+          Text(title, style: textStyle(color: Colors.black, weight: 500, size: 16.0),),
+          Container(width: 16)
+        ]
+      )
     );
   }
 }

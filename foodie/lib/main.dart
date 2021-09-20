@@ -58,7 +58,7 @@ class _MainPage extends State<MainPage> {
     }
     return Scaffold(
       body: Center(
-        child: FlutterLogo(size: 40),
+        child: Image.asset('asset/image/logo.png', width: 195, height: 65)
       )
     );
   }

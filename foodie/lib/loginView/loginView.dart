@@ -34,7 +34,7 @@ class _LoginView extends State<LoginView> {
                   Column(
                     children: [
                       SizedBox(height: 137),
-                      FlutterLogo(size: 50),
+                      Image.asset('asset/image/logo.png', width: 186, height: 62),
                       SizedBox(height: 90),
                       loginTextField('email', emailController),
                       loginTextField('pw', pwController),
@@ -88,8 +88,14 @@ class _LoginView extends State<LoginView> {
         children: [
           Container(
             child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                FlutterLogo(size: 28),
+                Container(
+                  margin: EdgeInsets.only(left: 10),
+                  width: 20,
+                  height: 20,
+                  child: Center(child: Image.asset(type=='email' ? 'asset/image/loginEmail.png' : 'asset/image/loginPassword.png', fit: BoxFit.fill,))
+                ),
                 Expanded(
                   child: TextField(
                     controller: loginController,

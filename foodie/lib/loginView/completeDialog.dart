@@ -20,8 +20,8 @@ class CompleteDialog extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              FlutterLogo(size: 64),
-              SizedBox(height: 12),
+              Image.asset('asset/image/loginAccept.png', width: 65, height: 65),
+              SizedBox(height: 14),
               Text('가입이 완료되었습니다.', style: textStyle(weight: 500, size: 16.0)),
               SizedBox(height: 16),
               GestureDetector(
