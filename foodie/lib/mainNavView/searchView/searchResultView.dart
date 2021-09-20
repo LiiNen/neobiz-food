@@ -4,11 +4,12 @@ import 'package:foodie/collections/statelessAppBar.dart';
 import 'package:foodie/mainNavView/homeView/homeBannerContainer.dart';
 import 'package:foodie/restApi/presetRequestBody.dart';
 import 'package:foodie/restApi/searchLocalApi.dart';
+import 'package:foodie/restApi/searchTownApi.dart';
 
 class SearchResultView extends StatefulWidget {
   final String title;
   final String searchType;
-  dynamic requestItem;
+  final dynamic requestItem;
   SearchResultView({required this.title, required this.searchType, required this.requestItem});
 
   @override
@@ -32,12 +33,19 @@ class _SearchResultView extends State<SearchResultView> {
       case 'subway':
         break;
       case 'town':
+        _getTownSearchList();
         break;
     }
   }
 
   _getLocalSearchList() async {
     var temp = await searchLocal(doNum: requestItem['doNum'], siName: requestItem['siName'], mode: 'shop', presetBody: presetSearchRequest());
+    setState(() {
+      _searchItemList = temp;
+    });
+  }
+  _getTownSearchList() async {
+    var temp = await searchTown(townNo: requestItem['townNo'], mode: 'shop', presetBody: presetSearchRequest());
     setState(() {
       _searchItemList = temp;
     });
@@ -112,6 +120,7 @@ class _SearchResultView extends State<SearchResultView> {
         children: [
           AspectRatio(
             aspectRatio: 1.375,
+            // todo: photo img if exists
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(4)),
