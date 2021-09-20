@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:foodie/collections/decorationContainers.dart';
 import 'package:foodie/collections/functions.dart';
 import 'package:foodie/collections/statelessAppBar.dart';
+import 'package:foodie/restApi/searchLocalApi.dart';
+
+import '../searchResultView.dart';
 
 List<String> localTitleList = [
   '서울', '경기', '인천', '부산',
@@ -23,7 +26,10 @@ class _SearchLocalView extends State<SearchLocalView> {
   var _localRegionList = [];
 
   _getRegion() async {
-
+    var temp = await searchLocal(doNum: _selectedIndex, siName: '', mode: 'region');
+    setState(() {
+      _localRegionList = temp;
+    });
   }
 
   @override
@@ -65,14 +71,13 @@ class _SearchLocalView extends State<SearchLocalView> {
                 child: Container(
                   height: 35,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(17.5)),
-                      color: _selectedIndex == index ? serviceColor() : Colors.transparent
+                    borderRadius: BorderRadius.all(Radius.circular(17.5)),
+                    color: _selectedIndex == index ? serviceColor() : Colors.transparent
                   ),
                   child: Center(
                     child: Text(localTitleList[index], style: textStyle(color: _selectedIndex == index ? Colors.white : Color(0xff898989), weight: 500, size: 16.0))
                   )
                 )
-
               )
             )
           );
@@ -92,10 +97,24 @@ class _SearchLocalView extends State<SearchLocalView> {
             return GestureDetector(
               behavior: HitTestBehavior.translucent,
               onTap: () {
-                //todo: navigatorPush
+                navigatorPush(
+                  context: context,
+                  widget: SearchResultView(
+                    title: '${localFullTitleList[_selectedIndex]} ${_localRegionList[index]['name']}',
+                    searchType: 'local',
+                    requestItem: {'doNum': _selectedIndex, 'siName': _localRegionList[index]['name']},
+                  )
+                );
               },
               child: Container(
                 height: 50,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(_localRegionList[index]['name'], style: textStyle(color: Color(0xff898989), weight: 500, size: 16.0)),
+                    Text(_localRegionList[index]['count'].toString(), style: textStyle(color: Color(0xff898989), weight: 500, size: 16.0))
+                  ]
+                )
               )
             );
           },

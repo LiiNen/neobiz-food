@@ -9,7 +9,7 @@ class _SearchSubwayView extends State<SearchSubwayView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: DefaultAppBar(title: '역세'),
+      appBar: DefaultAppBar(title: '역세권'),
     );
   }
 }
