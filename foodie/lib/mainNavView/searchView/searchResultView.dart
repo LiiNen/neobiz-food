@@ -131,6 +131,7 @@ class _SearchResultView extends State<SearchResultView> {
                   border: Border.all(color: Color(0xffededed), width: 1),
                   color: Color(0xffededed),
                 ),
+                child: _item['photo'] != null ? Image.network(_item['photo'], fit: BoxFit.fill) : Container()
               )
             ),
             SizedBox(height: 7),

@@ -24,8 +24,18 @@ class _ShopView extends State<ShopView> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    controller = TabController(length: 3, vsync: this, initialIndex: 0);
     _getShopInfo();
+    controller = TabController(length: 3, vsync: this, initialIndex: 0);
+    controller.addListener(_controllerListener);
+  }
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  _controllerListener() {
+    if(controller.indexIsChanging) setState(() {});
   }
 
   void _getShopInfo() async {
@@ -54,7 +64,6 @@ class _ShopView extends State<ShopView> with SingleTickerProviderStateMixin {
           SizedBox(height: 8),
           exportBox(),
           ShopViewTabBar(controller: controller),
-          // TODO: fix unbounded height problem
           shopTabBarView(controller: controller, shopJson: shopJson)
         ]
       )

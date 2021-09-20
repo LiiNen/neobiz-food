@@ -26,8 +26,8 @@ swiperPagination() {
     alignment: Alignment.bottomCenter,
     margin: EdgeInsets.all(4),
     builder: DotSwiperPaginationBuilder(
-        color: Color(0xffd9dee7), size: 6.0,
-        activeColor: Color(0xff0058cc), activeSize: 6.0
+      color: Color(0xffd9dee7), size: 6.0,
+      activeColor: Color(0xff0058cc), activeSize: 6.0
     )
   );
 }

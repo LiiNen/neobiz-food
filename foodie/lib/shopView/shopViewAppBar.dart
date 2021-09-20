@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class ShopViewAppBar extends StatefulWidget implements PreferredSizeWidget {
   ShopViewAppBar({required this.shopNo}) : preferredSize = Size.fromHeight(56.0);
@@ -19,16 +20,23 @@ class _ShopViewAppBar extends State<ShopViewAppBar> {
       brightness: Brightness.light,
       backgroundColor: Colors.transparent,
       elevation: 0,
-      leading: GestureDetector(
-        behavior: HitTestBehavior.translucent,
-        onTap: () {
-          Navigator.pop(context);
-        },
-        // todo: back icon
+      title: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          GestureDetector(
+            behavior: HitTestBehavior.translucent,
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: Container(
+                width: 16, height: 32,
+                child: Center(child: SvgPicture.asset('asset/svgIcon/icoBack.svg', width: 8, height: 16,))
+            )
+          ),
+          Container(width: 16)
+        ]
       ),
-      actions: [
-
-      ]
     );
   }
 }
