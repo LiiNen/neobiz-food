@@ -4,6 +4,8 @@ import 'package:foodie/collections/decorationContainers.dart';
 import 'package:foodie/restApi/detailInfoApi.dart';
 import 'package:foodie/shopView/shopViewAppBar.dart';
 
+import 'shopViewTabBar/shopViewTabBar.dart';
+
 class ShopView extends StatefulWidget {
   final int shopNo;
   final String infoText;
@@ -12,15 +14,17 @@ class ShopView extends StatefulWidget {
   @override
   State<ShopView> createState() => _ShopView(shopNo: shopNo, infoText: infoText);
 }
-class _ShopView extends State<ShopView> {
+class _ShopView extends State<ShopView> with SingleTickerProviderStateMixin {
   int shopNo;
   String infoText;
   _ShopView({required this.shopNo, required this.infoText});
   var shopJson;
+  late TabController controller;
 
   @override
   void initState() {
     super.initState();
+    controller = TabController(length: 3, vsync: this, initialIndex: 0);
     _getShopInfo();
   }
 
@@ -42,12 +46,16 @@ class _ShopView extends State<ShopView> {
       appBar: ShopViewAppBar(shopNo: shopNo),
       body: shopJson == null ? Container() : ListView(
         padding: EdgeInsets.only(top: 0),
+        scrollDirection: Axis.vertical,
         shrinkWrap: true,
         children: [
           shopPhotoSwiper(),
           infoBox(),
           SizedBox(height: 8),
           exportBox(),
+          ShopViewTabBar(controller: controller),
+          // TODO: fix unbounded height problem
+          shopTabBarView(controller: controller, shopJson: shopJson)
         ]
       )
     );
@@ -104,7 +112,7 @@ class _ShopView extends State<ShopView> {
         margin: EdgeInsets.symmetric(horizontal: 18, vertical: 31),
         child: Column(
           children: [
-
+            // todo : export items
           ]
         )
       )
