@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:foodie/collections/decorationContainers.dart';
 import 'package:foodie/collections/functions.dart';
 import 'package:foodie/collections/statelessAppBar.dart';
+import 'package:foodie/mainNavView/searchView/searchCategoryView/searchLocalView.dart';
+import 'package:foodie/mainNavView/searchView/searchCategoryView/searchSubwayView.dart';
+import 'package:foodie/mainNavView/searchView/searchCategoryView/searchTownView.dart';
 
 import 'homeBannerContainer.dart';
 import 'homeDrawer.dart';
@@ -48,18 +51,18 @@ class _HomeView extends State<HomeView> {
         child: Column(
           children: [
             Row(
-                children: [
-                  categoryItemContainerList[0],
-                  SizedBox(width: 58),
-                  categoryItemContainerList[1],
-                ]
+              children: [
+                categoryItemContainerList[0],
+                SizedBox(width: 58),
+                categoryItemContainerList[1],
+              ]
             ),
             Row(
-                children: [
-                  categoryItemContainerList[2],
-                  SizedBox(width: 58),
-                  categoryItemContainerList[3],
-                ]
+              children: [
+                categoryItemContainerList[2],
+                SizedBox(width: 58),
+                categoryItemContainerList[3],
+              ]
             )
           ]
         )
@@ -102,8 +105,8 @@ class CategoryItem {
 }
 
 List<CategoryItem> categoryItemList = [
-  CategoryItem(title: '지역별'),
-  CategoryItem(title: '역세권'),
-  CategoryItem(title: '맛집촌'),
+  CategoryItem(title: '지역별', route: SearchLocalView()),
+  CategoryItem(title: '역세권', route: SearchSubwayView()),
+  CategoryItem(title: '맛집촌', route: SearchTownView()),
   CategoryItem(title: '위치기반'),
 ];
