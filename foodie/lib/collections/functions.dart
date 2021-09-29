@@ -30,3 +30,12 @@ navigatorPush({required context, required widget, replacement=false}) {
     ? Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => widget))
     : Navigator.push(context, MaterialPageRoute(builder: (context) => widget));
 }
+
+String htmlTagRemover(String target) {
+  // todo: parser with new api
+  target = target.split('</p><p><br></p><p>')[0];
+  target = target.replaceAll('</p>', '');
+  target = target.replaceAll('<p>', '\n');
+  target = target.replaceAll('<br>', '\n');
+  return target;
+}

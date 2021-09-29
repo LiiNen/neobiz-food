@@ -124,7 +124,6 @@ class _SearchResultView extends State<SearchResultView> {
           children: [
             AspectRatio(
               aspectRatio: 1.375,
-              // todo: photo img if exists
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(4)),

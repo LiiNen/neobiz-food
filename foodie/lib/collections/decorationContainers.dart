@@ -21,6 +21,15 @@ lineDivider({color: const Color(0xffe8e8e8)}) {
   );
 }
 
+spaceDivider({color: const Color(0xffededed)}) {
+  return Container(
+    height: 8,
+    decoration: BoxDecoration(
+      color: color
+    )
+  );
+}
+
 swiperPagination() {
   return SwiperPagination(
     alignment: Alignment.bottomCenter,

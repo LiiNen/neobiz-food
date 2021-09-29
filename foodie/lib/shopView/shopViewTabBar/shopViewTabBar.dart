@@ -7,9 +7,9 @@ import 'shopViewTabLocation.dart';
 shopTabBarView({required TabController controller, required dynamic shopJson}) {
   return Container(
     child: [
-      ShopViewTabInfo(),
-      ShopViewTabReview(),
-      ShopViewTabLocation()
+      ShopViewTabInfo(shopJson),
+      ShopViewTabReview(shopJson),
+      ShopViewTabLocation(shopJson)
     ][controller.index],
   );
 }
