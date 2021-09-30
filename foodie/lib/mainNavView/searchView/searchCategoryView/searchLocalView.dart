@@ -39,6 +39,7 @@ class _SearchLocalView extends State<SearchLocalView> {
       body: Container(
         margin: EdgeInsets.only(top: 11),
         child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             localLeftItem(),
             localRightItem()
