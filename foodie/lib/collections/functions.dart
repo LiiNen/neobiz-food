@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:geolocator/geolocator.dart';
 
 void showToast(String message){
   Fluttertoast.showToast(msg: message,
@@ -48,3 +49,5 @@ String htmlTagRemover(String target) {
   target = target.replaceAll('<br>', '\n');
   return target;
 }
+
+

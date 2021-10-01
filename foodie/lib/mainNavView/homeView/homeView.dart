@@ -3,6 +3,7 @@ import 'package:foodie/collections/decorationContainers.dart';
 import 'package:foodie/collections/functions.dart';
 import 'package:foodie/collections/statelessAppBar.dart';
 import 'package:foodie/mainNavView/searchView/searchCategoryView/searchLocalView.dart';
+import 'package:foodie/mainNavView/searchView/searchCategoryView/searchPositionView.dart';
 import 'package:foodie/mainNavView/searchView/searchCategoryView/searchSubwayView.dart';
 import 'package:foodie/mainNavView/searchView/searchCategoryView/searchTownView.dart';
 
@@ -108,5 +109,5 @@ List<CategoryItem> categoryItemList = [
   CategoryItem(title: '지역별', route: SearchLocalView()),
   CategoryItem(title: '역세권', route: SearchSubwayView()),
   CategoryItem(title: '맛집촌', route: SearchTownView()),
-  CategoryItem(title: '위치기반'),
+  CategoryItem(title: '위치기반', route: SearchPositionView()),
 ];
