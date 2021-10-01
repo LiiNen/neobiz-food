@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:foodie/collections/decorationContainers.dart';
 import 'package:foodie/collections/functions.dart';
+import 'package:foodie/drawerMenuViews/supportView.dart';
 import 'package:foodie/mainNavView/userView/userView.dart';
 
 class HomeDrawerMenu {
@@ -16,7 +17,7 @@ var homeDrawerMenuList = [
   HomeDrawerMenu(title: '프리미엄 회원'),
   HomeDrawerMenu(title: '이용권 선물'),
   HomeDrawerMenu(title: '결제내역'),
-  HomeDrawerMenu(title: '1:1 문의'),
+  HomeDrawerMenu(title: '1:1 문의', route: SupportView()),
   HomeDrawerMenu(title: '로그아웃'),
 ];
 

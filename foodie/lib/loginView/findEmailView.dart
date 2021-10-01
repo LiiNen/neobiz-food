@@ -27,8 +27,8 @@ class _FindEmailView extends State<FindEmailView> {
             margin: EdgeInsets.symmetric(horizontal: 18),
             child: Column(
               children: [
-                signUpTextField('이름', nameController),
-                signUpTextField('이메일', emailController),
+                fullWidthTextField('이름', nameController),
+                fullWidthTextField('이메일', emailController),
               ]
             )
           )

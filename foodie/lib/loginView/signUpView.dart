@@ -47,12 +47,12 @@ class _SignUpView extends State<SignUpView> {
               children: [
                 loginStep(step: 1, title: '회원정보 입력'),
                 SizedBox(height: 30),
-                signUpTextField('이름', nameController),
-                signUpTextField('이메일', emailController),
-                signUpTextField('비밀번호', pwController),
-                signUpTextField('비밀번호 확인', pwConfirmController),
-                signUpTextField('휴대전화', phoneController),
-                signUpTextField('주소', addressController),
+                fullWidthTextField('이름', nameController),
+                fullWidthTextField('이메일', emailController),
+                fullWidthTextField('비밀번호', pwController),
+                fullWidthTextField('비밀번호 확인', pwConfirmController),
+                fullWidthTextField('휴대전화', phoneController),
+                fullWidthTextField('주소', addressController),
                 SizedBox(height: 12),
               ]
             )
@@ -69,30 +69,6 @@ class _SignUpView extends State<SignUpView> {
   bool checkSignUp() {
     return true;
   }
-}
-
-signUpTextField(String hintText, TextEditingController signUpController) {
-  return Container(
-    margin: EdgeInsets.only(bottom: 28),
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        Container(
-          child: TextField(
-            controller: signUpController,
-            obscureText: (hintText == '비밀번호' || hintText == '비밀번호 확인' ? true : false),
-            decoration: InputDecoration(
-              border: InputBorder.none,
-              hintText: hintText,
-              hintStyle: textStyle(color: Color(0xff8e8e8e), weight: 400, size: 15.0),
-            )
-          )
-        ),
-        // SizedBox(height: 8),
-        lineDivider()
-      ]
-    )
-  );
 }
 
 loginStep({required int step, required String title}) {

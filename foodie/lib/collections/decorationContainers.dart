@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:foodie/collections/functions.dart';
 
+import '../main.dart';
+
 subTitleContainer({required String title, double topMargin=16}) {
   return Container(
     margin: EdgeInsets.only(top: topMargin),
@@ -43,4 +45,48 @@ swiperPagination() {
 
 serviceColor() {
   return Color(0xffff851c);
+}
+
+fullWidthButton({required title, required action, double height=58}){
+  return GestureDetector(
+    onTap: () {action();},
+    child: Container(
+      height: height,
+      width: maxWidth,
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: serviceColor()
+        ),
+        borderRadius: BorderRadius.all(
+          Radius.circular(4),
+        ),
+        color: serviceColor(),
+      ),
+      child: Center(child: Text(title, style: textStyle(color: Colors.white, weight: 700, size: 16.0)))
+    )
+  );
+}
+
+fullWidthTextField(String hintText, TextEditingController controller) {
+  return Container(
+    margin: EdgeInsets.only(bottom: 28),
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        Container(
+          child: TextField(
+            controller: controller,
+            obscureText: (hintText == '비밀번호' || hintText == '비밀번호 확인' ? true : false),
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              hintText: hintText,
+              hintStyle: textStyle(color: Color(0xff8e8e8e), weight: 400, size: 15.0),
+            )
+          )
+        ),
+        // SizedBox(height: 8),
+        lineDivider()
+      ]
+    )
+  );
 }
