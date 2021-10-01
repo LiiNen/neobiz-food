@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodie/collections/decorationContainers.dart';
+import 'package:foodie/collections/functions.dart';
 
 class ShopViewTabReview extends StatefulWidget {
   final dynamic shopJson;
@@ -49,21 +50,26 @@ class _ShopViewTabReview extends State<ShopViewTabReview> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text('총 1개의 리뷰'),
-
+              SizedBox(width: 13),
             ]
           ),
           Expanded(
             child: Align(
               alignment: Alignment.centerRight,
-              child: Container(
-                width: 79, height: 33,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(
-                      Radius.circular(4)
+              child: GestureDetector(
+                onTap: () {
+                  //todo: navigator push to write review
+                },
+                child: Container(
+                  width: 79, height: 33,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(
+                        Radius.circular(4)
+                    ),
+                    color: const Color(0xffededed)
                   ),
-                  color: const Color(0xffededed)
-                ),
-                child: Center(child: Text('리뷰 작성'))
+                  child: Center(child: Text('리뷰 작성'))
+                )
               )
             )
           )
@@ -91,7 +97,7 @@ class _ShopViewTabReview extends State<ShopViewTabReview> {
             height: 34,
             child: Row(
               children: [
-                Text('이름')
+                Text('이름', style: textStyle(weight: 500, size: 15.0))
               ]
             )
           ),
@@ -99,7 +105,7 @@ class _ShopViewTabReview extends State<ShopViewTabReview> {
           Container(
             width: MediaQuery.of(context).size.width,
             margin: EdgeInsets.symmetric(vertical: 2),
-            child: Text('리뷰 내용dkdkdkdkdkdkkdkdkdkkdkdkdkdkkd')
+            child: Text('dkdkdkdkdkdkkdkdkdkkdkdkdkdkksksjksjksjksjksjksjksjksjkjskjsksd', style: textStyle(weight: 400, size: 14.0))
           )
         ]
       )

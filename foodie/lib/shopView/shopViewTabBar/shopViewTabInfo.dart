@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:foodie/collections/decorationContainers.dart';
 import 'package:foodie/collections/functions.dart';
 
@@ -45,7 +46,10 @@ class _ShopViewTabInfo extends State<ShopViewTabInfo> {
   }
 
   descriptionContainer() {
-    return Text(htmlTagRemover(shopJson['explain']), style: textStyle(weight: 400, size: 14.0));
+    return Html(
+      data: shopJson['explain']
+    );
+    // return Text(htmlTagRemover(shopJson['explain']), style: textStyle(weight: 400, size: 14.0));
   }
 
   detailContainer(nameList, indexList) {
