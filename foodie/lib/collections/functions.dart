@@ -1,4 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
+void showToast(String message){
+  Fluttertoast.showToast(msg: message,
+      gravity: ToastGravity.BOTTOM
+  );
+}
 
 TextStyle textStyle({color: Colors.black, weight: int, size: double}) {
   FontWeight fontWeight = FontWeight.w400;
@@ -25,9 +32,11 @@ TextStyle textStyle({color: Colors.black, weight: int, size: double}) {
   );
 }
 
-navigatorPush({required context, required widget, replacement=false}) {
+navigatorPush({required context, required widget, replacement=false, all=false}) {
   replacement
-    ? Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => widget))
+    ? all
+      ? Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => widget), (route) => false)
+      : Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => widget))
     : Navigator.push(context, MaterialPageRoute(builder: (context) => widget));
 }
 

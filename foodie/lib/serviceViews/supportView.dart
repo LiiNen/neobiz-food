@@ -34,10 +34,7 @@ class _SupportView extends State<SupportView> {
             )
           )
         ),
-        bottomNavigationBar: Padding(
-          padding: EdgeInsets.all(0.0),
-          child: fullWidthButton(title: '확인', action: submitAction),
-        ),
+        bottomNavigationBar: bottomNavigationButton(title: '확인', action: submitAction)
       )
     );
   }

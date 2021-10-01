@@ -47,6 +47,13 @@ serviceColor() {
   return Color(0xffff851c);
 }
 
+bottomNavigationButton({required title, required action}) {
+  return Padding(
+    padding: EdgeInsets.all(0.0),
+    child: fullWidthButton(title: title, action: action),
+  );
+}
+
 fullWidthButton({required title, required action, double height=58}){
   return GestureDetector(
     onTap: () {action();},

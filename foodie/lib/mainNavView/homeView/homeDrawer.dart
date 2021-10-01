@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:foodie/collections/decorationContainers.dart';
 import 'package:foodie/collections/functions.dart';
-import 'package:foodie/drawerMenuViews/supportView.dart';
+import 'package:foodie/serviceViews/paymentHistoryView.dart';
+import 'package:foodie/serviceViews/paymentView/paymentView.dart';
+import 'package:foodie/serviceViews/supportView.dart';
 import 'package:foodie/mainNavView/userView/userView.dart';
 
 class HomeDrawerMenu {
@@ -14,9 +16,9 @@ class HomeDrawerMenu {
 var homeDrawerMenuList = [
   HomeDrawerMenu(title: '신규 식당/여행지 제보하기'),
   HomeDrawerMenu(title: '내가 쓴 글'),
-  HomeDrawerMenu(title: '프리미엄 회원'),
-  HomeDrawerMenu(title: '이용권 선물'),
-  HomeDrawerMenu(title: '결제내역'),
+  HomeDrawerMenu(title: '프리미엄 회원', route: PaymentView()),
+  HomeDrawerMenu(title: '이용권 선물', route: PaymentView(isPresent: true)),
+  HomeDrawerMenu(title: '결제내역', route: PaymentHistoryView()),
   HomeDrawerMenu(title: '1:1 문의', route: SupportView()),
   HomeDrawerMenu(title: '로그아웃'),
 ];
