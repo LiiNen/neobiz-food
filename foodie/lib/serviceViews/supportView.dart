@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:foodie/collections/decorationContainers.dart';
 import 'package:foodie/collections/functions.dart';
 import 'package:foodie/collections/statelessAppBar.dart';
+import 'package:foodie/restApi/inquiryApi.dart';
+
+import 'package:foodie/main.dart';
 
 class SupportView extends StatefulWidget {
   @override
@@ -39,7 +42,18 @@ class _SupportView extends State<SupportView> {
     );
   }
 
-  submitAction() {
-    print('hello');
+  submitAction() async {
+    if(titleController.text == '') {
+      showToast('제목을 입력해주세요');
+    } else if(contentController.text == '') {
+      showToast('내용을 입력해주세요');
+    } else {
+      var isSuccess = await createInquiry(userId: userId, userName: userName, title: titleController.text, content: contentController.text);
+      if(isSuccess) {
+        showToast('문의가 성공적으로 접수되었습니다.');
+      } else {
+        showToast('오류 발생. 네트워크를 확인해주세요.');
+      }
+    }
   }
 }

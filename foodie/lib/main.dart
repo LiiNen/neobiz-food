@@ -21,6 +21,10 @@ class MyApp extends StatelessWidget {
 
 double maxWidth = 0;
 
+/// testing localhost api
+int userId = 333;
+String userName = '김정훈';
+
 class MainPage extends StatefulWidget {
   @override
   State<MainPage> createState() => _MainPage();
