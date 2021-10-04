@@ -30,16 +30,16 @@ dependencies:
   fluttertoast: ^8.0.7
   flutter_swiper: ^1.1.6
   http: ^0.13.3
-  url_launcher: ^6.0.9
+  url_launcher: ^6.0.5
   shared_preferences: ^2.0.6
-  image_picker: ^0.8.1+4
   flutter_signin_button: ^2.0.0
-  permission_handler: ^8.1.2
   flutter_dotenv: ^5.0.0
   cached_network_image: ^3.1.0
   flutter_svg: ^0.22.0
   flutter_html: ^2.1.2
-  geolocator: ^7.6.2
+  kakao_flutter_sdk: ^0.7.0
+  flutter_kakao_map: ^0.0.4
+  geolocator: ^6.2.1
 
 dev_dependencies:
   flutter_test:
@@ -60,6 +60,7 @@ flutter:
   assets:
     - asset/svgIcon/
     - asset/image/
+    - .env
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
