@@ -1,22 +1,20 @@
 PODS:
   - Flutter (1.0.0)
+  - flutter_kakao_map (0.0.1):
+    - Flutter
   - fluttertoast (0.0.2):
     - Flutter
     - Toast
   - FMDB (2.7.5):
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
-  - geolocator_apple (1.2.0):
+  - geolocator (6.2.0):
     - Flutter
-  - image_picker (0.0.1):
+  - kakao_flutter_sdk (0.7.0):
     - Flutter
-  - kakao_flutter_sdk (0.8.2):
-    - Flutter
-  - package_info_plus (0.4.5):
+  - package_info (0.0.1):
     - Flutter
   - path_provider (0.0.1):
-    - Flutter
-  - "permission_handler (5.1.0+2)":
     - Flutter
   - shared_preferences (0.0.1):
     - Flutter
@@ -35,13 +33,12 @@ PODS:
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
+  - flutter_kakao_map (from `.symlinks/plugins/flutter_kakao_map/ios`)
   - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
-  - geolocator_apple (from `.symlinks/plugins/geolocator_apple/ios`)
-  - image_picker (from `.symlinks/plugins/image_picker/ios`)
+  - geolocator (from `.symlinks/plugins/geolocator/ios`)
   - kakao_flutter_sdk (from `.symlinks/plugins/kakao_flutter_sdk/ios`)
-  - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
+  - package_info (from `.symlinks/plugins/package_info/ios`)
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
-  - permission_handler (from `.symlinks/plugins/permission_handler/ios`)
   - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
   - sqflite (from `.symlinks/plugins/sqflite/ios`)
   - url_launcher (from `.symlinks/plugins/url_launcher/ios`)
@@ -57,20 +54,18 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   Flutter:
     :path: Flutter
+  flutter_kakao_map:
+    :path: ".symlinks/plugins/flutter_kakao_map/ios"
   fluttertoast:
     :path: ".symlinks/plugins/fluttertoast/ios"
-  geolocator_apple:
-    :path: ".symlinks/plugins/geolocator_apple/ios"
-  image_picker:
-    :path: ".symlinks/plugins/image_picker/ios"
+  geolocator:
+    :path: ".symlinks/plugins/geolocator/ios"
   kakao_flutter_sdk:
     :path: ".symlinks/plugins/kakao_flutter_sdk/ios"
-  package_info_plus:
-    :path: ".symlinks/plugins/package_info_plus/ios"
+  package_info:
+    :path: ".symlinks/plugins/package_info/ios"
   path_provider:
     :path: ".symlinks/plugins/path_provider/ios"
-  permission_handler:
-    :path: ".symlinks/plugins/permission_handler/ios"
   shared_preferences:
     :path: ".symlinks/plugins/shared_preferences/ios"
   sqflite:
@@ -86,14 +81,13 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
+  flutter_kakao_map: 9a532d8252b361f246a7ee4524ccd374c82bac8c
   fluttertoast: 6122fa75143e992b1d3470f61000f591a798cc58
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
-  geolocator_apple: b741765c55dc21950e3e106e8b3584e55cf81ce5
-  image_picker: e06f7a68f000bd36f552c1847e33cda96ed31f1f
-  kakao_flutter_sdk: 99c58edf8b0996fb735cbe9e610096555ef7472e
-  package_info_plus: 6c92f08e1f853dc01228d6f553146438dafcd14e
+  geolocator: f5e3de65e241caba7ce3e8a618803387bda73384
+  kakao_flutter_sdk: e9ce9223c809eba9a9c375fb134ca608400ca9a1
+  package_info: 873975fc26034f0b863a300ad47e7f1ac6c7ec62
   path_provider: abfe2b5c733d04e238b0d8691db0cfd63a27a93c
-  permission_handler: ccb20a9fad0ee9b1314a52b70b76b473c5f8dab0
   shared_preferences: af6bfa751691cdc24be3045c43ec037377ada40d
   sqflite: 6d358c025f5b867b29ed92fc697fd34924e11904
   Toast: 91b396c56ee72a5790816f40d3a94dd357abc196

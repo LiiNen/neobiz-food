@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:foodie/collections/statelessAppBar.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingView extends StatefulWidget {
   @override
