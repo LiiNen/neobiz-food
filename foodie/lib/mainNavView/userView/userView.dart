@@ -35,8 +35,8 @@ class _UserView extends State<UserView> {
       appBar: DefaultAppBar(title: 'MY'),
       body: Container(
         margin: EdgeInsets.symmetric(horizontal: 18),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: ListView(
+          shrinkWrap: true,
           children: <Widget>[
             subTitleContainer(title: '회원정보'),
             SizedBox(height: 60),

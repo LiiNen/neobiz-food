@@ -28,12 +28,13 @@ class _LoginView extends State<LoginView> {
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height,
               padding: EdgeInsets.symmetric(horizontal: 18),
+              //todo: android overflow
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Column(
                     children: [
-                      SizedBox(height: 137),
+                      SizedBox(height: 20),
                       Image.asset('asset/image/logo.png', width: 186, height: 62),
                       SizedBox(height: 90),
                       loginTextField('email', emailController),
@@ -62,7 +63,7 @@ class _LoginView extends State<LoginView> {
                           )
                         ],
                       ),
-                      SizedBox(height: 60)
+                      SizedBox(height: 30)
                     ]
                   )
                 ],
@@ -75,8 +76,7 @@ class _LoginView extends State<LoginView> {
   }
 
   _loginAction() {
-
-    navigatorPush(context: context, widget: MainNavView(), replacement: true);
+    navigatorPush(context: context, widget: MainNavView(), replacement: true, all: true);
   }
 
   loginTextField(String type, TextEditingController loginController) {
