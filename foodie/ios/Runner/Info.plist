@@ -41,16 +41,12 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>io.flutter.embedded_views_preview</key>
-  <string>YES</string>
+
 	<key>NSLocationWhenInUseUsageDescription</key>
   <string>This app needs access to location when open.</string>
-  <key>LSApplicationQueriesSchemes</key>
-  <array>
-      <!-- 카카오톡으로 로그인 -->
-      <string>kakaokompassauth</string>
-      <!-- 카카오링크 -->
-      <string>kakaolink</string>
-  </array>
+  <key>NSLocationAlwaysUsageDescription</key>
+  <string>This app needs access to location when in the background.</string>
+  <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+  <string>This app needs access to location when open and in the background.</string>
 </dict>
 </plist>

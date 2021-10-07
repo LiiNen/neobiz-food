@@ -110,4 +110,5 @@ List<CategoryItem> categoryItemList = [
   CategoryItem(title: '역세권', route: SearchSubwayView()),
   CategoryItem(title: '맛집촌', route: SearchTownView()),
   CategoryItem(title: '위치기반', route: SearchPositionView()),
+  // CategoryItem(title: '위치기반'),
 ];
