@@ -2,4 +2,4 @@
 *restApi.dart
 *DS_Store*
 *.env
-*/resources/application.properties
+*/src/main/resources/application.properties 
