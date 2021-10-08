@@ -12,7 +12,6 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       automaticallyImplyLeading: false,
-      brightness: Brightness.light,
       backgroundColor: const Color(0xffffffff),
       centerTitle: true,
       title: Row(

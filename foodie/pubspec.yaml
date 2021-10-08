@@ -37,7 +37,6 @@ dependencies:
   cached_network_image: ^3.1.0
   flutter_svg: ^0.22.0
   flutter_html: ^2.1.2
-  webview_flutter: ^2.0.13
   kakao_flutter_sdk: ^0.7.0
 #  flutter_kakao_map: ^0.0.4
   geolocator: ^6.2.1

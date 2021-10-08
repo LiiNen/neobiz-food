@@ -17,7 +17,6 @@ class _ShopViewAppBar extends State<ShopViewAppBar> {
   Widget build(BuildContext context) {
     return AppBar(
       automaticallyImplyLeading: false,
-      brightness: Brightness.light,
       backgroundColor: Colors.transparent,
       elevation: 0,
       title: Row(
