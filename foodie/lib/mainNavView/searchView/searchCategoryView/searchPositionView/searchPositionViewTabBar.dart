@@ -2,8 +2,8 @@ import 'dart:io' show Platform;
 
 import 'package:flutter/material.dart';
 import 'package:foodie/collections/functions.dart';
-import 'package:foodie/mainNavView/searchView/searchCategoryView/searchPositionGoogleView.dart';
-import 'package:foodie/mainNavView/searchView/searchCategoryView/searchPositionView/searchPositionListView.dart';
+import 'searchPositionGoogleView.dart';
+import 'searchPositionListView.dart';
 
 searchPositionTabBarView({required TabController controller}) {
   return Container(
