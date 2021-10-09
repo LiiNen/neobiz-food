@@ -2,7 +2,6 @@
 /// ios 에서만 사용합니다.
 
 import 'package:flutter/material.dart';
-import 'package:foodie/collections/statelessAppBar.dart';
 import 'package:geolocator/geolocator.dart';
 
 /// android exception handler
@@ -39,19 +38,14 @@ class _SearchPositionGoogleView extends State<SearchPositionGoogleView> {
 
   @override
   Widget build(BuildContext context) {
-    return _position != null ? Scaffold(
-      appBar: DefaultAppBar(title: '위치'),
-      body: Column(
+    return _position != null ? Column(
         children: [
-          kakaoMap()
+          googleMap()
         ]
-      )
-    ) : Scaffold(
-      appBar: DefaultAppBar(title: '위치 권한 확인 중..'),
-    );
+      ) : Container();
   }
 
-  kakaoMap() {
+  googleMap() {
     return Container(
       width: MediaQuery.of(context).size.width,
       height: 300,

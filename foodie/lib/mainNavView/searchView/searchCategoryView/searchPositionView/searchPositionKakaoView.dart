@@ -48,16 +48,11 @@ import 'package:flutter/cupertino.dart';
 //
 //   @override
 //   Widget build(BuildContext context) {
-//     return _position != null ? Scaffold(
-//       appBar: DefaultAppBar(title: '위치'),
-//       body: Column(
+//     return _position != null ? Column(
 //         children: [
 //           kakaoMap()
 //         ]
-//       )
-//     ) : Scaffold(
-//       appBar: DefaultAppBar(title: '위치 권한 확인 중..'),
-//     );
+//       ) : Container();
 //   }
 //
 //   kakaoMap() {
