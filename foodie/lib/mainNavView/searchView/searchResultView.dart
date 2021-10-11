@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodie/collections/decorationContainers.dart';
 import 'package:foodie/collections/functions.dart';
 import 'package:foodie/collections/statelessAppBar.dart';
 import 'package:foodie/mainNavView/homeView/homeBannerContainer.dart';
@@ -23,6 +24,10 @@ class _SearchResultView extends State<SearchResultView> {
   _SearchResultView({required this.title, required this.searchType, required this.requestItem});
 
   var _searchItemList = [];
+
+  var _isRed = true;
+  var _filterSelectedIndex = 0;
+  var _filterTitleList = ['구역별', '메뉴별', '상황별'];
 
   @override
   void initState() {
@@ -55,21 +60,85 @@ class _SearchResultView extends State<SearchResultView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: DefaultAppBar(title: title),
+      appBar: DefaultAppBar(title: title, elevation: false),
       body: Container(
         width: MediaQuery.of(context).size.width,
-        child: ListView(
-          shrinkWrap: true,
-          children: <Widget>[
-            HomeBannerContainer(),
-          ] + (_searchItemList.length != 0 ? [
-            recommendContainer(),
-            SizedBox(height: 9),
-            listContainer(),
-          ] : [
-            // 맛집정보를 불러오는 중?
-          ])
+        child: Column(
+          children: [
+            hackTabBar(),
+            Expanded(
+              child: ListView(
+                shrinkWrap: true,
+                children: <Widget>[
+                  HomeBannerContainer(),
+                ] + (_searchItemList.length != 0 ? [
+                  recommendContainer(),
+                  SizedBox(height: 9),
+                  listContainer(),
+                ] : [
+                  // 맛집정보를 불러오는 중?
+                ])
+              )
+            )
+          ]
         )
+      )
+    );
+  }
+
+  hackTabBar() {
+    return Container(
+      height: 42,
+      color: Colors.white,
+      margin: EdgeInsets.symmetric(horizontal: 18),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            children: [
+              tabBarColor('red'),
+              SizedBox(width: 16),
+              tabBarColor('green'),
+            ]
+          ),
+          GestureDetector(
+            behavior: HitTestBehavior.translucent,
+            onTap: () {showFilter();},
+            child: Container(
+              margin: EdgeInsets.symmetric(vertical: 10),
+              child: Center(child: Text('필터', style: textStyle(weight: 500, size: 15.0)))
+            )
+          )
+        ],
+      )
+    );
+  }
+
+  tabBarColor(String color) {
+    bool _selected = (color == 'red' && _isRed) || (color == 'green' && !_isRed);
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          if(color == 'red') _isRed = true;
+          else if(color == 'green') _isRed = false;
+        });
+      },
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Text(color == 'red' ? '레드리스트' : '그린리스트',
+            style: _selected ?
+              textStyle(color: Color(0xff8e8e8e), weight: 500, size: 15.0) :
+              textStyle(color: Color(0xffe0e0e0), weight: 500, size: 15.0)
+          ),
+          SizedBox(height: 4),
+          Container(
+            width: 69, height: 6,
+            decoration: BoxDecoration(
+              color: _selected ? Color(0xff8e8e8e) : Colors.white
+            )
+          )
+        ]
       )
     );
   }
@@ -198,6 +267,77 @@ class _SearchResultView extends State<SearchResultView> {
             ]
           )
         )
+      )
+    );
+  }
+
+  showFilter() {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return StatefulBuilder(
+          builder: (BuildContext context, setState) {
+            return Container(
+              color: Colors.white,
+              child: Container(
+                margin: EdgeInsets.symmetric(horizontal: 18),
+                width: MediaQuery.of(context).size.width,
+                color: Colors.white,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(height: 12),
+                    Text('필터'),
+                    SizedBox(height: 12),
+                    lineDivider(),
+                    SizedBox(height: 14),
+                    filterTypeContainer(setState),
+                    SizedBox(height: 4),
+                  ]
+                )
+              )
+            );
+          }
+        );
+      }
+    );
+  }
+
+  filterTypeContainer(setState) {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      height: 41,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(4)),
+        color: Color(0xffededed),
+      ),
+      child: Row(
+        children: _filterTitleList.map((e) {
+          var index = _filterTitleList.indexOf(e);
+          return Expanded(
+            child: GestureDetector(
+              behavior: HitTestBehavior.translucent,
+              onTap: () {
+                setState(() {
+                  _filterSelectedIndex = index;
+                });
+              },
+              child: index == _filterSelectedIndex ? Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(4)),
+                  color: Color(0xff8e8e8e)
+                ),
+                child: Center(
+                  child: Text(_filterTitleList[index], style: textStyle(color: Colors.white, weight: 500, size: 15.0))
+                )
+              ) : Container(
+                child: Center(
+                  child: Text(_filterTitleList[index], style: textStyle(color: Color(0xff8e8e8e), weight: 500, size: 15.0))
+                )
+              )
+            )
+          );
+        }).toList()
       )
     );
   }
