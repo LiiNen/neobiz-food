@@ -13,7 +13,7 @@ class _SearchPositionView extends State<SearchPositionView> with SingleTickerPro
   @override
   void initState() {
     super.initState();
-    controller = TabController(length: 3, vsync: this, initialIndex: 0);
+    controller = TabController(length: 2, vsync: this, initialIndex: 0);
     controller.addListener(_controllerListener);
   }
   @override
@@ -29,8 +29,9 @@ class _SearchPositionView extends State<SearchPositionView> with SingleTickerPro
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: DefaultAppBar(title: '위치'),
-      body: Column(
+      appBar: DefaultAppBar(title: '위치', elevation: false),
+      body: ListView(
+        shrinkWrap: true,
         children: [
           SearchPositionTabBar(controller: controller),
           searchPositionTabBarView(controller: controller)

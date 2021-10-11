@@ -3,10 +3,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:foodie/collections/functions.dart';
 
 class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
-  DefaultAppBar({required this.title}) : preferredSize = Size.fromHeight(56.0);
+  DefaultAppBar({required this.title, this.elevation=true}) : preferredSize = Size.fromHeight(56.0);
   @override
   final Size preferredSize;
   final String title;
+  final bool elevation;
 
   @override
   Widget build(BuildContext context) {
@@ -14,6 +15,8 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
       automaticallyImplyLeading: false,
       backgroundColor: const Color(0xffffffff),
       centerTitle: true,
+      elevation: elevation ? 1.0 : 0,
+      shadowColor: elevation ? Colors.black: Colors.white,
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -31,7 +34,7 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
           Text(title, style: textStyle(color: Colors.black, weight: 500, size: 16.0),),
           Container(width: 16)
         ]
-      )
+      ),
     );
   }
 }
