@@ -15,8 +15,7 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
       automaticallyImplyLeading: false,
       backgroundColor: const Color(0xffffffff),
       centerTitle: true,
-      elevation: elevation ? 1.0 : 0,
-      shadowColor: elevation ? Colors.black: Colors.white,
+      shadowColor: elevation ? Colors.black : Colors.white,
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -49,14 +48,25 @@ class HomeViewAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      elevation: 0,
+      elevation: 1.0,
+      shadowColor: Colors.black,
       backgroundColor: Colors.white,
-      automaticallyImplyLeading: true,
+      automaticallyImplyLeading: false,
       centerTitle: true,
-      iconTheme: IconThemeData(
-        color: Colors.black,
+      title: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          SizedBox(width: 29),
+          Image.asset('asset/image/logo.png', width: 113),
+          Container(),
+        ]
       ),
-      title: Text('foodie', style: textStyle(color: Colors.black, weight: 400, size: 14.0)),
+      actions: [
+        IconButton(
+          onPressed: () => Scaffold.of(context).openEndDrawer(),
+          icon: Image.asset('asset/image/menuPlusIcon.png', width: 29, height: 29),
+        )
+      ]
     );
   }
 }

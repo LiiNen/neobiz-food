@@ -99,3 +99,30 @@ fullWidthTextField(String hintText, TextEditingController controller) {
     )
   );
 }
+
+reviewBox({required BuildContext context, required String reward}) {
+  return GestureDetector(
+    behavior: HitTestBehavior.translucent,
+    onTap: () {
+      // todo: push to review
+    },
+    child: Container(
+      margin: EdgeInsets.symmetric(horizontal: 18),
+      width: MediaQuery.of(context).size.width,
+      height: 47,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(6)),
+        color: Color(0xffffe489)
+      ),
+      child: Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            //todo: document icon
+            Text('리뷰를 작성하고 ${reward} 받아보세요!', style: textStyle(color: Color(0xffff9933), weight: 700, size: 13.0)),
+          ]
+        )
+      )
+    )
+  );
+}
