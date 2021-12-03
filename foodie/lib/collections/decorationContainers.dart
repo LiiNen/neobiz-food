@@ -44,7 +44,7 @@ swiperPagination() {
 }
 
 serviceColor() {
-  return Color(0xffff851c);
+  return Color(0xffff7c2f);
 }
 
 bottomNavigationButton({required title, required action}) {

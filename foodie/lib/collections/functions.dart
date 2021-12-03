@@ -39,6 +39,15 @@ navigatorPush({required context, required widget, replacement=false, all=false})
       : Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => widget))
     : Navigator.push(context, MaterialPageRoute(builder: (context) => widget));
 }
+navigatorPushWithoutAnimation({required context, required widget}) {
+  Navigator.pushReplacement(
+    context,
+    PageRouteBuilder(
+      pageBuilder: (context, animation1, animation2) => widget,
+      transitionDuration: Duration.zero,
+    ),
+  );
+}
 
 String htmlTagRemover(String target) {
   // todo: parser with new api

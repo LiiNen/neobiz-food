@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:foodie/collections/exitDialog.dart';
+import 'package:foodie/collections/functions.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
@@ -17,7 +19,52 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: MainPage()
+      home: SplashView()
+    );
+  }
+}
+
+class SplashView extends StatefulWidget {
+  @override
+  State<SplashView> createState() => _SplashView();
+}
+
+class _SplashView extends State<SplashView> {
+  bool? _isLogin;
+
+  @override
+  void initState() {
+    super.initState();
+    new Future.delayed(new Duration(seconds: 1), _checkLogin);
+  }
+
+  _checkLogin() async {
+    _isLogin = false;
+
+    if(_isLogin == true) {
+      navigatorPushWithoutAnimation(context: context, widget: MainNavView());
+    }
+    else {
+      navigatorPushWithoutAnimation(context: context, widget: LoginView());
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return WillPopScope(
+      onWillPop: () => showExitDialog(context),
+      child: Scaffold(
+        backgroundColor: Color(0xffff7c2f),
+        body: Container(
+          width: MediaQuery.of(context).size.width,
+          margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.35),
+          child: Column(
+            children: [
+              Image.asset('asset/image/logoSplash.png', width: 195),
+            ]
+          )
+        )
+      )
     );
   }
 }
@@ -27,47 +74,3 @@ double maxWidth = 0;
 /// testing localhost api
 int userId = 333;
 String userName = '김정훈';
-
-class MainPage extends StatefulWidget {
-  @override
-  State<MainPage> createState() => _MainPage();
-}
-
-class _MainPage extends State<MainPage> {
-  bool? _isLogin;
-
-
-  @override
-  void initState() {
-    super.initState();
-    new Future.delayed(new Duration(seconds: 2), _checkLogin);
-  }
-
-  Future _checkLogin() async {
-    final pref = await SharedPreferences.getInstance();
-    setState(() {
-      _isLogin = pref.getBool('login') ?? false;
-      print(_isLogin);
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    maxWidth = MediaQuery.of(context).size.width;
-    if(_isLogin != null && _isLogin!){
-      return MaterialApp(
-        home: MainNavView()
-      );
-    }
-    else if (_isLogin != null && !_isLogin!) {
-      return MaterialApp(
-        home: LoginView()
-      );
-    }
-    return Scaffold(
-      body: Center(
-        child: Image.asset('asset/image/logo.png', width: 195, height: 65)
-      )
-    );
-  }
-}

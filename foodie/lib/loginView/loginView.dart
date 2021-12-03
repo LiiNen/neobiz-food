@@ -14,6 +14,7 @@ class LoginView extends StatefulWidget {
 class _LoginView extends State<LoginView> {
   TextEditingController emailController = TextEditingController();
   TextEditingController pwController = TextEditingController();
+  bool isAutoLogin = false;
 
   @override
   Widget build(BuildContext context) {
@@ -27,43 +28,45 @@ class _LoginView extends State<LoginView> {
             child: Container(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height,
-              padding: EdgeInsets.symmetric(horizontal: 18),
-              //todo: android overflow
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Column(
-                    children: [
-                      SizedBox(height: 20),
-                      Image.asset('asset/image/logo.png', width: 186, height: 62),
-                      SizedBox(height: 90),
-                      loginTextField('email', emailController),
-                      loginTextField('pw', pwController),
-                      SizedBox(height: 38),
-                      loginButton(title: '로그인', action: () => {_loginAction()},),
-                    ]
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 18),
+                    child: Column(
+                      children: [
+                        SizedBox(height: MediaQuery.of(context).size.height * 0.135),
+                        Image.asset('asset/image/logo.png', width: 186, height: 62),
+                        SizedBox(height: 58),
+                        loginTextField('email', emailController),
+                        SizedBox(height: 22),
+                        loginTextField('pw', pwController),
+                        SizedBox(height: 26),
+                        loginRowMenu(),
+                        SizedBox(height: 26),
+                        loginButton(action: _loginAction),
+                        SizedBox(height: 19),
+                        socialLoginContainer()
+                      ]
+                    )
                   ),
                   Column(
                     children: [
-                      loginButton(title: '간편 로그인', action: () => {showSocialLogin()},),
-                      SizedBox(height: 30),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
+                          Text('아직 회원이 아니신가요?', style: textStyle(color: Color(0xff8e8e8e), weight: 400, size: 13.0)),
+                          SizedBox(width: 5),
                           GestureDetector(
-                              behavior: HitTestBehavior.translucent,
-                              onTap: () {navigatorPush(context: context, widget: SignUpView());},
-                              child: Text('회원가입')
+                            behavior: HitTestBehavior.translucent,
+                            onTap: () {navigatorPush(context: context, widget: SignUpView());},
+                            child: Text('회원가입 하기', style: textStyle(color: serviceColor(), weight: 400, size: 13.0)),
                           ),
-                          SizedBox(width: 6),
-                          GestureDetector(
-                              behavior: HitTestBehavior.translucent,
-                              onTap: () {navigatorPush(context: context, widget: FindEmailView());},
-                              child: Text('회원정보 찾기')
-                          )
                         ],
                       ),
-                      SizedBox(height: 30)
+                      SizedBox(height: 11),
+                      Image.asset('asset/image/loginBottomLogo.png', width: MediaQuery.of(context).size.width),
+                      SizedBox(height: 20)
                     ]
                   )
                 ],
@@ -80,32 +83,33 @@ class _LoginView extends State<LoginView> {
   }
 
   loginTextField(String type, TextEditingController loginController) {
-    String hintText = (type == 'email' ? '이메일을 입력해주세요.' : '비밀번호를 입력해주세요.');
+    String hintText = (type == 'email' ? 'E-mail' : 'Password');
     return Container(
-      margin: EdgeInsets.only(bottom: 24),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
+            height: 22,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Container(
-                  margin: EdgeInsets.only(left: 10),
-                  width: 20,
-                  height: 20,
-                  child: Center(child: Image.asset(type=='email' ? 'asset/image/loginEmail.png' : 'asset/image/loginPassword.png', fit: BoxFit.fill,))
-                ),
+                // Container(
+                //   margin: EdgeInsets.only(left: 10),
+                //   width: 20,
+                //   height: 20,
+                //   child: Center(child: Image.asset(type=='email' ? 'asset/image/loginEmail.png' : 'asset/image/loginPassword.png', fit: BoxFit.fill,))
+                // ),
                 Expanded(
                   child: TextField(
                     controller: loginController,
                     obscureText: (type == 'pw' ? true : false),
                     decoration: InputDecoration(
-                      contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                      // contentPadding: EdgeInsets.symmetric(horizontal: 10),
                       border: InputBorder.none,
                       hintText: hintText,
                       hintStyle: textStyle(color: Color(0xff8e8e8e), weight: 400, size: 15.0),
-                    )
+                    ),
+                    style: textStyle(color: Colors.black, weight: 400, size: 15.0),
                   )
                 )
               ],
@@ -117,77 +121,111 @@ class _LoginView extends State<LoginView> {
     );
   }
 
-  loginButton({required title, required action, double height=58}){
-    bool isSimple = (title == '간편 로그인');
+  loginButton({required action, double height=45}){
     return GestureDetector(
-      onTap: () {action();},
+      onTap: () { action(); },
       child: Container(
         height: height,
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
-          border: Border.all(
-            color: isSimple ? Color(0xffe0e0e0) : serviceColor()
-          ),
           borderRadius: BorderRadius.all(
-            Radius.circular(4),
+            Radius.circular(3),
           ),
-          color: isSimple ? Colors.white : serviceColor(),
+          color: serviceColor(),
         ),
-        child: Center(child: Text(title, style: textStyle(color: isSimple ? Color(0xff8e8e8e) : Colors.white, weight: 700, size: 16.0)))
+        child: Center(child: Text('로그인', style: textStyle(color: Colors.white, weight: 700, size: 15.0)))
       )
     );
   }
 
-  showSocialLogin() {
-    showModalBottomSheet(
-      context: context,
-      builder: (BuildContext context){
-        return Container(
-          color: Colors.transparent,
-          child: Container(
-            margin: EdgeInsets.symmetric(horizontal: 18),
-            padding: EdgeInsets.only(bottom: 18),
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-              // TODO : border not adjusted 
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(10),
-                topRight: Radius.circular(10),
-              ),
-              color: Colors.white,
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  margin: EdgeInsets.symmetric(vertical: 16),
-                  child: Text('간편 로그인', style: textStyle(color: Color(0xff8e8e8e), weight: 500, size: 16.0)),
-                ),
-                lineDivider(),
-                SizedBox(height: 18),
-                Container(
-                  margin: EdgeInsets.symmetric(vertical: 10),
-                  child: loginButton(title: '카카오톡 로그인', action: (){}, height: 48)
-                ),
-                Container(
-                  margin: EdgeInsets.symmetric(vertical: 10),
-                  child: loginButton(title: '네이버 로그인', action: (){}, height: 48)
-                ),
-                Container(
-                  margin: EdgeInsets.symmetric(vertical: 10),
-                  child: loginButton(title: '구글 로그인', action: (){}, height: 48)
-                ),
-                Container(
-                  margin: EdgeInsets.symmetric(vertical: 10),
-                  child: loginButton(title: '애플 로그인', action: (){}, height: 48)
-                ),
-                SizedBox(height: 18)
-              ],
-            )
-          )
-        );
-      }
+  loginRowMenu() {
+    return Container(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          autoLoginButton(),
+          findLoginButton()
+        ]
+      )
     );
   }
+  autoLoginButton() {
+    return GestureDetector(
+      behavior: HitTestBehavior.translucent,
+      onTap: () {
+        setState(() {
+          isAutoLogin = !isAutoLogin;
+        });
+      },
+      child: Container(
+        height: 20,
+        child: Row(
+          children: [
+            Container(
+              width: 19, height: 19,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(3)),
+                border: Border.all(color: Color(0xffe0e0e0), width: 1),
+                color: Color(0xffffffff)
+              ),
+              child: isAutoLogin ? Center(
+                child: Icon(Icons.check, color: serviceColor(), size: 19)
+              ) : Container()
+            ),
+            SizedBox(width: 8),
+            Text('자동 로그인', style: textStyle(color: Color(0xff8e8e8e), weight: 400, size: 14.0))
+          ]
+        )
+      )
+    );
+  }
+  findLoginButton() {
+    return GestureDetector(
+      behavior: HitTestBehavior.translucent,
+      onTap: () {
+        navigatorPush(context: context, widget: FindEmailView());
+      },
+      child: Container(
+        height: 20,
+        child: Text('아이디 / 비밀번호 찾기', style: textStyle(color: Color(0xff8e8e8e), weight: 400, size: 14.0))
+      )
+    );
+  }
+
+  socialLoginContainer() {
+    return Container(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('간편로그인', style: textStyle(color: Color(0xff8e8e8e), weight: 400, size: 14.0)),
+          SizedBox(height: 7),
+          lineDivider(),
+          SizedBox(height: 23),
+          socialLoginRow(),
+        ]
+      )
+    );
+  }
+  var socialLoginList = ['Google', 'Naver', 'Kakao', 'Facebook'];
+  socialLoginRow() {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: List.generate(socialLoginList.length * 2 - 1, (index) {
+        if(index % 2 == 1) return SizedBox(width: 16);
+        return socialLoginButton((index/2).floor());
+      })
+    );
+  }
+  socialLoginButton(int index) {
+    return Expanded(
+      child: GestureDetector(
+        behavior: HitTestBehavior.translucent,
+        onTap: () {
+          /// todo : action by index
+        },
+        child: Image.asset('asset/image/login${socialLoginList[index]}.png', fit: BoxFit.fill)
+      )
+    );
+  }
+
 }
