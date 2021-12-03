@@ -15,20 +15,26 @@ class CompleteDialog extends StatelessWidget {
       contentPadding: EdgeInsets.all(0),
       content: Container(
         width: 324, height: 228,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(
+            Radius.circular(8)
+          ),
+          color: Color(0xffffffff)
+        ),
         child: Center(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Image.asset('asset/image/loginAccept.png', width: 65, height: 65),
-              SizedBox(height: 14),
+              Image.asset('asset/image/loginAccept.png', width: 62, height: 62),
+              SizedBox(height: 15),
               Text('가입이 완료되었습니다.', style: textStyle(weight: 500, size: 16.0)),
-              SizedBox(height: 16),
+              SizedBox(height: 22),
               GestureDetector(
                 behavior: HitTestBehavior.translucent,
                 onTap: () {Navigator.pop(context);},
                 child: Container(
-                  width: 154, height: 49,
+                  width: 154, height: 43,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(
                       Radius.circular(4),
@@ -36,7 +42,7 @@ class CompleteDialog extends StatelessWidget {
                     color: serviceColor()
                   ),
                   child: Center(
-                    child: Text('확인', style: textStyle(color: Colors.white, weight: 700, size: 16.0))
+                    child: Text('확인', style: textStyle(color: Colors.white, weight: 700, size: 15.0))
                   )
                 )
               )

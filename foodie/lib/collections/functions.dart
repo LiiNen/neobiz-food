@@ -24,11 +24,11 @@ TextStyle textStyle({color: Colors.black, weight: int, size: double}) {
       break;
   }
   return TextStyle(
-      color: color,
-      fontWeight: fontWeight,
-      fontFamily: "NotoSansKR",
-      fontStyle:  FontStyle.normal,
-      fontSize: size
+    color: color,
+    fontWeight: fontWeight,
+    fontFamily: "NotoSansKR",
+    fontStyle:  FontStyle.normal,
+    fontSize: size
   );
 }
 

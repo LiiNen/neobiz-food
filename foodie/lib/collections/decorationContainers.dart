@@ -78,18 +78,20 @@ fullWidthTextField(String hintText, TextEditingController controller) {
   return Container(
     margin: EdgeInsets.only(bottom: 28),
     child: Column(
-      mainAxisAlignment: MainAxisAlignment.end,
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Container(
+          height: 24,
           child: TextField(
             controller: controller,
             obscureText: (hintText == '비밀번호' || hintText == '비밀번호 확인' ? true : false),
             decoration: InputDecoration(
               border: InputBorder.none,
               hintText: hintText,
-              hintStyle: textStyle(color: Color(0xff8e8e8e), weight: 400, size: 15.0),
-            )
-          )
+              hintStyle: textStyle(color: Color(0xff8e8e8e), weight: 500, size: 16.0),
+            ),
+            style: textStyle(color: Colors.black, weight: 500, size: 16.0),
+          ),
         ),
         // SizedBox(height: 8),
         lineDivider()

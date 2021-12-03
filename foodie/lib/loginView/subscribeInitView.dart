@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodie/collections/decorationContainers.dart';
 import 'package:foodie/collections/functions.dart';
 import 'package:foodie/collections/statelessAppBar.dart';
 import 'package:foodie/loginView/signUpView.dart';
@@ -13,6 +14,7 @@ class SubscribeInitView extends StatefulWidget {
 class _SubscribeInitView extends State<SubscribeInitView> {
   bool isEmailSubscribe = true;
   bool isSnsSubscribe = true;
+  bool isPushSubscribe = true;
 
   @override
   Widget build(BuildContext context) {
@@ -25,9 +27,10 @@ class _SubscribeInitView extends State<SubscribeInitView> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             loginStep(step: 2, title: '정보 수신 설정'),
-            SizedBox(height: 4),
+            SizedBox(height: 19),
             subscribeContainer('이메일', isEmailSubscribe),
             subscribeContainer('SNS', isSnsSubscribe),
+            subscribeContainer('푸시알림서비스', isPushSubscribe),
           ],
         )
       ),
@@ -44,8 +47,8 @@ class _SubscribeInitView extends State<SubscribeInitView> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('$title 수신설정', style: textStyle(weight: 500, size: 16.0)),
-          SizedBox(height: 16),
+          Text(title.length < 5 ? '$title 수신설정' : title, style: textStyle(weight: 500, size: 16.0)),
+          SizedBox(height: 11),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -71,13 +74,16 @@ class _SubscribeInitView extends State<SubscribeInitView> {
           });
         },
         child: Container(
-          height: 52,
+          height: 47,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(4)),
-            color: isSelected ? Color(0xff2d3572) : Color(0xffededed),
+            border: Border.all(color: isSelected ? serviceColor() : Color(0xffe0e0e0)),
+            color: isSelected ? serviceColor() : Colors.white
           ),
           child: Center(
-            child: isPositive ? Text('수신함', style: textStyle(color: isSelected ? Colors.white : Color(0xff8e8e8e), weight: 500, size: 16.0)) : Text('수신안함', style: textStyle(color: isSelected ? Colors.white : Color(0xff8e8e8e), weight: 500, size: 16.0))
+            child: isPositive ?
+              Text('수신함', style: textStyle(color: isSelected ? Colors.white : Color(0xff8e8e8e), weight: 500, size: 16.0)) :
+              Text('수신안함', style: textStyle(color: isSelected ? Colors.white : Color(0xff8e8e8e), weight: 500, size: 16.0))
           )
         )
       )

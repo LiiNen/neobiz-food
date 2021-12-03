@@ -16,6 +16,7 @@ class _SignUpView extends State<SignUpView> {
   TextEditingController pwConfirmController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   TextEditingController addressController = TextEditingController();
+  TextEditingController detailAddressController = TextEditingController();
 
   String _userType = '';
 
@@ -27,7 +28,7 @@ class _SignUpView extends State<SignUpView> {
   }
   checkUserType() async {
     _userType = await showUserTypeDialog(context);
-    print(_userType);
+    setState(() {});
     if(_userType == '') Navigator.pop(context);
   }
 
@@ -41,18 +42,19 @@ class _SignUpView extends State<SignUpView> {
         appBar: DefaultAppBar(title: '회원가입'),
         body: SingleChildScrollView(
           child: Container(
-            margin: EdgeInsets.symmetric(horizontal: 18),
+            padding: EdgeInsets.symmetric(horizontal: 18),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 loginStep(step: 1, title: '회원정보 입력'),
                 SizedBox(height: 30),
-                fullWidthTextField('이름', nameController),
+                fullWidthTextField(_userType == 'shop' ? '매장명' : '이름', nameController),
                 fullWidthTextField('이메일', emailController),
                 fullWidthTextField('비밀번호', pwController),
                 fullWidthTextField('비밀번호 확인', pwConfirmController),
                 fullWidthTextField('휴대전화', phoneController),
-                fullWidthTextField('주소', addressController),
+                fullWidthTextField('우편번호', addressController),
+                fullWidthTextField('상세주소', detailAddressController),
                 SizedBox(height: 12),
               ]
             )

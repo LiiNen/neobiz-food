@@ -15,6 +15,10 @@ showUserTypeDialog(BuildContext context) async {
             contentPadding: EdgeInsets.all(0),
             content: Container(
               width: 324, height: 292,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(8)),
+                color: Colors.white,
+              ),
               child: Center(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -41,7 +45,7 @@ showUserTypeDialog(BuildContext context) async {
                                     border: isUser ? Border.all(color: serviceColor(), width: 2) : Border.all(color: Color(0xffe0e0e0), width: 1)
                                 ),
                                 child: Center(
-                                  child: Image.asset('asset/image/loginUser.png')
+                                  child: Image.asset(isUser ? 'asset/image/loginUserSelected.png' : 'asset/image/loginUserUnselected.png'),
                                 )
                               ),
                               SizedBox(height: 2),
@@ -68,7 +72,7 @@ showUserTypeDialog(BuildContext context) async {
                                     border: isShop ? Border.all(color: serviceColor(), width: 2) : Border.all(color: Color(0xffe0e0e0), width: 1)
                                   ),
                                   child: Center(
-                                      child: Image.asset('asset/image/loginShop.png')
+                                      child: Image.asset(isShop ? 'asset/image/loginShopSelected.png' : 'asset/image/loginShopUnselected.png'),
                                   )
                                 ),
                                 SizedBox(height: 2),
