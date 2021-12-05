@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:foodie/collections/decorationContainers.dart';
 import 'package:foodie/collections/functions.dart';
-import 'package:foodie/collections/statelessAppBar.dart';
+import 'package:foodie/mainNavView/searchView/searchResultView.dart';
 import 'package:foodie/restApi/searchLocalApi.dart';
-
-import '../searchResultView.dart';
 
 List<String> localTitleList = [
   '서울', '경기', '인천', '부산',
@@ -34,17 +32,14 @@ class _SearchLocalView extends State<SearchLocalView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: DefaultAppBar(title: '지역별'),
-      body: Container(
-        margin: EdgeInsets.only(top: 11),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            localLeftItem(),
-            localRightItem()
-          ]
-        )
+    return Container(
+      margin: EdgeInsets.only(top: 11),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          localLeftItem(),
+          localRightItem()
+        ]
       )
     );
   }

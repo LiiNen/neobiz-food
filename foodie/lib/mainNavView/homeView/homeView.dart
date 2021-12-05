@@ -4,10 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:foodie/collections/decorationContainers.dart';
 import 'package:foodie/collections/functions.dart';
 import 'package:foodie/collections/statelessAppBar.dart';
-import 'package:foodie/mainNavView/searchView/searchCategoryView/searchLocalView.dart';
-import 'package:foodie/mainNavView/searchView/searchCategoryView/searchPositionView/searchPositionView.dart';
-import 'package:foodie/mainNavView/searchView/searchCategoryView/searchSubwayView.dart';
-import 'package:foodie/mainNavView/searchView/searchCategoryView/searchTownView.dart';
+import 'package:foodie/searchCategoryView/searchCategoryView.dart';
 import 'package:foodie/shopContainerView/recShopContainer.dart';
 
 import 'homeBannerContainer.dart';
@@ -101,7 +98,7 @@ class _HomeView extends State<HomeView> {
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
       onTap: () {
-        navigatorPush(context: context, widget: categoryItemList[index].route);
+        navigatorPush(context: context, widget: SearchCategoryView(initialIndex: index,));
       },
       child: Container(
         width: 93, height: 93,
@@ -155,12 +152,11 @@ class _HomeView extends State<HomeView> {
 class CategoryItem {
   String title;
   String imgSrc;
-  Widget route;
-  CategoryItem({required this.title, required this.imgSrc, required this.route});
+  CategoryItem({required this.title, required this.imgSrc});
 }
 
 List<CategoryItem> categoryItemList = [
-  CategoryItem(title: '지역별', imgSrc: 'asset/image/categoryRegion.png', route: SearchLocalView()),
-  CategoryItem(title: '역주변', imgSrc: 'asset/image/categorySubway.png', route: SearchSubwayView()),
-  CategoryItem(title: '맛집촌', imgSrc: 'asset/image/categoryTown.png', route: SearchTownView()),
+  CategoryItem(title: '지역별', imgSrc: 'asset/image/categoryRegion.png'),
+  CategoryItem(title: '역주변', imgSrc: 'asset/image/categorySubway.png'),
+  CategoryItem(title: '맛집촌', imgSrc: 'asset/image/categoryTown.png'),
 ];

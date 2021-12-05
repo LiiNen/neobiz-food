@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodie/collections/functions.dart';
-import 'package:foodie/mainNavView/searchView/searchCategoryView/searchPositionView/searchPositionCard.dart';
+import 'package:foodie/searchCategoryView/searchPositionView/searchPositionCard.dart';
 
 class SearchPositionListView extends StatefulWidget {
   @override
