@@ -35,6 +35,12 @@ class _HomeView extends State<HomeView> {
               SizedBox(height: 40),
               reviewBox(context: context, reward: '푸디 포인트를'),
               SizedBox(height: 34),
+              Container(
+                width: MediaQuery.of(context).size.width,
+                margin: EdgeInsets.symmetric(horizontal: 18),
+                child: Text('내 주변 맛집은?', style: textStyle(weight: 700, size: 19.0), textAlign: TextAlign.start,),
+              ),
+              SizedBox(height: 20),
               RecShopContainerList([1, 1, 1, 1, 1,]),
               SizedBox(height: 21),
               copyrightBox(),
