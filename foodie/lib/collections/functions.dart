@@ -59,3 +59,7 @@ String htmlTagRemover(String target) {
 }
 
 
+String areaString(int area1, int area2, int area3) {
+
+  return '';
+}

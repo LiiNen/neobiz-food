@@ -11,7 +11,7 @@ subTitleContainer({required String title, double topMargin=16}) {
   );
 }
 
-lineDivider({color: const Color(0xffe8e8e8)}) {
+lineDivider({color: const Color(0xffededed)}) {
   return Container(
     height: 1,
     decoration: BoxDecoration(

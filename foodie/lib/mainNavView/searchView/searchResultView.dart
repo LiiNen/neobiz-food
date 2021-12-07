@@ -6,6 +6,7 @@ import 'package:foodie/mainNavView/homeView/homeBannerContainer.dart';
 import 'package:foodie/restApi/presetRequestBody.dart';
 import 'package:foodie/restApi/searchLocalApi.dart';
 import 'package:foodie/restApi/searchTownApi.dart';
+import 'package:foodie/shopContainerView/shopListContainer.dart';
 import 'package:foodie/shopView/shopView.dart';
 
 class SearchResultView extends StatefulWidget {
@@ -60,24 +61,31 @@ class _SearchResultView extends State<SearchResultView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: DefaultAppBar(title: title, elevation: false),
       body: Container(
         width: MediaQuery.of(context).size.width,
         child: Column(
           children: [
-            hackTabBar(),
+            resultTabBar(),
+            lineDivider(),
             Expanded(
-              child: ListView(
-                shrinkWrap: true,
-                children: <Widget>[
-                  HomeBannerContainer(),
-                ] + (_searchItemList.length != 0 ? [
-                  recommendContainer(),
-                  SizedBox(height: 9),
-                  listContainer(),
-                ] : [
-                  // 맛집정보를 불러오는 중?
-                ])
+              child: SingleChildScrollView(
+                child: Container(
+                  color: Color(0xfffcfcfc),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: _searchItemList.length != 0 ? [
+                      recommendContainer(),
+                      SizedBox(height: 28),
+                      titleBox('리스트'),
+                      SizedBox(height: 5),
+                      ShopListContainer(shopObjectList: _searchItemList)
+                    ] : [
+                      // 맛집정보를 불러오는 중?
+                    ]
+                  )
+                )
               )
             )
           ]
@@ -86,9 +94,17 @@ class _SearchResultView extends State<SearchResultView> {
     );
   }
 
-  hackTabBar() {
+  titleBox(String title) {
     return Container(
-      height: 42,
+      width: MediaQuery.of(context).size.width,
+      margin: EdgeInsets.symmetric(horizontal: 18),
+      child: Text(title, style: textStyle(weight: 700, size: 18.0))
+    );
+  }
+
+  resultTabBar() {
+    return Container(
+      height: 78,
       color: Colors.white,
       margin: EdgeInsets.symmetric(horizontal: 18),
       child: Row(
@@ -97,7 +113,7 @@ class _SearchResultView extends State<SearchResultView> {
           Row(
             children: [
               tabBarColor('red'),
-              SizedBox(width: 16),
+              SizedBox(width: 8),
               tabBarColor('green'),
             ]
           ),
@@ -123,37 +139,29 @@ class _SearchResultView extends State<SearchResultView> {
           else if(color == 'green') _isRed = false;
         });
       },
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          Text(color == 'red' ? '레드리스트' : '그린리스트',
-            style: _selected ?
-              textStyle(color: Color(0xff8e8e8e), weight: 500, size: 15.0) :
-              textStyle(color: Color(0xffe0e0e0), weight: 500, size: 15.0)
-          ),
-          SizedBox(height: 4),
-          Container(
-            width: 69, height: 6,
-            decoration: BoxDecoration(
-              color: _selected ? Color(0xff8e8e8e) : Colors.white
-            )
-          )
-        ]
+      child: Container(
+        width: 96, height: 32,
+        decoration: BoxDecoration(
+          color: _selected ? serviceColor() : Colors.white,
+          borderRadius: BorderRadius.all(Radius.circular(4)),
+          border: Border.all(color: _selected ? serviceColor() : Color(0xffededed), width: 1)
+        ),
+        child: Center(child: Text(color == 'red' ? '레드리스트' : '그린리스트', style: _selected ?
+          textStyle(color: Colors.white, weight: 700, size: 14.0) :
+          textStyle(color: Color(0xff8e8e8e), weight: 500, size: 14.0)
+        ))
       )
     );
   }
 
   recommendContainer() {
     return Container(
-      decoration: BoxDecoration(
-        color: Colors.white
-      ),
       child: Container(
-        margin: EdgeInsets.symmetric(vertical: 10, horizontal: 18),
+        margin: EdgeInsets.symmetric(vertical: 22, horizontal: 18),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('추천맛집', style: textStyle(color: Color(0xff8e8e8e), weight: 500, size: 17.0)),
+            Text('추천맛집', style: textStyle(weight: 700, size: 18.0)),
             recommendColumn(2)
           ]
         )
@@ -211,64 +219,6 @@ class _SearchResultView extends State<SearchResultView> {
         )
       )
     ));
-  }
-
-  listContainer() {
-    List<Widget> listCardList = List<Widget>.generate(_searchItemList.length, (index) {
-      return listCard(index);
-    });
-    return Container(
-      decoration: BoxDecoration(
-          color: Colors.white
-      ),
-      child: Container(
-        margin: EdgeInsets.symmetric(vertical: 12, horizontal: 18),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('리스트', style: textStyle(color: Color(0xff8e8e8e), weight: 500, size: 17.0)),
-            SizedBox(height: 6),
-          ] + listCardList
-        )
-      )
-    );
-  }
-  listCard(int index) {
-    var _item = _searchItemList[index];
-    String _infoText = '${_item['kind']}';
-    if(_item['food'] != null) _infoText = _infoText + ' | ${_item['food']}';
-    if(_item['food_2nd'] != null) _infoText = _infoText + ' | ${_item['food_2nd']}';
-    return GestureDetector(
-      behavior: HitTestBehavior.translucent,
-      onTap: () {navigatorPush(context: context, widget: ShopView(shopNo: _item['no'], infoText: _infoText));},
-      child: Container(
-        margin: EdgeInsets.symmetric(vertical: 6),
-        width: MediaQuery.of(context).size.width,
-        height: 70,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(6)),
-          border: Border.all(color: Color(0xffededed), width: 1),
-          color: Colors.white
-        ),
-        child: Container(
-          margin: EdgeInsets.symmetric(horizontal: 10),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(_item['name'], style: textStyle(color: Color(0xff8e8e8e), weight: 500, size: 16.0)),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(_infoText, style: textStyle(color: Color(0xff8e8e8e), weight: 400, size: 13.0)),
-                  Container() // todo: 무슨 버튼
-                ],
-              )
-            ]
-          )
-        )
-      )
-    );
   }
 
   showFilter() {

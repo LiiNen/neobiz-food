@@ -32,7 +32,7 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
               child: Center(child: SvgPicture.asset('asset/svgIcon/icoBack.svg', width: 8, height: 16,))
             )
           ),
-          Text(title, style: textStyle(color: Colors.black, weight: 500, size: 16.0),),
+          Text(title, style: textStyle(color: Colors.black, weight: 700, size: 16.0),),
           Container(width: 16)
         ]
       ),
