@@ -5,10 +5,9 @@ import 'package:foodie/mainNavView/searchView/searchResultView.dart';
 import 'package:foodie/restApi/searchLocalApi.dart';
 
 List<String> localTitleList = [
-  '서울', '경기', '인천', '부산',
-  '대구', '대전', '광주', '울산',
-  '강원', '충북', '충남', '경북',
-  '경남', '전북', '전남', '제주'];
+  '서울', '경기', '인천', '부산', '대구',
+  '대전', '광주', '울산', '강원', '충북',
+  '충남', '경북', '경남', '전북', '전남', '제주'];
 List<String> localFullTitleList = [
   '서울특별시', '경기도', '인천광역시', '부산광역시',
   '대구광역시', '대전광역시', '광주광역시', '울산광역시',
@@ -22,6 +21,7 @@ class SearchLocalView extends StatefulWidget {
 class _SearchLocalView extends State<SearchLocalView> {
   var _selectedIndex;
   var _localRegionList = [];
+  bool _isExpanded = false;
 
   _getRegion() async {
     var temp = await searchLocal(doNum: _selectedIndex, siName: '', mode: 'region');
@@ -32,90 +32,168 @@ class _SearchLocalView extends State<SearchLocalView> {
 
   @override
   Widget build(BuildContext context) {
+    return Column(
+      children: [
+        localRegionContainer(),
+        Expanded(child: SingleChildScrollView(
+          child: localDetailContainer(),
+        ))
+      ]
+    );
+  }
+
+  localRegionContainer() {
     return Container(
-      margin: EdgeInsets.only(top: 11),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      width: MediaQuery.of(context).size.width,
+      padding: EdgeInsets.symmetric(horizontal: 20),
+      child: Column(
         children: [
-          localLeftItem(),
-          localRightItem()
+          Container(
+            margin: EdgeInsets.only(top: 18),
+            child: Column(
+              children: _isExpanded ? List.generate((localTitleList.length / 5).ceil() * 2 - 1, (index) {
+                if(index%2==1) {
+                  return SizedBox(height: 11);
+                }
+                return regionListRow((index/2).floor());
+              }) : [regionListRow(0)]
+            )
+          ),
+          bottomTapButton()
         ]
       )
     );
   }
 
-  localLeftItem() {
-    return Container(
-      margin: EdgeInsets.only(left: 18, right: 16),
-      width: 69,
-      child: ListView.separated(
-        shrinkWrap: true,
-        itemCount: localTitleList.length,
-        itemBuilder: (BuildContext context, int index) {
-          return GestureDetector(
-            behavior: HitTestBehavior.translucent,
-            onTap: () {
-              setState(() {
-                _selectedIndex = index;
-                _localRegionList = [];
-                _getRegion();
-              });
-            },
-            child: Container(
-              height: 50,
-              child: Center(
-                child: Container(
-                  height: 35,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(17.5)),
-                    color: _selectedIndex == index ? serviceColor() : Colors.transparent
-                  ),
-                  child: Center(
-                    child: Text(localTitleList[index], style: textStyle(color: _selectedIndex == index ? Colors.white : Color(0xff898989), weight: 500, size: 16.0))
-                  )
-                )
-              )
+  regionListRow(int startIndex) {
+    int _index = startIndex * 5;
+    return Row(
+      children: List.generate(9, (rowIndex) {
+        if(rowIndex%2==1) return SizedBox(width: 10);
+        else return regionSquareBox(_index + (rowIndex/2).floor());
+      })
+    );
+  }
+
+  regionSquareBox(int index) {
+    var _selected = _selectedIndex == index;
+    if(index >= localTitleList.length) {
+      return Expanded(
+        child: AspectRatio(
+          aspectRatio: 1.0,
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(4)),
+              boxShadow: [BoxShadow(
+                color: Color(0x45dbdbdb),
+                offset: Offset(3,3),
+                blurRadius: 5,
+                spreadRadius: 0
+              )] ,
+              color: Colors.white
             )
-          );
-        },
-        separatorBuilder: (BuildContext context, int index) => const Divider(height: 1),
+          )
+        )
+      );
+    }
+    else return Expanded(
+      child: AspectRatio(
+        aspectRatio: 1.0,
+        child: GestureDetector(
+          behavior: HitTestBehavior.translucent,
+          onTap: () {
+            _selectedIndex = index;
+            _localRegionList = [];
+            _getRegion();
+          },
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(4)),
+              boxShadow: [BoxShadow(
+                color: Color(0x45dbdbdb),
+                offset: Offset(3,3),
+                blurRadius: 5,
+                spreadRadius: 0
+              )] ,
+              color: _selected ? serviceColor() : Colors.white,
+            ),
+            child: Center(
+              child: Text(localTitleList[index], style: _selected ?
+                textStyle(color: Colors.white, weight: 700, size: 14.0) :
+                textStyle(weight: 500, size: 14.0)
+              ),
+            )
+          )
+        )
       )
     );
   }
-  localRightItem() {
-    return Expanded(
+
+  bottomTapButton() {
+    return GestureDetector(
+      behavior: HitTestBehavior.translucent,
+      onTap: () {
+        setState(() {
+          _isExpanded = !_isExpanded;
+        });
+      },
       child: Container(
-        margin: EdgeInsets.only(left: 13, right: 18),
-        child: ListView.separated(
-          shrinkWrap: true,
-          itemCount: _localRegionList.length,
-          itemBuilder: (BuildContext context, int index) {
-            return GestureDetector(
-              behavior: HitTestBehavior.translucent,
-              onTap: () {
-                navigatorPush(
-                  context: context,
-                  widget: SearchResultView(
-                    title: '${localFullTitleList[_selectedIndex]} ${_localRegionList[index]['name']}',
-                    searchType: 'local',
-                    requestItem: {'doNum': _selectedIndex, 'siName': _localRegionList[index]['name']},
-                  )
-                );
-              },
-              child: Container(
-                height: 50,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(_localRegionList[index]['name'], style: textStyle(color: Color(0xff898989), weight: 500, size: 16.0)),
-                    Text(_localRegionList[index]['count'].toString(), style: textStyle(color: Color(0xff898989), weight: 500, size: 16.0))
-                  ]
-                )
-              )
-            );
-          },
-          separatorBuilder: (BuildContext context, int index) => const Divider(height: 1),
+        width: MediaQuery.of(context).size.width,
+        margin: EdgeInsets.only(top: 21, bottom: 10),
+        child: Center(
+          child: Container(
+            width: 33, height: 5,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(4)),
+              color: Color(0xffe0e0e0)
+            )
+          )
         )
+      )
+    );
+  }
+
+  localDetailContainer() {
+    return Container(
+      child: Column(
+        children: List.generate(_localRegionList.length, (index) {
+          return localDetailBox(index);
+        })
+      )
+    );
+  }
+
+  localDetailBox(index) {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      child: Column(
+        children: [
+          lineDivider(),
+          GestureDetector(
+            behavior: HitTestBehavior.translucent,
+            onTap: () {
+              navigatorPush(
+                context: context,
+                widget: SearchResultView(
+                  title: '${localFullTitleList[_selectedIndex]} ${_localRegionList[index]['name']}',
+                  searchType: 'local',
+                  requestItem: {'doNum': _selectedIndex, 'siName': _localRegionList[index]['name']},
+                )
+              );
+            },
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              margin: EdgeInsets.symmetric(horizontal: 20, vertical: 17),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(_localRegionList[index]['name'], style: textStyle(weight: 500, size: 15.0)),
+                  Text(_localRegionList[index]['count'].toString(), style: textStyle(color: Color(0xff8e8e8e), weight: 400, size: 15.0))
+                ]
+              )
+            )
+          )
+        ]
       )
     );
   }

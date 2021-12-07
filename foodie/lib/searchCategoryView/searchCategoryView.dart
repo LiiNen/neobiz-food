@@ -40,9 +40,9 @@ class _SearchCategoryView extends State<SearchCategoryView> with SingleTickerPro
         child: Column(
           children: [
             SearchCategoryTabBar(controller: _categoryTabController),
-            Expanded(child: SingleChildScrollView(
+            Flexible(
               child: searchCategoryTabBarView(controller: _categoryTabController),
-            ))
+            )
           ]
         )
       )

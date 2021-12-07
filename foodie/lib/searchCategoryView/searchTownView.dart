@@ -27,21 +27,23 @@ class _SearchTownView extends State<SearchTownView> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 18),
-      child: Column(
-        children:
-        List.generate((_townList.length/2).ceil() + 2, (index) {
-          if(index == 0) return SizedBox(height: 26);
-          else if(index == (_townList.length/2).ceil() + 1) return SizedBox(height: 18);
-          return Row(
-            children: [
-              _townCard((index-1)*2),
-              SizedBox(width: 16),
-              _townCard((index-1)*2+1),
-            ]
-          );
-        })
+    return SingleChildScrollView(
+      child: Container(
+        margin: EdgeInsets.symmetric(horizontal: 18),
+        child: Column(
+          children:
+          List.generate((_townList.length/2).ceil() + 2, (index) {
+            if(index == 0) return SizedBox(height: 26);
+            else if(index == (_townList.length/2).ceil() + 1) return SizedBox(height: 18);
+            return Row(
+              children: [
+                _townCard((index-1)*2),
+                SizedBox(width: 16),
+                _townCard((index-1)*2+1),
+              ]
+            );
+          })
+        )
       )
     );
   }
