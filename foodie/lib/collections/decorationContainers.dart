@@ -126,3 +126,25 @@ reviewBox({required BuildContext context, required String reward}) {
     )
   );
 }
+
+bottomTapButton(BuildContext context, dynamic callback) {
+  return GestureDetector(
+    behavior: HitTestBehavior.translucent,
+    onTap: () {
+      callback();
+    },
+    child: Container(
+      width: MediaQuery.of(context).size.width,
+      margin: EdgeInsets.only(top: 21, bottom: 10),
+      child: Center(
+        child: Container(
+          width: 33, height: 5,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(4)),
+            color: Color(0xffe0e0e0)
+          )
+        )
+      )
+    )
+  );
+}

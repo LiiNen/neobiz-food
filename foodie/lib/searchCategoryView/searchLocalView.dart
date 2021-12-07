@@ -55,27 +55,33 @@ class _SearchLocalView extends State<SearchLocalView> {
                 if(index%2==1) {
                   return SizedBox(height: 11);
                 }
-                return regionListRow((index/2).floor());
-              }) : [regionListRow(0)]
+                return localListRow((index/2).floor());
+              }) : [localListRow(0)]
             )
           ),
-          bottomTapButton()
+          bottomTapButton(context, onTapExpanded)
         ]
       )
     );
   }
 
-  regionListRow(int startIndex) {
+  onTapExpanded() {
+    setState(() {
+      _isExpanded = !_isExpanded;
+    });
+  }
+
+  localListRow(int startIndex) {
     int _index = startIndex * 5;
     return Row(
       children: List.generate(9, (rowIndex) {
         if(rowIndex%2==1) return SizedBox(width: 10);
-        else return regionSquareBox(_index + (rowIndex/2).floor());
+        else return localSquareBox(_index + (rowIndex/2).floor());
       })
     );
   }
 
-  regionSquareBox(int index) {
+  localSquareBox(int index) {
     var _selected = _selectedIndex == index;
     if(index >= localTitleList.length) {
       return Expanded(
@@ -122,30 +128,6 @@ class _SearchLocalView extends State<SearchLocalView> {
                 textStyle(color: Colors.white, weight: 700, size: 14.0) :
                 textStyle(weight: 500, size: 14.0)
               ),
-            )
-          )
-        )
-      )
-    );
-  }
-
-  bottomTapButton() {
-    return GestureDetector(
-      behavior: HitTestBehavior.translucent,
-      onTap: () {
-        setState(() {
-          _isExpanded = !_isExpanded;
-        });
-      },
-      child: Container(
-        width: MediaQuery.of(context).size.width,
-        margin: EdgeInsets.only(top: 21, bottom: 10),
-        child: Center(
-          child: Container(
-            width: 33, height: 5,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(4)),
-              color: Color(0xffe0e0e0)
             )
           )
         )

@@ -23,6 +23,7 @@ class _HomeBannerContainer extends State<HomeBannerContainer> {
     return Container(
       width: MediaQuery.of(context).size.width,
       height: 183,
+      //todo : fix swiper issue
       child: Swiper(
         pagination: swiperPagination(),
         autoplay: true,
