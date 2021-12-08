@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:foodie/collections/decorationContainers.dart';
 import 'package:foodie/collections/functions.dart';
 import 'package:foodie/collections/statelessAppBar.dart';
+import 'package:foodie/mainNavView/searchView/searchResultView.dart';
 import 'package:foodie/restApi/searchSubwayApi.dart';
 
 Map subwayQuery({int areaNo=-1, int lineNo=-1, int stationNo=-1, int curPage=-1}) {
@@ -194,17 +195,18 @@ class _SearchSubwayView extends State<SearchSubwayView> {
       child: Column(
         children: List.generate(_subwayLineList.length * 2, (index) {
           if(index%2==1) return lineDivider();
-          else return GestureDetector(
+          var itemIndex = (index/2).floor();
+          return GestureDetector(
             behavior: HitTestBehavior.translucent,
             onTap: () {
-              _selectedLine = _subwayLineList[index]['no'];
+              _selectedLine = _subwayLineList[itemIndex]['no'];
               _getSubwayStation();
             },
             child: Container(
               margin: EdgeInsets.symmetric(vertical: 17),
               height: 22,
               child: Center(
-                child: Text(_subwayLineList[(index/2).floor()]['name'], style: textStyle(weight: 500, size: 15.0))
+                child: Text(_subwayLineList[itemIndex]['name'], style: textStyle(weight: 500, size: 15.0))
               )
             )
           );
@@ -225,7 +227,7 @@ class _SearchSubwayView extends State<SearchSubwayView> {
             behavior: HitTestBehavior.translucent,
             onTap: () {
               _selectedStation = _subwayStationList[itemIndex]['no'];
-              //todo: push navigator
+              navigatorPush(context: context, widget: SearchResultView(title: '${_subwayStationList[itemIndex]['name']}역', searchType: 'subway', requestItem: subwayQuery(areaNo: _selectedRegion, lineNo: _selectedLine, stationNo: _selectedStation)));
             },
             child: Container(
               margin: EdgeInsets.symmetric(vertical: 17),

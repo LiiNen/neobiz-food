@@ -6,7 +6,7 @@ searchSubway({required Map subwayQueryData, required String mode, Map? presetBod
   String query = '?'
       'area_no=${subwayQueryData['areaNo']}'
       '&line=${subwayQueryData['lineNo']}'
-      '&station=${subwayQueryData['stationNo']}'
+      '&station=${subwayQueryData['stationNo']}';
       '&cur_page=1';
   var requestBody = Map();
   if(presetBody != null) requestBody = presetBody;
@@ -30,6 +30,9 @@ searchSubwayApi({required String query, required Map requestBody}) async {
       else if(responseBody['linelist'] != null) return responseBody['linelist'];
       else if(responseBody['stationlist'] != null) return responseBody['stationlist'];
       else print('what body?');
+    }
+    else if(_type == 'shop') {
+      print('??');
     }
     else if(_type == null) {
       return responseBody['unpaid_list'];

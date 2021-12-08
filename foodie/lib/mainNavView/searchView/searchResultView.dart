@@ -5,6 +5,7 @@ import 'package:foodie/collections/statelessAppBar.dart';
 import 'package:foodie/mainNavView/homeView/homeBannerContainer.dart';
 import 'package:foodie/restApi/presetRequestBody.dart';
 import 'package:foodie/restApi/searchLocalApi.dart';
+import 'package:foodie/restApi/searchSubwayApi.dart';
 import 'package:foodie/restApi/searchTownApi.dart';
 import 'package:foodie/shopContainerView/shopListContainer.dart';
 import 'package:foodie/shopView/shopView.dart';
@@ -38,6 +39,7 @@ class _SearchResultView extends State<SearchResultView> {
         _getLocalSearchList();
         break;
       case 'subway':
+        _getSubwaySearchList();
         break;
       case 'town':
         _getTownSearchList();
@@ -48,6 +50,13 @@ class _SearchResultView extends State<SearchResultView> {
   _getLocalSearchList() async {
     var temp = await searchLocal(doNum: requestItem['doNum'], siName: requestItem['siName'], mode: 'shop', presetBody: presetSearchRequest());
     setState(() {
+      _searchItemList = temp;
+    });
+  }
+  _getSubwaySearchList() async {
+    var temp = await searchSubway(subwayQueryData: requestItem, mode: 'shop', presetBody: presetSearchRequest());
+    setState(() {
+      print(temp);
       _searchItemList = temp;
     });
   }
@@ -142,9 +151,9 @@ class _SearchResultView extends State<SearchResultView> {
       child: Container(
         width: 96, height: 32,
         decoration: BoxDecoration(
-          color: _selected ? serviceColor() : Colors.white,
+          color: _selected ? color=='red' ? serviceColor() : Color(0xff66af6e) : Colors.white,
           borderRadius: BorderRadius.all(Radius.circular(4)),
-          border: Border.all(color: _selected ? serviceColor() : Color(0xffededed), width: 1)
+          border: Border.all(color: _selected ? color=='red' ? serviceColor() : Color(0xff66af6e) : Color(0xffededed), width: 1)
         ),
         child: Center(child: Text(color == 'red' ? '레드리스트' : '그린리스트', style: _selected ?
           textStyle(color: Colors.white, weight: 700, size: 14.0) :
@@ -154,6 +163,7 @@ class _SearchResultView extends State<SearchResultView> {
     );
   }
 
+  //todo: hack rec column
   recommendContainer() {
     return Container(
       child: Container(
