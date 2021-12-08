@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodie/collections/decorationContainers.dart';
 import 'package:foodie/collections/functions.dart';
 import 'shopViewTabInfo.dart';
 import 'shopViewTabReview.dart';
@@ -15,7 +16,7 @@ shopTabBarView({required TabController controller, required dynamic shopJson}) {
 }
 
 class ShopViewTabBar extends StatelessWidget implements PreferredSizeWidget {
-  ShopViewTabBar({required this.controller}) : preferredSize = Size.fromHeight(58.0);
+  ShopViewTabBar({required this.controller}) : preferredSize = Size.fromHeight(55.0);
   @override
   final Size preferredSize;
   final TabController controller;
@@ -30,12 +31,12 @@ class ShopViewTabBar extends StatelessWidget implements PreferredSizeWidget {
       child: TabBar(
         controller: controller,
         indicator: UnderlineTabIndicator(
-          borderSide: BorderSide(width: 7, color: Color(0xff8e8e8e)),
+          borderSide: BorderSide(width: 4, color: serviceColor()),
           insets: EdgeInsets.symmetric(horizontal: 30),
         ),
-        labelColor: Color(0xff8e8e8e), unselectedLabelColor: Color(0xffe0e0e0),
-        labelStyle: textStyle(weight: 500, size: 16.0),
-        unselectedLabelStyle: textStyle(weight: 500, size: 16.0),
+        labelColor: serviceColor(), unselectedLabelColor: Color(0xff8e8e8e),
+        labelStyle: textStyle(color: serviceColor(), weight: 700, size: 16.0),
+        unselectedLabelStyle: textStyle(color: Color(0xff8e8e8e), weight: 500, size: 16.0),
         tabs: [
           Tab(text: '정보'),
           Tab(text: '리뷰'),

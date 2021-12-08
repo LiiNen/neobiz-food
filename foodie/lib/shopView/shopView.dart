@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:foodie/collections/decorationContainers.dart';
+import 'package:foodie/collections/functions.dart';
 import 'package:foodie/restApi/detailInfoApi.dart';
 import 'package:foodie/shopView/shopViewAppBar.dart';
 
@@ -61,7 +62,9 @@ class _ShopView extends State<ShopView> with SingleTickerProviderStateMixin {
         children: [
           shopPhotoSwiper(),
           infoBox(),
-          SizedBox(height: 8),
+          lineDivider(),
+          positionBox(),
+          SizedBox(height: 12),
           exportBox(),
           ShopViewTabBar(controller: controller),
           shopTabBarView(controller: controller, shopJson: shopJson)
@@ -98,33 +101,89 @@ class _ShopView extends State<ShopView> with SingleTickerProviderStateMixin {
     return Container(
       color: Colors.white,
       child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 18, vertical: 16),
+        margin: EdgeInsets.symmetric(vertical: 24),
+        padding: EdgeInsets.only(left: 18, right: 13),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(shopJson['name']),
-            SizedBox(height: 3),
-            Text(infoText),
-            SizedBox(height: 21),
-            Text('푸디로그 평점(AAA) 오감 평점(5점)'),
-            SizedBox(height: 21),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(shopJson['name'], style: textStyle(weight: 500, size: 18.0)),
+                Image.asset('asset/image/star3.png', height: 30),
+              ]
+            ),
+            Text(infoText, style: textStyle(color: Color(0xff8e8e8e), weight: 500, size: 15.0)),
+            SizedBox(height: 12),
+            Row(
+              children: [
+                Text('전문가 평점', style: textStyle(color: Color(0xff4d4d4d), weight: 400, size: 15.0)),
+                SizedBox(width: 8),
+                coloredBox('AAA'),
+                SizedBox(width: 22),
+                Text('방문자 평점', style: textStyle(color: Color(0xff4d4d4d), weight: 400, size: 15.0)),
+                SizedBox(width: 8),
+                coloredBox('5.0'),
+              ]
+            ),
           ]
         )
       )
     );
   }
 
+  coloredBox(text) {
+    return Container(
+      width: 46,
+      height: 23,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(3)),
+        color: Color(0xffff851c)
+      ),
+      child: Center(
+        child: Text(text, style: textStyle(color: Colors.white, weight: 400, size: 15.0))
+      )
+    );
+  }
+
+  positionBox() {
+    return Container(
+      color: Color(0xfffcfcfc),
+      width: MediaQuery.of(context).size.width,
+      padding: EdgeInsets.symmetric(horizontal: 18, vertical: 12),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('주소', style: textStyle(color: Color(0xff4d4d4d), weight: 500, size: 15.0)),
+          SizedBox(height: 2),
+          Text(shopJson['address'], style: textStyle(color: Color(0xff393939), weight: 400, size: 14.0)),
+          //todo : 도로명주소????
+          SizedBox(height: 9),
+          Text('전화번호', style: textStyle(color: Color(0xff4d4d4d), weight: 500, size: 15.0)),
+          SizedBox(height: 2),
+          Text(shopJson['phone'], style: textStyle(color: Color(0xff393939), weight: 400, size: 14.0)),
+        ]
+      )
+    );
+  }
+
   exportBox() {
     return Container(
-      color: Colors.white,
+      color: Color(0xfffcfcfc),
       child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 18, vertical: 31),
+        width: MediaQuery.of(context).size.width,
+        padding: EdgeInsets.symmetric(vertical: 12),
         child: Column(
           children: [
-            // todo : export items
+            fullWidthShadowButton('전화걸기', callPhone)
           ]
         )
       )
     );
+  }
+
+  callPhone() {
+    print('todo: phone call');
   }
 }

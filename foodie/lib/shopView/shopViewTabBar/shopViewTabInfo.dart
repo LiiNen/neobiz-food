@@ -13,11 +13,11 @@ class _ShopViewTabInfo extends State<ShopViewTabInfo> {
   dynamic shopJson;
   _ShopViewTabInfo(this.shopJson);
 
-  List<String> _addressList = ['주소', '전화번호', '찾아오는 길'];
-  List<String> _addressIndexList = ['address', 'phone', 'search_road'];
+  List<String> _firstList = ['영업시간', '휴무일', '추천메뉴', '예산'];
+  List<String> _firstIndexList = ['time', 'rest_day', 'rec_menu', 'pre_cost'];
 
-  List<String> _elseList = ['영업시간', '휴무일', '메뉴', '추천메뉴', '예산', '홈페이지', '주차장'];
-  List<String> _elseIndexList = ['time', 'rest_day', 'menu', 'rec_menu', 'pre_cost', 'homepage', 'park'];
+  List<String> _secondList = ['홈페이지', '주차장'];
+  List<String> _secondIndexList = ['homepage', 'park'];
 
   @override
   Widget build(BuildContext context) {
@@ -27,11 +27,11 @@ class _ShopViewTabInfo extends State<ShopViewTabInfo> {
         children: [
           detailBox(descriptionContainer()),
           spaceDivider(),
-          detailBox(detailContainer(_addressList, _addressIndexList)),
+          detailBox(detailContainer(_firstList, _firstIndexList)),
           spaceDivider(),
-          detailBox(detailContainer(_elseList, _elseIndexList)),
+          detailBox(detailContainer(_secondList, _secondIndexList)),
           spaceDivider(),
-
+          detailMenuBox()
         ]
       )
     );
@@ -45,6 +45,7 @@ class _ShopViewTabInfo extends State<ShopViewTabInfo> {
     );
   }
 
+  //todo: fixing style
   descriptionContainer() {
     return Html(
       data: shopJson['explain']
@@ -56,9 +57,9 @@ class _ShopViewTabInfo extends State<ShopViewTabInfo> {
     List<Widget> _childrenList = [];
     for(var i = 0; i < nameList.length; i++) {
       if(shopJson[indexList[i]] != '') { // return data가 없는 경우
-        _childrenList.add(Text(nameList[i], style: textStyle(weight: 500, size: 15.0),));
+        _childrenList.add(Text(nameList[i], style: textStyle(color: Color(0xff4d4d4d), weight: 500, size: 15.0),));
         _childrenList.add(SizedBox(height: 2));
-        _childrenList.add(Text(shopJson[indexList[i]], style: textStyle(weight: 400, size: 14.0),));
+        _childrenList.add(Text(shopJson[indexList[i]], style: textStyle(color: Color(0xff393939), weight: 400, size: 14.0),));
 
         if(i+1 != nameList.length) {
           _childrenList.add(SizedBox(height: 12));
@@ -70,5 +71,50 @@ class _ShopViewTabInfo extends State<ShopViewTabInfo> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: _childrenList
     );
+  }
+
+  detailMenuBox() {
+    return Container(
+      margin: EdgeInsets.only(top: 22, bottom: 60),
+      child: Column(
+        children: [
+          fullWidthShadowButton('오류신고', bugReport),
+          ownerButton()
+        ]
+      )
+    );
+  }
+
+  ownerButton() {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 18, vertical: 26),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(6)),
+        color: Color(0xffffe489)
+      ),
+      child: Container(
+        margin: EdgeInsets.symmetric(horizontal: 18),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text('식당주이신가요?', style: textStyle(color: Color(0xffff9933), weight: 700, size: 13.0)),
+            GestureDetector(
+              behavior: HitTestBehavior.translucent,
+              onTap: () {
+                print('todo 직접관리');
+              },
+              child: Container(
+                height: 47,
+                child: Center(child: Text('직접관리', style: textStyle(color: Color(0xffff9933), weight: 500, size: 12.0))),
+              )
+            )
+          ]
+        )
+      )
+    );
+  }
+
+  bugReport() {
+    print('bug report');
   }
 }

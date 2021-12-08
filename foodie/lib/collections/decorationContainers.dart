@@ -24,10 +24,13 @@ lineDivider({color: const Color(0xffededed)}) {
 }
 
 spaceDivider({color: const Color(0xffededed)}) {
-  return Container(
-    height: 8,
-    decoration: BoxDecoration(
-      color: color
+  return Opacity(
+    opacity : 0.34867000579833984,
+    child: Container(
+      height: 8,
+      decoration: BoxDecoration(
+        color: color
+      )
     )
   );
 }
@@ -143,6 +146,35 @@ bottomTapButton(BuildContext context, dynamic callback) {
             borderRadius: BorderRadius.all(Radius.circular(4)),
             color: Color(0xffe0e0e0)
           )
+        )
+      )
+    )
+  );
+}
+
+fullWidthShadowButton(String title, dynamic onTap) {
+  return Container(
+    margin: EdgeInsets.symmetric(horizontal: 18),
+    child: GestureDetector(
+      behavior: HitTestBehavior.translucent,
+      onTap: () {
+        onTap();
+      },
+      child: Container(
+        height: 56,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(4)),
+          border: Border.all(color: Color(0xffededed), width: 1),
+          boxShadow: [BoxShadow(
+            color: Color(0x219b9b9b),
+            offset: Offset(0,3),
+            blurRadius: 6,
+            spreadRadius: 0
+          )] ,
+          color: Colors.white
+        ),
+        child: Center(
+          child: Text(title, style: textStyle(weight: 500, size: 14.0)),
         )
       )
     )
