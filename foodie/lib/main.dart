@@ -51,6 +51,7 @@ class _SplashView extends State<SplashView> {
 
   @override
   Widget build(BuildContext context) {
+    maxWidth = MediaQuery.of(context).size.width;
     return WillPopScope(
       onWillPop: () => showExitDialog(context),
       child: Scaffold(

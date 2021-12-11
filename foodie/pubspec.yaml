@@ -60,6 +60,7 @@ flutter:
   assets:
     - asset/svgIcon/
     - asset/image/
+    - asset/image/review/
     - .env
 
   # An image asset can refer to one or more resolution-specific "variants", see

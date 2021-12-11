@@ -52,12 +52,12 @@ serviceColor() {
 
 bottomNavigationButton({required title, required action}) {
   return Padding(
-    padding: EdgeInsets.all(0.0),
+    padding: EdgeInsets.only(bottom: 20),
     child: fullWidthButton(title: title, action: action),
   );
 }
 
-fullWidthButton({required title, required action, double height=58}){
+fullWidthButton({required title, required action, double height=70}){
   return GestureDetector(
     onTap: () {action();},
     child: Container(
@@ -67,12 +67,12 @@ fullWidthButton({required title, required action, double height=58}){
         border: Border.all(
           color: serviceColor()
         ),
-        borderRadius: BorderRadius.all(
-          Radius.circular(4),
-        ),
+        // borderRadius: BorderRadius.all(
+        //   Radius.circular(4),
+        // ),
         color: serviceColor(),
       ),
-      child: Center(child: Text(title, style: textStyle(color: Colors.white, weight: 700, size: 16.0)))
+      child: Center(child: Text(title, style: textStyle(color: Colors.white, weight: 700, size: 15.0)))
     )
   );
 }
