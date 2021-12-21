@@ -164,28 +164,34 @@ class _SearchSubwayView extends State<SearchSubwayView> {
   }
 
   subwayDetailContainer() {
-    return Expanded(child: Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        SingleChildScrollView(
-          child: Container(
+    return Expanded(child:
+      Stack(
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(width: 114),
+              Expanded(child: SingleChildScrollView(
+                child: subwayStationContainer()
+              ))
+            ]
+          ),
+          Container(
             width: 114,
             decoration: BoxDecoration(
-              // boxShadow: [BoxShadow(
-              //   color: const Color(0x19000000),
-              //   offset: Offset(0,3),
-              //   blurRadius: 6,
-              //   spreadRadius: 0
-              // )] ,
+              boxShadow: [BoxShadow(
+                color: const Color(0x19000000),
+                offset: Offset(0, 0),
+                blurRadius: 6,
+                spreadRadius: 0
+              )] ,
               color: const Color(0xffffffff)
             ),
-            child: subwayLineContainer()
-          )
-        ),
-        Expanded(child: SingleChildScrollView(
-          child: subwayStationContainer()
-        ))
-      ]
+            child: SingleChildScrollView(
+              child: subwayLineContainer()
+            )
+          ),
+        ]
     ));
   }
 
@@ -193,7 +199,7 @@ class _SearchSubwayView extends State<SearchSubwayView> {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 7.5),
       child: Column(
-        children: List.generate(_subwayLineList.length * 2, (index) {
+        children: List.generate(_subwayLineList.length == 0 ? 0 : _subwayLineList.length * 2 - 1, (index) {
           if(index%2==1) return lineDivider();
           var itemIndex = (index/2).floor();
           return GestureDetector(
@@ -231,6 +237,7 @@ class _SearchSubwayView extends State<SearchSubwayView> {
             },
             child: Container(
               margin: EdgeInsets.symmetric(vertical: 17),
+              padding: EdgeInsets.only(left: 11, right: 7),
               height: 22,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

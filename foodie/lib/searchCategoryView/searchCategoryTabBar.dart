@@ -36,6 +36,7 @@ class SearchCategoryTabBar extends StatelessWidget implements PreferredSizeWidge
       child: TabBar(
         controller: controller,
         indicator: UnderlineTabIndicator(
+          insets: EdgeInsets.symmetric(horizontal: 30),
           borderSide: BorderSide(width: 4.0, color: serviceColor()),
         ),
         labelColor: serviceColor(),

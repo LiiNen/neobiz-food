@@ -29,11 +29,10 @@ class _SearchTownView extends State<SearchTownView> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 18),
+        margin: EdgeInsets.symmetric(horizontal: 18, vertical: 16),
         child: Column(
-          children:
-          List.generate((_townList.length/2).ceil() + 2, (index) {
-            if(index == 0) return SizedBox(height: 26);
+          children: List.generate((_townList.length/2).ceil() + 2, (index) {
+            if(index == 0) return SizedBox(height: 10);
             else if(index == (_townList.length/2).ceil() + 1) return SizedBox(height: 18);
             return Row(
               children: [
@@ -84,7 +83,7 @@ class _SearchTownView extends State<SearchTownView> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(_townList[index]['name'], style: textStyle(color: Colors.black, weight: 500, size: 14.0)),
-                  SizedBox(width: 3),
+                  SizedBox(width: 4),
                   Text(_townList[index]['count'].toString(), style: textStyle(color: Color(0xffc4c4c4), weight: 700, size: 14.0))
                 ]
               )
