@@ -32,13 +32,28 @@ class _MainNavView extends State<MainNavView> {
             });
           },
           items: [
-            BottomNavigationBarItem(label: '홈', icon: Icon(Icons.home)),
-            BottomNavigationBarItem(label: '검색', icon: Icon(Icons.search)),
-            BottomNavigationBarItem(label: '찜', icon: Icon(Icons.favorite)),
-            BottomNavigationBarItem(label: 'MY', icon: Icon(Icons.person_rounded)),
-            BottomNavigationBarItem(label: '설정', icon: Icon(Icons.settings_rounded))
+            BottomNavigationBarItem(label: '홈', icon: Container(
+              margin: EdgeInsets.only(bottom: 6, top: 6),
+              child: _selectedIndex == 0 ? Image.asset('asset/image/navHomeSelect.png', width: 23.5) : Image.asset('asset/image/navHomeUnselect.png', width: 23.5))
+            ),
+            BottomNavigationBarItem(label: '검색', icon: Container(
+              margin: EdgeInsets.only(bottom: 6, top: 6),
+              child: _selectedIndex == 1 ? Image.asset('asset/image/navHomeSelect.png', width: 23.5) : Image.asset('asset/image/navHomeUnselect.png', width: 23.5))
+            ),
+            BottomNavigationBarItem(label: '내주변', icon: Container(
+              margin: EdgeInsets.only(bottom: 6, top: 6),
+              child: _selectedIndex == 2 ? Image.asset('asset/image/navLocationSelect.png', width: 20.8) : Image.asset('asset/image/navLocationUnselect.png', width: 20.8))
+            ),
+            BottomNavigationBarItem(label: 'MY', icon: Container(
+              margin: EdgeInsets.only(bottom: 6, top: 6),
+              child: _selectedIndex == 3 ? Image.asset('asset/image/navUserUnselect.png', width: 20) : Image.asset('asset/image/navUserSelect.png', width: 20))
+            ),
+            BottomNavigationBarItem(label: '찜', icon: Container(
+              margin: EdgeInsets.only(bottom: 6, top: 6),
+              child: _selectedIndex == 4 ? Image.asset('asset/image/navFavoriteUnselect.png', width: 16.5) : Image.asset('asset/image/navFavoriteUnselect.png', width: 16.5))
+            )
           ],
-          selectedItemColor: Colors.black,
+          selectedItemColor: Color(0xffff851c),
         ),
         body: Center(
           child: _mainNavItemView.elementAt(_selectedIndex),
@@ -50,8 +65,8 @@ class _MainNavView extends State<MainNavView> {
   List<Widget> _mainNavItemView = <Widget>[
     HomeView(),
     SearchView(),
-    FavoriteView(),
+    SettingView(), // todo : location tab
     UserView(),
-    SettingView(),
+    FavoriteView(),
   ];
 }
