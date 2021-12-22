@@ -32,16 +32,60 @@ class _UserView extends State<UserView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: DefaultAppBar(title: 'MY'),
-      body: Container(
-        margin: EdgeInsets.symmetric(horizontal: 18),
-        child: ListView(
-          shrinkWrap: true,
-          children: <Widget>[
-            subTitleContainer(title: '회원정보'),
-            SizedBox(height: 60),
-          ] + userTextFieldBuilder()
+      backgroundColor: Color(0xfffcfcfc),
+      appBar: DefaultAppBar(title: 'MY', elevation: false),
+      body: SingleChildScrollView(
+        child: Container(
+          width: MediaQuery.of(context).size.width,
+          child: Container(
+            margin: EdgeInsets.symmetric(vertical: 26),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                titleColumn(),
+                spaceDivider(),
+                infoColumn(),
+              ]
+            )
+          )
         )
+      )
+    );
+  }
+
+  titleColumn() {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 18),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          subTitleContainer(title: '회원정보'),
+          SizedBox(height: 18),
+          modifyInfoBox(context: context, callback: () {
+            //todo route
+          }),
+          SizedBox(height: 29),
+        ]
+      )
+    );
+  }
+
+  infoColumn() {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 18),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(height: 20),
+          Column(
+            children: userTextFieldBuilder()
+          ),
+          SizedBox(height: 30),
+          Align(
+            alignment: Alignment.centerRight,
+            child: withdrawalButton(),
+          )
+        ]
       )
     );
   }
@@ -51,6 +95,68 @@ class _UserView extends State<UserView> {
       return userTextField(title: e.category, currentText: e.value, enabled: false);
     }).toList();
   }
+
+  withdrawalButton() {
+    return GestureDetector(
+      behavior: HitTestBehavior.translucent,
+      onTap: () {
+        // todo: withdrawal api
+      },
+      child: Container(
+        width: 88, height: 33,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(4)),
+          border: Border.all(color: const Color(0xffededed), width: 1),
+          boxShadow: [BoxShadow(
+            color: const Color(0x4ebababa),
+            offset: Offset(0,3),
+            blurRadius: 6,
+            spreadRadius: 0
+          )] ,
+          color: Colors.white
+        ),
+        child: Center(
+          child: Text('회원탈퇴', style: textStyle(weight: 500, size: 13.0))
+        )
+      )
+    );
+  }
+}
+
+modifyInfoBox({required BuildContext context, required callback}) {
+  return Container(
+    width: MediaQuery.of(context).size.width,
+    height: 47,
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.all(Radius.circular(6)),
+      color: Color(0xffffe489)
+    ),
+    child: Container(
+      margin: EdgeInsets.symmetric(horizontal: 18),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text('회원정보를 수정하고 싶으신가요?', style: textStyle(color: Color(0xffff9933), weight: 500, size: 13.0)),
+          GestureDetector(
+            behavior: HitTestBehavior.translucent,
+            onTap: () {
+              callback();
+            },
+            child: Container(
+              height: 40,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // todo: icon
+                  Text('수정하기', style: textStyle(color: Color(0xffff9933), weight: 500, size: 12.0))
+                ]
+              )
+            )
+          )
+        ]
+      )
+    )
+  );
 }
 
 Widget userTextField({required String title, required String currentText, TextEditingController? userController, bool enabled=true}) {
@@ -63,8 +169,10 @@ Widget userTextField({required String title, required String currentText, TextEd
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(title, style: textStyle(weight: 500, size: 16.0)),
-              SizedBox(width: 10),
+              Container(
+                width: 96,
+                child: Text(title, style: textStyle(weight: 500, size: 15.0)),
+              ),
               Expanded(child: TextField(
                 enabled: enabled,
                 controller: userController ?? TextEditingController(),
@@ -73,7 +181,7 @@ Widget userTextField({required String title, required String currentText, TextEd
                   hintText: currentText,
                   hintStyle: enabled ?
                     textStyle(color: Colors.grey, weight: 500, size: 16.0) :
-                    textStyle(color: Colors.black, weight: 500, size: 16.0)
+                    textStyle(color: Color(0xff8e8e8e), weight: 400, size: 15.0)
                 )
               ))
             ],

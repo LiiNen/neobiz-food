@@ -20,17 +20,15 @@ class _FindEmailView extends State<FindEmailView> {
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
         backgroundColor: Colors.white,
-        resizeToAvoidBottomInset: true,
-        appBar: DefaultAppBar(title: '회원정보 찾기'),
-        body: SingleChildScrollView(
-          child: Container(
-            margin: EdgeInsets.symmetric(horizontal: 18),
-            child: Column(
-              children: [
-                fullWidthTextField('이름', nameController),
-                fullWidthTextField('이메일', emailController),
-              ]
-            )
+        appBar: DefaultAppBar(title: '비밀번호 찾기', elevation: true,),
+        body: Container(
+          margin: EdgeInsets.symmetric(horizontal: 18),
+          child: Column(
+            children: [
+              SizedBox(height: 34),
+              fullWidthTextField('이름', nameController),
+              fullWidthTextField('이메일', emailController),
+            ]
           )
         ),
         bottomNavigationBar: Padding(

@@ -56,7 +56,7 @@ class _FindDialog extends State<FindDialog>{
                     color: serviceColor()
                   ),
                   child: Center(
-                      child: Text('확인', style: textStyle(color: Colors.white, weight: 700, size: 16.0))
+                      child: Text('비밀번호 초기화 메일이 전송되었습니다.', style: textStyle(color: Colors.white, weight: 700, size: 16.0))
                   )
                 )
               )

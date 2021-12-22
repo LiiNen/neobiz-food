@@ -4,10 +4,10 @@ import 'package:foodie/collections/functions.dart';
 
 import '../main.dart';
 
-subTitleContainer({required String title, double topMargin=16}) {
+subTitleContainer({required String title, double topMargin=0}) {
   return Container(
     margin: EdgeInsets.only(top: topMargin),
-    child: Text(title, style: textStyle(weight: 500, size: 19.0))
+    child: Text(title, style: textStyle(weight: 500, size: 21.0))
   );
 }
 
@@ -121,7 +121,8 @@ reviewBox({required BuildContext context, required String reward}) {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            //todo: document icon
+            Image.asset('asset/image/review/reviewIcon.png', width: 12),
+            SizedBox(width: 5),
             Text('리뷰를 작성하고 ${reward} 받아보세요!', style: textStyle(color: Color(0xffff9933), weight: 700, size: 13.0)),
           ]
         )
@@ -129,6 +130,8 @@ reviewBox({required BuildContext context, required String reward}) {
     )
   );
 }
+
+
 
 bottomTapButton(BuildContext context, dynamic callback) {
   return GestureDetector(

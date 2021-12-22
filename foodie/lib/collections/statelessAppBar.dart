@@ -17,8 +17,8 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
       automaticallyImplyLeading: false,
       backgroundColor: const Color(0xffffffff),
       centerTitle: true,
-      shadowColor: elevation ? Color(0x15000000) : Colors.white,
-      elevation: 2,
+      shadowColor: elevation ? Colors.black : Colors.white,
+      elevation: 2.0,
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -51,7 +51,7 @@ class HomeViewAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      elevation: 1.0,
+      elevation: 2.0,
       shadowColor: Colors.black,
       backgroundColor: Colors.white,
       automaticallyImplyLeading: false,

@@ -46,7 +46,7 @@ class _MainNavView extends State<MainNavView> {
             ),
             BottomNavigationBarItem(label: 'MY', icon: Container(
               margin: EdgeInsets.only(bottom: 6, top: 6),
-              child: _selectedIndex == 3 ? Image.asset('asset/image/navUserUnselect.png', width: 20) : Image.asset('asset/image/navUserSelect.png', width: 20))
+              child: _selectedIndex == 3 ? Image.asset('asset/image/navUserSelect.png', width: 20) : Image.asset('asset/image/navUserUnselect.png', width: 20))
             ),
             BottomNavigationBarItem(label: '찜', icon: Container(
               margin: EdgeInsets.only(bottom: 6, top: 6),
