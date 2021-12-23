@@ -20,7 +20,6 @@ class _HomeView extends State<HomeView> {
     return Scaffold(
       backgroundColor: Color(0xfffcfcfc),
       appBar: HomeViewAppBar(),
-      endDrawer: HomeDrawer(),
       body: Container(
         padding: EdgeInsets.only(top: 30),
         width: MediaQuery.of(context).size.width,

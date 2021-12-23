@@ -1,71 +1,152 @@
 import 'package:flutter/material.dart';
 import 'package:foodie/collections/decorationContainers.dart';
 import 'package:foodie/collections/functions.dart';
+import 'package:foodie/collections/statelessAppBar.dart';
 import 'package:foodie/serviceViews/paymentHistoryView.dart';
 import 'package:foodie/serviceViews/paymentView/paymentView.dart';
 import 'package:foodie/serviceViews/supportView.dart';
 import 'package:foodie/mainNavView/userView/userView.dart';
 
 class HomeDrawerMenu {
+  dynamic icon;
   String title;
   Widget? route;
   dynamic action;
-  HomeDrawerMenu({required this.title, this.route, this.action});
+  HomeDrawerMenu({required this.icon, required this.title, this.route, this.action});
 }
-
-var homeDrawerMenuList = [
-  HomeDrawerMenu(title: '신규 식당/여행지 제보하기'),
-  HomeDrawerMenu(title: '내가 쓴 글'),
-  HomeDrawerMenu(title: '프리미엄 회원', route: PaymentView()),
-  HomeDrawerMenu(title: '이용권 선물', route: PaymentView(isPresent: true)),
-  HomeDrawerMenu(title: '결제내역', route: PaymentHistoryView()),
-  HomeDrawerMenu(title: '1:1 문의', route: SupportView()),
-  HomeDrawerMenu(title: '로그아웃'),
-];
 
 class HomeDrawer extends StatefulWidget {
   @override
   State<HomeDrawer> createState() => _HomeDrawer();
 }
 class _HomeDrawer extends State<HomeDrawer> {
+  GlobalKey _profileKey = GlobalKey();
+  Widget _profileContainer = Container();
+
+  var homeDrawerMenuList = [
+    HomeDrawerMenu(icon: Image.asset('asset/image/drawerManageIcon.png', width: 17), title: '내 매장 관리하기'),
+    HomeDrawerMenu(icon: Image.asset('asset/image/drawerReportIcon.png', width: 18), title: '맛집 | 여행지 제보하기'),
+    HomeDrawerMenu(icon: Image.asset('asset/image/drawerReviewIcon.png', width: 16), title: '내가쓴글'),
+    HomeDrawerMenu(icon: Image.asset('asset/image/drawerPremiumIcon.png', width: 18), title: '프리미엄 회원', route: PaymentView()),
+    HomeDrawerMenu(icon: Image.asset('asset/image/drawerPresentIcon.png', width: 18), title: '이용권 선물', route: PaymentView(isPresent: true)),
+    HomeDrawerMenu(icon: Image.asset('asset/image/drawerPaymentIcon.png', width: 15), title: '결제내역', route: PaymentHistoryView()),
+    HomeDrawerMenu(icon: Image.asset('asset/image/drawerInquiryIcon.png', width: 16), title: '1:1 문의', route: SupportView()),
+    HomeDrawerMenu(icon: Image.asset('asset/image/drawerLogoutIcon.png', width: 15), title: '로그아웃'),
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+    if(true) { // todo: 매장 유저가 아닐경우
+      homeDrawerMenuList.removeAt(0);
+    }
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      setState(() {
+        /// do nothing
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Drawer(
-      child: ListView(
-        children: <Widget>[
-          DrawerHeader(
-            child: profileContainer()
-          ),
-        ] + List.generate(homeDrawerMenuList.length * 2 - 1, (index) {
-          if(index%2 == 0) return homeDrawerMenuItem(homeDrawerMenuList[(index/2).floor()]);
-          else return lineDivider();
-        })
+    return Scaffold(
+      backgroundColor: Color(0xfffcfcfc),
+      appBar: DefaultAppBar(title: '', elevation: false,),
+      body: Container(
+        width: MediaQuery.of(context).size.width,
+        child: SingleChildScrollView(
+          child: SafeArea(child: Stack(
+            children: [
+              Container(
+                margin: EdgeInsets.only(top: getSizeWithKey(_profileKey) != null ? getSizeWithKey(_profileKey).height + 5 : 0),
+                child: Column(
+                  children: homeDrawerMenuItemList()
+                )
+              ),
+              profileContainer(),
+            ]
+          )
+        ))
       )
     );
   }
 
   profileContainer() {
-    return Row(
-      mainAxisSize: MainAxisSize.max,
-      children: [
-        FlutterLogo(size: 66),
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('username', style: textStyle(weight: 500, size: 16.0)),
-            Text('user point', style: textStyle(weight: 500, size: 16.0))
-          ]
-        ),
-        Expanded(
-          child: GestureDetector(
-            onTap: () => {navigatorPush(context: context, widget: UserView())},
-            behavior: HitTestBehavior.translucent,
-            child: Text('마이페이지 >', style: textStyle(weight: 500, size: 16.0), textAlign: TextAlign.right,)
-          )
-        )
-      ]
+    return Container(
+      key: _profileKey,
+      decoration: BoxDecoration(
+        boxShadow: [BoxShadow(
+          color: Color(0x299d9d9d),
+          offset: Offset(0,3),
+          blurRadius: 6,
+          spreadRadius: 0
+        )] ,
+        color: Colors.white,
+      ),
+      child: Column(
+        children: [
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            height: 48,
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Image.asset('asset/image/profileDefault.png', width: 48),
+                SizedBox(width: 9),
+                Stack(
+                  children: [
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: Text('username님', style: textStyle(weight: 700, size: 16.0)),
+                    ),
+                    Align(
+                      alignment: Alignment.bottomLeft,
+                      child: Row(
+                        children: [
+                          Image.asset('asset/image/pointIcon.png', width: 16),
+                          SizedBox(width: 3),
+                          Text('0000P', style: textStyle(color: serviceColor(), weight: 500, size: 16.0))
+                        ]
+                      )
+                    ),
+                  ]
+                ),
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () { navigatorPush(context: context, widget: UserView()); },
+                    behavior: HitTestBehavior.translucent,
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: Container(
+                        width: 88, height: 33,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(4)),
+                          border: Border.all(color: Color(0xffe0e0e0), width: 1),
+                          color: Colors.white
+                        ),
+                        child: Center(
+                          child: Text('마이페이지', style: textStyle(weight: 700, size: 13.0))
+                        )
+                      )
+                    )
+                  )
+                )
+              ]
+            )
+          ),
+          SizedBox(height: 27),
+          reviewBox(context: context, reward: '1000포인트'),
+          SizedBox(height: 23),
+        ]
+      ),
     );
+  }
+
+  homeDrawerMenuItemList() {
+    return List<Widget>.generate(homeDrawerMenuList.length * 2 - 1, (index) {
+      if(index%2 == 0) return homeDrawerMenuItem(homeDrawerMenuList[(index/2).floor()]);
+      else return lineDivider();
+    });
   }
 
   homeDrawerMenuItem(HomeDrawerMenu menu) {
@@ -77,10 +158,20 @@ class _HomeDrawer extends State<HomeDrawer> {
         print('click');
       },
       child: Container(
-        margin: EdgeInsets.only(left: 18),
-        height: 60,
+        margin: EdgeInsets.symmetric(horizontal: 21),
+        width: MediaQuery.of(context).size.width, height: 60,
         alignment: Alignment.centerLeft,
-        child: Text(menu.title, style: textStyle(weight: 500, size: 16.0))
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              width: 18,
+              child: Center(child: menu.icon,)
+            ),
+            SizedBox(width: 21),
+            Text(menu.title, style: textStyle(color: menu.title=='로그아웃' ? serviceColor() : Colors.black, weight: 500, size: 15.0))
+          ]
+        )
       )
     );
   }

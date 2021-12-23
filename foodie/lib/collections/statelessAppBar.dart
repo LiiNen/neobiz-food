@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:foodie/collections/functions.dart';
+import 'package:foodie/mainNavView/homeView/homeDrawer.dart';
 
 import 'decorationContainers.dart';
 
@@ -18,7 +19,7 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: const Color(0xffffffff),
       centerTitle: true,
       shadowColor: elevation ? Colors.black : Colors.white,
-      elevation: 2.0,
+      elevation: elevation ? 2.0 : 0.0,
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -66,7 +67,7 @@ class HomeViewAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       actions: [
         IconButton(
-          onPressed: () => Scaffold.of(context).openEndDrawer(),
+          onPressed: () { navigatorPush(context: context, widget: HomeDrawer()); },
           icon: Image.asset('asset/image/menuPlusIcon.png', width: 29, height: 29),
         )
       ]

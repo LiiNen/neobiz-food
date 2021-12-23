@@ -60,6 +60,13 @@ String htmlTagRemover(String target) {
 
 
 String areaString(int area1, int area2, int area3) {
-
   return '';
+}
+
+getSizeWithKey(GlobalKey key) {
+  if (key.currentContext != null) {
+    final RenderBox renderBox = key.currentContext!.findRenderObject() as RenderBox;
+    Size size = renderBox.size;
+    return size;
+  }
 }
