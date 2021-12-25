@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:foodie/collections/decorationContainers.dart';
 import 'package:foodie/collections/functions.dart';
 import 'package:foodie/collections/statelessAppBar.dart';
+import 'package:foodie/serviceViews/paymentView/paymentCouponDialog.dart';
+import 'package:foodie/serviceViews/paymentView/paymentDepositView.dart';
 import 'package:foodie/serviceViews/paymentView/paymentPresentView.dart';
 import 'package:foodie/serviceViews/paymentView/paymentView.dart';
 
@@ -22,16 +24,21 @@ class PaymentSelectionView extends StatefulWidget {
 class _PaymentSelectionView extends State<PaymentSelectionView> {
   bool isPresent;
   _PaymentSelectionView(this.isPresent);
+  List<PaymentSelectionItem> paymentSelectionItemList = [];
 
-  var paymentSelectionItemList = [
-    PaymentSelectionItem(title: '신용카드 결제'),
-    PaymentSelectionItem(title: '무통장 입금',),
-    PaymentSelectionItem(title: '휴대폰 결제'),
-    PaymentSelectionItem(title: '포인트 결제'),
-    PaymentSelectionItem(img: Image.asset('asset/image/paymentKakao.png')),
-    PaymentSelectionItem(img: Image.asset('asset/image/paymentNaver.png')),
-    PaymentSelectionItem(title: '선물쿠폰 사용'),
-  ];
+  @override
+  void initState() {
+    super.initState();
+    paymentSelectionItemList = [
+      PaymentSelectionItem(title: '신용카드 결제'),
+      PaymentSelectionItem(title: '무통장 입금', route: PaymentDepositView()),
+      PaymentSelectionItem(title: '휴대폰 결제'),
+      PaymentSelectionItem(title: '포인트 결제'),
+      PaymentSelectionItem(img: Image.asset('asset/image/paymentKakao.png')),
+      PaymentSelectionItem(img: Image.asset('asset/image/paymentNaver.png')),
+      PaymentSelectionItem(title: '선물쿠폰 사용', callback: _showPaymentCouponDialog),
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,14 +55,17 @@ class _PaymentSelectionView extends State<PaymentSelectionView> {
               paymentSelectionContainer(),
               spaceDivider(),
               socialPaymentSelectionContainer(),
-              spaceDivider(),
-              elsePaymentSelectionContainer(),
+              presentContainer(),
             ],
           )
         )
       ),
       bottomNavigationBar: bottomNavigationButton(title: '다음', action: _nextAction),
     );
+  }
+
+  _showPaymentCouponDialog() {
+    showPaymentCouponDialog(context);
   }
 
   selectionBox(PaymentSelectionItem? _paymentItem) {
@@ -67,6 +77,12 @@ class _PaymentSelectionView extends State<PaymentSelectionView> {
         behavior: HitTestBehavior.translucent,
         onTap: () {
           //todo route or callback
+          if(_paymentItem.route != null) {
+            navigatorPush(context: context, widget: _paymentItem.route);
+          }
+          if(_paymentItem.callback != null) {
+            _paymentItem.callback();
+          }
         },
         child: AspectRatio(
           aspectRatio: 3.28,
@@ -136,6 +152,19 @@ class _PaymentSelectionView extends State<PaymentSelectionView> {
         ]
       )
     );
+  }
+
+  presentContainer() {
+    if(!isPresent) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          spaceDivider(),
+          elsePaymentSelectionContainer(),
+        ]
+      );
+    }
+    else return Container();
   }
 
   elsePaymentSelectionContainer() {

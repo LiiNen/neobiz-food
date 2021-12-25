@@ -77,9 +77,9 @@ fullWidthButton({required title, required action, double height=70}){
   );
 }
 
-fullWidthTextField(String hintText, TextEditingController controller) {
+fullWidthTextField(String hintText, TextEditingController controller, {double margin=28}) {
   return Container(
-    margin: EdgeInsets.only(bottom: 28),
+    margin: EdgeInsets.only(bottom: margin),
     child: Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [

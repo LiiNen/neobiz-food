@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:foodie/collections/decorationContainers.dart';
 import 'package:foodie/collections/functions.dart';
 import 'package:foodie/collections/statelessAppBar.dart';
-import 'package:foodie/mainNavView/homeView/homeView.dart';
+import 'package:foodie/mainNavView/mainNavView.dart';
 import 'package:foodie/serviceViews/paymentView/paymentView.dart';
 
 class PaymentPresentView extends StatefulWidget {
@@ -23,16 +23,12 @@ class _PaymentPresentView extends State<PaymentPresentView> {
         appBar: DefaultAppBar(title: '이용권 선물'),
         body: SingleChildScrollView(
           child: Container(
-            margin: EdgeInsets.symmetric(horizontal: 18),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 paymentStep(step: 3, title: '사용자 등록'),
                 SizedBox(height: 27),
-                Text('선물하실 사용자를 등록해주세요.'),
-                SizedBox(height: 37),
-                fullWidthTextField('이름', nameController),
-                fullWidthTextField('전화번호', phoneController),
+                userContainer()
               ],
             )
           )
@@ -42,8 +38,24 @@ class _PaymentPresentView extends State<PaymentPresentView> {
     );
   }
 
+  userContainer() {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      margin: EdgeInsets.symmetric(horizontal: 18),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('선물하실 사용자를 등록해주세요.', style: textStyle(color: Color(0xff8e8e8e), weight: 500, size: 16.0)),
+          SizedBox(height: 37),
+          fullWidthTextField('이름', nameController),
+          fullWidthTextField('전화번호', phoneController),
+        ]
+      )
+    );
+  }
+
   _nextStep() {
     showToast('선물하기 완료');
-    navigatorPush(context: context, widget: HomeView(), replacement: true, all: true);
+    navigatorPush(context: context, widget: MainNavView(), replacement: true, all: true);
   }
 }
