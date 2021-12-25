@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:foodie/collections/decorationContainers.dart';
 import 'package:foodie/collections/functions.dart';
+import 'package:foodie/serviceViews/supportView.dart';
 
 class ShopViewTabInfo extends StatefulWidget {
   final dynamic shopJson;
@@ -115,6 +116,6 @@ class _ShopViewTabInfo extends State<ShopViewTabInfo> {
   }
 
   bugReport() {
-    print('bug report');
+    navigatorPush(context: context, widget: SupportView(supportId: 0, title: shopJson['name']));
   }
 }
