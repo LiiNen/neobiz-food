@@ -18,7 +18,7 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
       automaticallyImplyLeading: false,
       backgroundColor: const Color(0xffffffff),
       centerTitle: true,
-      shadowColor: elevation ? Colors.black : Colors.white,
+      shadowColor: elevation ? Colors.white : Colors.white,
       elevation: elevation ? 2.0 : 0.0,
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
