@@ -23,7 +23,7 @@ class _SettingView extends State<SettingView> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: DefaultAppBar(title: '설정'),
+      appBar: DefaultAppBar(title: '설정', back: false),
       body: Container(
         margin: EdgeInsets.symmetric(horizontal: 18),
         child: Column(

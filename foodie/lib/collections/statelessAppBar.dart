@@ -6,11 +6,12 @@ import 'package:foodie/mainNavView/homeView/homeDrawer.dart';
 import 'decorationContainers.dart';
 
 class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
-  DefaultAppBar({required this.title, this.elevation=true}) : preferredSize = Size.fromHeight(56.0);
+  DefaultAppBar({required this.title, this.elevation=true, this.back=true}) : preferredSize = Size.fromHeight(56.0);
   @override
   final Size preferredSize;
   final String title;
   final bool elevation;
+  final bool back;
 
   @override
   Widget build(BuildContext context) {
@@ -18,13 +19,13 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
       automaticallyImplyLeading: false,
       backgroundColor: const Color(0xffffffff),
       centerTitle: true,
-      shadowColor: elevation ? Colors.white : Colors.white,
+      shadowColor: Colors.white,
       elevation: elevation ? 2.0 : 0.0,
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          GestureDetector(
+          back ? GestureDetector(
             behavior: HitTestBehavior.translucent,
             onTap: () {
               Navigator.pop(context);
@@ -33,7 +34,7 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
               width: 16, height: 32,
               child: Center(child: SvgPicture.asset('asset/svgIcon/icoBack.svg', width: 8, height: 16,))
             )
-          ),
+          ) : Container(width: 16),
           Text(title, style: textStyle(color: Colors.black, weight: 700, size: 16.0),),
           Container(width: 16)
         ]
@@ -53,7 +54,7 @@ class HomeViewAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       elevation: 2.0,
-      shadowColor: Colors.black,
+      shadowColor: Colors.white,
       backgroundColor: Colors.white,
       automaticallyImplyLeading: false,
       centerTitle: true,

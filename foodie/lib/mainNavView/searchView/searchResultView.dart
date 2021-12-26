@@ -70,8 +70,8 @@ class _SearchResultView extends State<SearchResultView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: DefaultAppBar(title: title, elevation: false),
+      backgroundColor: Color(0xfffcfcfc),
       body: Container(
         width: MediaQuery.of(context).size.width,
         child: Column(

@@ -33,7 +33,7 @@ class _UserView extends State<UserView> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xfffcfcfc),
-      appBar: DefaultAppBar(title: 'MY', elevation: false),
+      appBar: DefaultAppBar(title: 'MY', back: false),
       body: SingleChildScrollView(
         child: Container(
           width: MediaQuery.of(context).size.width,

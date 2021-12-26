@@ -42,7 +42,7 @@ class _SearchView extends State<SearchView> {
       child: Scaffold(
         backgroundColor: Colors.white,
         resizeToAvoidBottomInset: true,
-        appBar: DefaultAppBar(title: '검색'),
+        appBar: DefaultAppBar(title: '검색', back: false),
         body: SingleChildScrollView(
           child: Container(
             margin: EdgeInsets.symmetric(horizontal: 18),
