@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:foodie/collections/decorationContainers.dart';
 import 'package:foodie/collections/functions.dart';
 import 'package:foodie/collections/statelessAppBar.dart';
-import 'package:foodie/mainNavView/homeView/homeBannerContainer.dart';
 import 'package:foodie/restApi/presetRequestBody.dart';
 import 'package:foodie/restApi/searchLocalApi.dart';
 import 'package:foodie/restApi/searchSubwayApi.dart';
 import 'package:foodie/restApi/searchTownApi.dart';
+import 'package:foodie/serviceViews/supportView.dart';
 import 'package:foodie/shopContainerView/shopListContainer.dart';
 import 'package:foodie/shopView/shopView.dart';
 
@@ -87,6 +87,8 @@ class _SearchResultView extends State<SearchResultView> {
                     children: _searchItemList.length != 0 ? [
                       recommendContainer(),
                       SizedBox(height: 28),
+                      addShopButton(),
+                      SizedBox(height: 28),
                       titleBox('리스트'),
                       SizedBox(height: 5),
                       ShopListContainer(shopObjectList: _searchItemList)
@@ -130,8 +132,7 @@ class _SearchResultView extends State<SearchResultView> {
             behavior: HitTestBehavior.translucent,
             onTap: () {showFilter();},
             child: Container(
-              margin: EdgeInsets.symmetric(vertical: 10),
-              child: Center(child: Text('필터', style: textStyle(weight: 500, size: 15.0)))
+              child: Image.asset('asset/image/searchFilter.png', width: 22, height: 16),
             )
           )
         ],
@@ -298,6 +299,39 @@ class _SearchResultView extends State<SearchResultView> {
             )
           );
         }).toList()
+      )
+    );
+  }
+
+  addShopButton() {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 18),
+      child: yellowPointBox(
+        context: context,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text('숨은 맛집을 직접 등록해주세요', style: textStyle(color: Color(0xffff9933), weight: 700, size: 13.0)),
+            GestureDetector(
+              behavior: HitTestBehavior.translucent,
+              onTap: () {
+                navigatorPush(context: context, widget: SupportView(supportId: 2));
+              },
+              child: Container(
+                height: 47,
+                child: Center(child: Container(
+                  width: 78, height: 26,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                    border: Border.all(color: const Color(0xffff9933), width: 1),
+                    color: const Color(0xffffffff)
+                  ),
+                  child: Center(child: Text('등록하기', style: textStyle(color: Color(0xffff9933), weight: 500, size: 12.0))),
+                ))
+              )
+            )
+          ]
+        )
       )
     );
   }

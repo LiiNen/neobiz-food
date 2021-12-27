@@ -80,37 +80,33 @@ class _ShopViewTabInfo extends State<ShopViewTabInfo> {
       child: Column(
         children: [
           fullWidthShadowButton('오류신고', bugReport),
-          ownerButton()
+          SizedBox(height: 26),
+          ownerButton(),
+          SizedBox(height: 26),
         ]
       )
     );
   }
 
   ownerButton() {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 18, vertical: 26),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(6)),
-        color: Color(0xffffe489)
-      ),
-      child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 18),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text('식당주이신가요?', style: textStyle(color: Color(0xffff9933), weight: 700, size: 13.0)),
-            GestureDetector(
-              behavior: HitTestBehavior.translucent,
-              onTap: () {
-                print('todo 직접관리');
-              },
-              child: Container(
-                height: 47,
-                child: Center(child: Text('직접관리', style: textStyle(color: Color(0xffff9933), weight: 500, size: 12.0))),
-              )
+    return yellowPointBox(
+      context: context,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text('식당주이신가요?', style: textStyle(color: Color(0xffff9933), weight: 700, size: 13.0)),
+          GestureDetector(
+            behavior: HitTestBehavior.translucent,
+            onTap: () {
+              //todo: 직접관리 페이지
+              print('todo 직접관리');
+            },
+            child: Container(
+              height: 47,
+              child: Center(child: Text('직접관리', style: textStyle(color: Color(0xffff9933), weight: 500, size: 12.0))),
             )
-          ]
-        )
+          )
+        ]
       )
     );
   }

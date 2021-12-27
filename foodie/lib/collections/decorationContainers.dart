@@ -131,7 +131,20 @@ reviewBox({required BuildContext context, required String reward}) {
   );
 }
 
-
+yellowPointBox({required BuildContext context, required Widget child}) {
+  return Container(
+    width: MediaQuery.of(context).size.width,
+    height: 47,
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.all(Radius.circular(6)),
+      color: Color(0xffffe489)
+    ),
+    child: Container(
+      margin: EdgeInsets.symmetric(horizontal: 18),
+      child: child
+    )
+  );
+}
 
 bottomTapButton(BuildContext context, dynamic callback) {
   return GestureDetector(

@@ -1,5 +1,3 @@
-import 'dart:io' show Platform;
-
 import 'package:flutter/material.dart';
 import 'package:foodie/collections/decorationContainers.dart';
 import 'package:foodie/collections/functions.dart';
@@ -8,7 +6,6 @@ import 'package:foodie/searchCategoryView/searchCategoryView.dart';
 import 'package:foodie/shopContainerView/recShopContainer.dart';
 
 import 'homeBannerContainer.dart';
-import 'homeDrawer.dart';
 
 class HomeView extends StatefulWidget {
   @override

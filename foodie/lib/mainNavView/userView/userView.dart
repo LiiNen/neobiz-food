@@ -61,7 +61,7 @@ class _UserView extends State<UserView> {
         children: [
           subTitleContainer(title: '회원정보'),
           SizedBox(height: 18),
-          modifyInfoBox(context: context, callback: () {
+          modifyInfoBox(callback: () {
             //todo route
           }),
           SizedBox(height: 29),
@@ -121,18 +121,10 @@ class _UserView extends State<UserView> {
       )
     );
   }
-}
 
-modifyInfoBox({required BuildContext context, required callback}) {
-  return Container(
-    width: MediaQuery.of(context).size.width,
-    height: 47,
-    decoration: BoxDecoration(
-      borderRadius: BorderRadius.all(Radius.circular(6)),
-      color: Color(0xffffe489)
-    ),
-    child: Container(
-      margin: EdgeInsets.symmetric(horizontal: 18),
+  modifyInfoBox({required callback}) {
+    return yellowPointBox(
+      context: context,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -155,8 +147,8 @@ modifyInfoBox({required BuildContext context, required callback}) {
           )
         ]
       )
-    )
-  );
+    );
+  }
 }
 
 Widget userTextField({required String title, required String currentText, TextEditingController? userController, bool enabled=true}) {
