@@ -19,7 +19,7 @@ class SearchResultView extends StatefulWidget {
   @override
   State<SearchResultView> createState() => _SearchResultView(title: title, searchType: searchType, requestItem: requestItem);
 }
-class _SearchResultView extends State<SearchResultView> {
+class _SearchResultView extends State<SearchResultView> with SingleTickerProviderStateMixin {
   String title;
   String searchType;
   dynamic requestItem;
@@ -30,6 +30,16 @@ class _SearchResultView extends State<SearchResultView> {
   var _isRed = true;
   var _filterSelectedIndex = 0;
   var _filterTitleList = ['구역별', '메뉴별', '상황별'];
+
+  late TabController controller;
+
+  var tempList = [
+    ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
+    ['1', '2', '8', '9', '10', '11', '12', '13'],
+    ['1', '2', '3', '4', '5', '6', '7',]
+  ];
+
+  var filterItemList = [];
 
   @override
   void initState() {
@@ -45,6 +55,21 @@ class _SearchResultView extends State<SearchResultView> {
         _getTownSearchList();
         break;
     }
+    controller = TabController(length: 3, vsync: this, initialIndex: 0);
+    controller.addListener(_controllerListener);
+    filterItemList = tempList[controller.previousIndex];
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  _controllerListener() {
+    if(controller.indexIsChanging) setState(() {
+      filterItemList = tempList[controller.index];
+    });
   }
 
   _getLocalSearchList() async {
@@ -232,77 +257,6 @@ class _SearchResultView extends State<SearchResultView> {
     ));
   }
 
-  showFilter() {
-    showModalBottomSheet(
-      context: context,
-      builder: (context) {
-        return StatefulBuilder(
-          builder: (BuildContext context, setState) {
-            return Container(
-              color: Colors.white,
-              child: Container(
-                margin: EdgeInsets.symmetric(horizontal: 18),
-                width: MediaQuery.of(context).size.width,
-                color: Colors.white,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    SizedBox(height: 12),
-                    Text('필터'),
-                    SizedBox(height: 12),
-                    lineDivider(),
-                    SizedBox(height: 14),
-                    filterTypeContainer(setState),
-                    SizedBox(height: 4),
-                  ]
-                )
-              )
-            );
-          }
-        );
-      }
-    );
-  }
-
-  filterTypeContainer(setState) {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      height: 41,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(4)),
-        color: Color(0xffededed),
-      ),
-      child: Row(
-        children: _filterTitleList.map((e) {
-          var index = _filterTitleList.indexOf(e);
-          return Expanded(
-            child: GestureDetector(
-              behavior: HitTestBehavior.translucent,
-              onTap: () {
-                setState(() {
-                  _filterSelectedIndex = index;
-                });
-              },
-              child: index == _filterSelectedIndex ? Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(4)),
-                  color: Color(0xff8e8e8e)
-                ),
-                child: Center(
-                  child: Text(_filterTitleList[index], style: textStyle(color: Colors.white, weight: 500, size: 15.0))
-                )
-              ) : Container(
-                child: Center(
-                  child: Text(_filterTitleList[index], style: textStyle(color: Color(0xff8e8e8e), weight: 500, size: 15.0))
-                )
-              )
-            )
-          );
-        }).toList()
-      )
-    );
-  }
-
   addShopButton() {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 18),
@@ -332,6 +286,173 @@ class _SearchResultView extends State<SearchResultView> {
             )
           ]
         )
+      )
+    );
+  }
+
+  showFilter() {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return StatefulBuilder(
+          builder: (BuildContext context, setState) {
+            return Container(
+              color: Colors.white,
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height * 0.65,
+                color: Colors.white,
+                child: Stack(
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        filterTabBar(setState),
+                        lineDivider(),
+                        Flexible(
+                          child: SingleChildScrollView(
+                            child: Column(
+                              children: [
+                                // filterTypeContainer(setState),
+                                Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  margin: EdgeInsets.symmetric(horizontal: 18, vertical: 33),
+                                  child: Column(
+                                    children: filterItemRow(setState)
+                                  )
+                                ),
+                                SizedBox(height: 10),
+                              ]
+                            )
+                          )
+                        ),
+                      ]
+                    ),
+                    Align(
+                      alignment: Alignment.bottomCenter,
+                      child: bottomNavigationButton(title: '확인', action: () {
+                        //todo: re-search action with filter results
+                      })
+                    )
+                  ]
+                )
+              )
+            );
+          }
+        );
+      }
+    );
+  }
+
+  filterTabBar(setState) {
+    return TabBar(
+      onTap: (index) {
+        setState(() {});
+      },
+      controller: controller,
+      indicator: UnderlineTabIndicator(
+        borderSide: BorderSide(width: 4, color: serviceColor()),
+        insets: EdgeInsets.symmetric(horizontal: 30),
+      ),
+      labelColor: serviceColor(), unselectedLabelColor: Color(0xff8e8e8e),
+      labelStyle: textStyle(color: serviceColor(), weight: 700, size: 16.0),
+      unselectedLabelStyle: textStyle(color: Color(0xff8e8e8e), weight: 500, size: 16.0),
+      tabs: [
+        Tab(text: '구역별'),
+        Tab(text: '메뉴별'),
+        Tab(text: '상황별'),
+      ],
+    );
+  }
+
+  filterItemRow(setState) {
+    var filterRowList = List.generate((filterItemList.length/3).floor() * 2 - 1, (index) {
+      if(index%2==1) return SizedBox(height: 10);
+      var itemIndex = (index/2).floor()*3;
+      print(filterItemList);
+      print(itemIndex);
+      return Row(
+        children: [
+          filterDetailBox(filterItemList[itemIndex], setState),
+          SizedBox(width: 10),
+          filterDetailBox(itemIndex+1 < filterItemList.length ? filterItemList[itemIndex+1] : '', setState),
+          SizedBox(width: 10),
+          filterDetailBox(itemIndex+2 < filterItemList.length ? filterItemList[itemIndex+2] : '', setState),
+        ]
+      );
+    });
+    return filterRowList;
+  }
+
+  filterDetailBox(String title, setState) {
+    return Expanded(
+      child: Container(
+        margin: EdgeInsets.symmetric(vertical: 5),
+        child: GestureDetector(
+          behavior: HitTestBehavior.translucent,
+          onTap: () {
+            setState(() {
+              //todo: selected
+            });
+          },
+          child: AspectRatio(
+            aspectRatio: 1.0,
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(3)),
+                border: Border.all(color: const Color(0xffededed), width: 1),
+                color: const Color(0xffffffff)
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(title, style: textStyle(weight: 500, size: 15.0)),
+                  Text('0', style: textStyle(color: Color(0xff8e8e8e), weight: 400, size: 13.0)),
+                ]
+              )
+            )
+          )
+        )
+      )
+    );
+  }
+
+  filterTypeContainer(setState) {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      height: 52,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(4)),
+        color: Colors.white,
+      ),
+      child: Row(
+        children: _filterTitleList.map((e) {
+          var index = _filterTitleList.indexOf(e);
+          return Expanded(
+            child: GestureDetector(
+              behavior: HitTestBehavior.translucent,
+              onTap: () {
+                setState(() {
+                  _filterSelectedIndex = index;
+                });
+              },
+              child: index == _filterSelectedIndex ? Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(4)),
+                  color: Color(0xff8e8e8e)
+                ),
+                child: Center(
+                  child: Text(_filterTitleList[index], style: textStyle(color: Colors.white, weight: 500, size: 15.0))
+                )
+              ) : Container(
+                child: Center(
+                  child: Text(_filterTitleList[index], style: textStyle(color: Color(0xff8e8e8e), weight: 500, size: 15.0))
+                )
+              )
+            )
+          );
+        }).toList()
       )
     );
   }
