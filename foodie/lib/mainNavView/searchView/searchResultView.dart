@@ -293,15 +293,18 @@ class _SearchResultView extends State<SearchResultView> with SingleTickerProvide
   showFilter() {
     showModalBottomSheet(
       context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.white,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(topLeft: Radius.circular(15.0), topRight: Radius.circular(15.0)),
+      ),
       builder: (context) {
         return StatefulBuilder(
           builder: (BuildContext context, setState) {
             return Container(
-              color: Colors.white,
               child: Container(
                 width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height * 0.65,
-                color: Colors.white,
+                height: MediaQuery.of(context).size.height * 0.7,
                 child: Stack(
                   children: [
                     Column(
@@ -311,18 +314,21 @@ class _SearchResultView extends State<SearchResultView> with SingleTickerProvide
                         lineDivider(),
                         Flexible(
                           child: SingleChildScrollView(
-                            child: Column(
-                              children: [
-                                // filterTypeContainer(setState),
-                                Container(
-                                  width: MediaQuery.of(context).size.width,
-                                  margin: EdgeInsets.symmetric(horizontal: 18, vertical: 33),
-                                  child: Column(
-                                    children: filterItemRow(setState)
-                                  )
-                                ),
-                                SizedBox(height: 10),
-                              ]
+                            child: Container(
+                              margin: EdgeInsets.only(bottom: 70),
+                              child: Column(
+                                children: [
+                                  // filterTypeContainer(setState),
+                                  Container(
+                                    width: MediaQuery.of(context).size.width,
+                                    margin: EdgeInsets.symmetric(horizontal: 18, vertical: 33),
+                                    child: Column(
+                                      children: filterItemRow(setState)
+                                    )
+                                  ),
+                                  SizedBox(height: 10),
+                                ]
+                              )
                             )
                           )
                         ),
@@ -346,6 +352,7 @@ class _SearchResultView extends State<SearchResultView> with SingleTickerProvide
 
   filterTabBar(setState) {
     return TabBar(
+      padding: EdgeInsets.only(top: 10),
       onTap: (index) {
         setState(() {});
       },
