@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:foodie/collections/exitDialog.dart';
+import 'package:foodie/mainNavView/searchPositionView/searchPositionView.dart';
 
 import 'homeView/homeView.dart';
 import 'searchView/searchView.dart';
 import 'favoriteView/favoriteView.dart';
 import 'userView/userView.dart';
-import 'settingView/settingView.dart';
 
 class MainNavView extends StatefulWidget {
   @override
@@ -65,7 +65,7 @@ class _MainNavView extends State<MainNavView> {
   List<Widget> _mainNavItemView = <Widget>[
     HomeView(),
     SearchView(),
-    SettingView(), // todo : location tab
+    SearchPositionView(),
     UserView(),
     FavoriteView(),
   ];
