@@ -76,10 +76,10 @@ class HomeViewAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 }
 
-class SearchAppBar extends StatelessWidget implements PreferredSizeWidget {
+class SearchCategoryAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   final Size preferredSize;
-  SearchAppBar() : preferredSize = Size.fromHeight(56.0);
+  SearchCategoryAppBar() : preferredSize = Size.fromHeight(56.0);
 
   @override
   Widget build(BuildContext context) {
@@ -106,6 +106,68 @@ class SearchAppBar extends StatelessWidget implements PreferredSizeWidget {
           Container(width: 16)
         ]
       ),
+    );
+  }
+}
+
+class SearchTextAppBar extends StatefulWidget implements PreferredSizeWidget {
+  SearchTextAppBar({required TextEditingController this.controller, required dynamic this.callback}) : preferredSize = Size.fromHeight(56.0);
+  @override
+  final Size preferredSize;
+  final TextEditingController controller;
+  final dynamic callback;
+
+  @override
+  State<SearchTextAppBar> createState() => _SearchTextAppBar();
+}
+class _SearchTextAppBar extends State<SearchTextAppBar> {
+
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      backgroundColor: Colors.white,
+      leadingWidth: 0,
+      automaticallyImplyLeading: false,
+      centerTitle: false,
+      titleSpacing: 0,
+      title: Container(
+        width: MediaQuery.of(context).size.width, height: 35,
+        margin: EdgeInsets.symmetric(horizontal: 18),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(4)),
+          border: Border.all(color: const Color(0xffeaeaea), width: 1),
+          color: const Color(0xffffffff)
+        ),
+        child: TextField(
+            controller: widget.controller,
+            autofocus: true,
+            textInputAction: TextInputAction.search,
+            decoration: InputDecoration(
+              filled: true,
+              fillColor: Colors.white,
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(4)),
+                borderSide: BorderSide(color: Color(0xffeaeaea)),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(4)),
+                borderSide: BorderSide(color: Color(0xffeaeaea)),
+              ),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(4)),
+                borderSide: BorderSide(color: Color(0xffeaeaea)),
+              ),
+              contentPadding: EdgeInsets.only(left: 16, right: 16),
+              hintText: '키워드를 입력해주세요',
+              hintStyle: textStyle(color: Color(0xff8e8e8e), weight: 400, size: 13.0),
+            ),
+            style: textStyle(weight: 600, size: 13.0),
+            onChanged: (value) {setState((){});},
+            onSubmitted: (value) {
+              widget.callback(value);
+            },
+          ),
+        )
     );
   }
 }

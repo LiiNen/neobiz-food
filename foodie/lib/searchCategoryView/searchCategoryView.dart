@@ -35,7 +35,7 @@ class _SearchCategoryView extends State<SearchCategoryView> with SingleTickerPro
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: SearchAppBar(),
+      appBar: SearchCategoryAppBar(),
       backgroundColor: Color(0xfffcfcfc),
       body: Container(
         child: Column(

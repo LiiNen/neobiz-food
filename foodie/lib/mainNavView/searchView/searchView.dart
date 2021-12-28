@@ -12,6 +12,8 @@ class _SearchView extends State<SearchView> {
   List<String>? currentSearchList;
   List<String>? popularSearchList;
 
+  TextEditingController controller = TextEditingController();
+
   @override
   void initState() {
     super.initState();
@@ -20,11 +22,10 @@ class _SearchView extends State<SearchView> {
   }
 
   _loadCurrentSearch() async {
-    // final pref = await SharedPreferences.getInstance();
+    final pref = await SharedPreferences.getInstance();
     setState(() {
-      // currentSearchList = pref.getStringList('currentSearchList') ?? [];
-      // print(currentSearchList);
-      currentSearchList = ['1', '2', '3', '4', '5123123123123123'];
+      currentSearchList = pref.getStringList('currentSearchList') ?? [];
+      print(currentSearchList);
     });
   }
 
@@ -42,7 +43,7 @@ class _SearchView extends State<SearchView> {
       child: Scaffold(
         backgroundColor: Colors.white,
         resizeToAvoidBottomInset: true,
-        appBar: DefaultAppBar(title: '검색', back: false),
+        appBar: SearchTextAppBar(controller: controller, callback: searchAction),
         body: SingleChildScrollView(
           child: Container(
             margin: EdgeInsets.symmetric(horizontal: 18),
@@ -57,6 +58,11 @@ class _SearchView extends State<SearchView> {
         )
       )
     );
+  }
+
+  searchAction(String input) {
+    //todo search with text api
+    print(input);
   }
 
   recentSearchContainer() {
