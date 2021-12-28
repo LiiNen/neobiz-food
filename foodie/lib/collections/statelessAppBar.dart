@@ -141,8 +141,10 @@ class _SearchTextAppBar extends State<SearchTextAppBar> {
         child: TextField(
             controller: widget.controller,
             autofocus: true,
+            textAlignVertical: TextAlignVertical.center,
             textInputAction: TextInputAction.search,
             decoration: InputDecoration(
+              isCollapsed: true,
               filled: true,
               fillColor: Colors.white,
               focusedBorder: OutlineInputBorder(
@@ -157,7 +159,35 @@ class _SearchTextAppBar extends State<SearchTextAppBar> {
                 borderRadius: BorderRadius.all(Radius.circular(4)),
                 borderSide: BorderSide(color: Color(0xffeaeaea)),
               ),
-              contentPadding: EdgeInsets.only(left: 16, right: 16),
+              prefixIcon: Padding(
+                padding: EdgeInsets.only(left: 16, right: 12),
+                child: Tab(
+                  iconMargin: EdgeInsets.all(0),
+                  icon: Image.asset('asset/image/icoSearch.png', width: 14.5, fit: BoxFit.fill),
+                )
+              ),
+              prefixIconConstraints: BoxConstraints(
+                maxWidth: 42.5
+              ),
+              suffixIcon: Padding(
+                padding: EdgeInsets.only(left: 6, right: 10),
+                child: Tab(
+                  child: GestureDetector(
+                    behavior: HitTestBehavior.translucent,
+                    onTap: () {
+                      widget.callback(widget.controller.text);
+                    },
+                    child: Container(
+                      margin: EdgeInsets.symmetric(horizontal: 6),
+                      child: Text('검색', style: textStyle(color: Color(0xff6c6c6c), weight: 500, size: 13.0), textAlign: TextAlign.right,)
+                      // child: Image.asset('asset/image/icoSearch.png')
+                    )
+                  )
+                )
+              ),
+              suffixIconConstraints: BoxConstraints(
+                maxWidth: 52
+              ),
               hintText: '키워드를 입력해주세요',
               hintStyle: textStyle(color: Color(0xff8e8e8e), weight: 400, size: 13.0),
             ),

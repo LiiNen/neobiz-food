@@ -8,6 +8,9 @@ import 'package:foodie/shopContainerView/recShopContainer.dart';
 import 'homeBannerContainer.dart';
 
 class HomeView extends StatefulWidget {
+  final dynamic searchRoute;
+  HomeView({required this.searchRoute});
+
   @override
   State<HomeView> createState() => _HomeView();
 }
@@ -48,22 +51,38 @@ class _HomeView extends State<HomeView> {
   }
 
   searchBoxContainer() {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 18),
-      width: MediaQuery.of(context).size.width,
-      height: 46,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(4)),
-        border: Border.all(color: const Color(0xffff7c2f), width: 1),
-        boxShadow: [BoxShadow(
-          color: const Color(0x0d000000),
-          offset: Offset(0,3),
-          blurRadius: 6,
-          spreadRadius: 0
-        )] ,
-        color: Colors.white
+    return GestureDetector(
+      behavior: HitTestBehavior.translucent,
+      onTap: () {widget.searchRoute();},
+      child: Container(
+        margin: EdgeInsets.symmetric(horizontal: 18),
+        width: MediaQuery.of(context).size.width,
+        height: 46,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(4)),
+          border: Border.all(color: const Color(0xffff7c2f), width: 1),
+          boxShadow: [BoxShadow(
+            color: const Color(0x0d000000),
+            offset: Offset(0,3),
+            blurRadius: 6,
+            spreadRadius: 0
+          )] ,
+          color: Colors.white
+        ),
+        child: Align(
+          alignment: Alignment.centerLeft,
+          child: Container(
+            margin: EdgeInsets.only(left: 16),
+            child: Row(
+              children: [
+                Image.asset('asset/image/icoSearch.png', width: 14.5),
+                SizedBox(width: 11),
+                Text('지하철역, 지역, 맛집 이름으로 찾아보세요!', style: textStyle(color: Color(0xff8e8e8e), weight: 500, size: 14.0))
+              ]
+            )
+          )
+        )
       )
-      //todo: textfield child
     );
   }
 

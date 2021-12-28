@@ -13,6 +13,19 @@ class MainNavView extends StatefulWidget {
 }
 class _MainNavView extends State<MainNavView> {
   int _selectedIndex = 0;
+  List<Widget> _mainNavItemView = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _mainNavItemView = <Widget>[
+      HomeView(searchRoute: _searchRoute),
+      SearchView(),
+      SearchPositionView(),
+      UserView(),
+      FavoriteView(),
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,11 +75,9 @@ class _MainNavView extends State<MainNavView> {
     );
   }
 
-  List<Widget> _mainNavItemView = <Widget>[
-    HomeView(),
-    SearchView(),
-    SearchPositionView(),
-    UserView(),
-    FavoriteView(),
-  ];
+  _searchRoute() {
+    setState(() {
+      _selectedIndex = 1;
+    });
+  }
 }

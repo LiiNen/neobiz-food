@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:foodie/collections/decorationContainers.dart';
 import 'package:foodie/collections/functions.dart';
 import 'package:foodie/collections/statelessAppBar.dart';
+import 'package:foodie/restApi/presetRequestBody.dart';
+import 'package:foodie/restApi/searchLocalApi.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SearchView extends StatefulWidget {
@@ -13,6 +15,9 @@ class _SearchView extends State<SearchView> {
   List<String>? popularSearchList;
 
   TextEditingController controller = TextEditingController();
+
+  var _searchItemList = [];
+  bool isSearched = false;
 
   @override
   void initState() {
@@ -26,6 +31,17 @@ class _SearchView extends State<SearchView> {
     setState(() {
       currentSearchList = pref.getStringList('currentSearchList') ?? [];
       print(currentSearchList);
+    });
+  }
+
+  searchAction(String input) async {
+    //todo search with text api
+    //hack search local
+    FocusManager.instance.primaryFocus?.unfocus();
+    var temp = await searchLocal(doNum: 0, siName: '강북구', mode: 'shop', presetBody: presetSearchRequest());
+    setState(() {
+      _searchItemList = temp;
+      isSearched = true;
     });
   }
 
@@ -44,25 +60,37 @@ class _SearchView extends State<SearchView> {
         backgroundColor: Colors.white,
         resizeToAvoidBottomInset: true,
         appBar: SearchTextAppBar(controller: controller, callback: searchAction),
-        body: SingleChildScrollView(
-          child: Container(
-            margin: EdgeInsets.symmetric(horizontal: 18),
-            child: Column(
-              children: [
-                recentSearchContainer(),
-                SizedBox(height: 9),
-                popularSearchContainer(),
-              ],
-            )
-          )
+        body: isSearched ? afterSearchContainer() : beforeSearchContainer()
+      )
+    );
+  }
+
+  beforeSearchContainer() {
+    return SingleChildScrollView(
+      child: Container(
+        margin: EdgeInsets.symmetric(horizontal: 18),
+        child: Column(
+          children: [
+            recentSearchContainer(),
+            SizedBox(height: 9),
+            popularSearchContainer(),
+          ],
         )
       )
     );
   }
 
-  searchAction(String input) {
-    //todo search with text api
-    print(input);
+  afterSearchContainer() {
+    return Column(
+      children: [
+        listBox(),
+        lineDivider(),
+        listBox(),
+      ]
+    );
+  }
+  listBox() {
+    return Text('hh');
   }
 
   recentSearchContainer() {

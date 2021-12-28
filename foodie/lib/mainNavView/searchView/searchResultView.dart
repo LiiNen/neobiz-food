@@ -73,6 +73,7 @@ class _SearchResultView extends State<SearchResultView> with SingleTickerProvide
   }
 
   _getLocalSearchList() async {
+    print(requestItem);
     var temp = await searchLocal(doNum: requestItem['doNum'], siName: requestItem['siName'], mode: 'shop', presetBody: presetSearchRequest());
     setState(() {
       _searchItemList = temp;
