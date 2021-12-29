@@ -24,6 +24,8 @@ class _SearchPositionView extends State<SearchPositionView> with SingleTickerPro
   ];
   var filterItemList = [];
 
+  bool isRed = true;
+
   @override
   void initState() {
     super.initState();
@@ -43,12 +45,19 @@ class _SearchPositionView extends State<SearchPositionView> with SingleTickerPro
     if(filterController.indexIsChanging) setState(() {});
   }
 
+  colorChangeListener(String color) {
+    setState(() {
+      if(color == 'red') isRed = true;
+      else if(color == 'green') isRed = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       //todo get region
       appBar: SearchPositionAppBar(title: '위치', back: false, callback: showFilter),
-      body: SearchPositionTabView()
+      body: SearchPositionTabView(colorChangeListener: colorChangeListener, isRed: isRed)
     );
   }
 

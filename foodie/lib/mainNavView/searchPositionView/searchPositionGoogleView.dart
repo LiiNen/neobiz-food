@@ -2,6 +2,8 @@
 /// ios 에서만 사용합니다.
 
 import 'package:flutter/material.dart';
+import 'package:foodie/mainNavView/searchPositionView/searchPositionBottomContainer.dart';
+import 'package:foodie/mainNavView/searchPositionView/searchPositionViewTabBar.dart';
 import 'package:geolocator/geolocator.dart';
 
 /// android exception handler
@@ -13,6 +15,9 @@ class SearchPositionKakaoView extends StatelessWidget {
 }
 
 class SearchPositionGoogleView extends StatefulWidget {
+  final dynamic colorChangeListener;
+  final bool isRed;
+  SearchPositionGoogleView({required dynamic this.colorChangeListener, required bool this.isRed});
   @override
   State<SearchPositionGoogleView> createState() => _SearchPositionGoogleView();
 }
@@ -38,11 +43,23 @@ class _SearchPositionGoogleView extends State<SearchPositionGoogleView> {
 
   @override
   Widget build(BuildContext context) {
-    return _position != null ? Column(
+    //todo: implement with map api
+    // return _position != null ? Column(
+    //     children: [
+    //       googleMap(),
+    //       SearchPositionBottomContainer(colorChangeListener: widget.colorChangeListener, isRed: widget.isRed)
+    //     ]
+    //   ) : Container();
+    return Container(
+      child: Stack(
         children: [
-          googleMap()
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: SearchPositionBottomContainer(colorChangeListener: widget.colorChangeListener, isRed: widget.isRed)
+          )
         ]
-      ) : Container();
+      )
+    );
   }
 
   googleMap() {

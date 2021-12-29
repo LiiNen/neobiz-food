@@ -6,11 +6,11 @@ import 'package:foodie/collections/functions.dart';
 import 'searchPositionGoogleView.dart';
 import 'searchPositionListView.dart';
 
-searchPositionTabBarView({required TabController controller}) {
+searchPositionTabBarView({required TabController controller, required dynamic colorChangeListener, required bool isRed}) {
   return Container(
     child: [
-      Platform.isAndroid ? SearchPositionKakaoView() : SearchPositionGoogleView(),
-      SearchPositionListView()
+      Platform.isAndroid ? SearchPositionKakaoView() : SearchPositionGoogleView(colorChangeListener: colorChangeListener, isRed: isRed),
+      SearchPositionListView(colorChangeListener: colorChangeListener, isRed: isRed)
     ][controller.index]
   );
 }
