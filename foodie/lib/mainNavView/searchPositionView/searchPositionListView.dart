@@ -16,58 +16,64 @@ class _SearchPositionListView extends State<SearchPositionListView> {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width,
-      margin: EdgeInsets.symmetric(horizontal: 18),
+      color: Colors.white,
+      child: Container(
+        child: Column(
+          children: [
+            SizedBox(height: 25),
+            filterBox(),
+            SizedBox(height: 21),
+            lineDivider(),
+            SizedBox(height: 10),
+            Expanded(child: shopListView()),
+            SizedBox(height: 10),
+          ]
+        )
+      )
+    );
+  }
+
+  shopListView() {
+    return SingleChildScrollView(
       child: Column(
-        children: [
-          SizedBox(height: 18),
-          filterBox(),
-          SizedBox(height: 16),
-          SearchPositionCard(title: '가온', genre: '한식 | 모던한식 | 오리', position: '서울 강남구'),
-          SizedBox(height: 13),
-          SearchPositionCard(title: '가온', genre: '한식 | 모던한식 | 오리', position: '서울 강남구'),
-          SizedBox(height: 13),
-          SearchPositionCard(title: '가온', genre: '한식 | 모던한식 | 오리', position: '서울 강남구'),
-          SizedBox(height: 13),
-          SearchPositionCard(title: '가온', genre: '한식 | 모던한식 | 오리', position: '서울 강남구'),
-          SizedBox(height: 13),
-          SearchPositionCard(title: '가온', genre: '한식 | 모던한식 | 오리', position: '서울 강남구'),
-          SizedBox(height: 13),
-          SearchPositionCard(title: '가온', genre: '한식 | 모던한식 | 오리', position: '서울 강남구'),
-          SizedBox(height: 13),
-          SearchPositionCard(title: '가온', genre: '한식 | 모던한식 | 오리', position: '서울 강남구'),
-          SizedBox(height: 13),
-        ]
+        children: List.generate(10*2-1,(index) {
+          if(index%2==1) return lineDivider();
+          return SearchPositionCard(title: '가온', genre: '한식 | 모던한식 | 오리', position: '서울 강남구');
+        })
       )
     );
   }
 
   Widget filterBox() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Row(
-          children: [
-            colorFilterBox('red'),
-            SizedBox(width: 9),
-            colorFilterBox('green')
-          ],
-        ),
-        GestureDetector(
-          behavior: HitTestBehavior.translucent,
-          onTap: () {},
-          child: Container(
-            width: 61, height: 30,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(15)),
-              border: Border.all(color: const Color(0xffededed), width: 1),
-              color: const Color(0xffffffff)
-            ),
-            child: Center(
-              child: Text('1km', style: textStyle(color: serviceColor(), weight: 500, size: 14.0),)
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 18),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            children: [
+              colorFilterBox('red'),
+              SizedBox(width: 9),
+              colorFilterBox('green')
+            ],
+          ),
+          GestureDetector(
+            behavior: HitTestBehavior.translucent,
+            onTap: () {},
+            child: Container(
+              width: 61, height: 30,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(15)),
+                border: Border.all(color: const Color(0xffededed), width: 1),
+                color: const Color(0xffffffff)
+              ),
+              child: Center(
+                child: Text('1km', style: textStyle(color: serviceColor(), weight: 500, size: 14.0),)
+              )
             )
           )
-        )
-      ]
+        ]
+      )
     );
   }
 

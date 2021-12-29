@@ -34,9 +34,7 @@ class _SearchPositionTabView extends State<SearchPositionTabView> with SingleTic
       children: [
         SearchPositionTabBar(controller: controller),
         Expanded(
-          child: SingleChildScrollView(
-            child: searchPositionTabBarView(controller: controller, colorChangeListener: widget.colorChangeListener, isRed: widget.isRed)
-          )
+          child: searchPositionTabBarView(controller: controller, colorChangeListener: widget.colorChangeListener, isRed: widget.isRed)
         )
       ]
     );

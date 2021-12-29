@@ -44,7 +44,7 @@ class _SearchPositionBottomContainer extends State<SearchPositionBottomContainer
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         shrinkWrap: true,
-        itemCount: 5*2-1,
+        itemCount: 10*2-1,
         itemBuilder: (BuildContext context, int index) {
           if(index%2==1) return SizedBox(width: 7);
           return SearchPositionBottomCard(title: '가온', genre: '한식 | 모던한식 | 오리', position: '서울 강남구');
@@ -93,9 +93,9 @@ class _SearchPositionBottomContainer extends State<SearchPositionBottomContainer
       child: Container(
         width: 84, height: 35,
         decoration: BoxDecoration(
-            color: _selected ? color=='red' ? serviceColor() : Color(0xff66af6e) : Colors.white,
-            borderRadius: BorderRadius.all(Radius.circular(4)),
-            border: Border.all(color: _selected ? color=='red' ? serviceColor() : Color(0xff66af6e) : Color(0xffededed), width: 1)
+          color: _selected ? color=='red' ? serviceColor() : Color(0xff66af6e) : Colors.white,
+          borderRadius: BorderRadius.all(Radius.circular(4)),
+          border: Border.all(color: _selected ? color=='red' ? serviceColor() : Color(0xff66af6e) : Color(0xffededed), width: 1)
         ),
         child: Center(child: Text(color == 'red' ? '레드리스트' : '그린리스트', style: _selected ?
           textStyle(color: Colors.white, weight: 700, size: 14.0) :
