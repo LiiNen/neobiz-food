@@ -11,7 +11,17 @@ subTitleContainer({required String title, double topMargin=0}) {
   );
 }
 
-lineDivider({color: const Color(0xffededed)}) {
+lineDivider({color: const Color(0xffededed), vertical: false}) {
+  if(vertical) {
+    return Container(
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: color,
+          width: 0.35
+        )
+      )
+    );
+  }
   return Container(
     height: 1,
     decoration: BoxDecoration(

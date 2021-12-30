@@ -35,7 +35,7 @@ class _FavoriteView extends State<FavoriteView> with SingleTickerProviderStateMi
               child: Container(
                 child: Column(
                   children: [
-                    //todo : favorite list slider
+                    _isRed ? FavoriteRedList() : FavoriteGreenList(),
                     FavoriteDescriptionContainer(),
                   ]
                 )
