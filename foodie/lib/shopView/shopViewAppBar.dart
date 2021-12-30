@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:foodie/collections/decorationContainers.dart';
 
 class ShopViewAppBar extends StatefulWidget implements PreferredSizeWidget {
   ShopViewAppBar({required this.shopNo}) : preferredSize = Size.fromHeight(56.0);
@@ -17,7 +18,7 @@ class _ShopViewAppBar extends State<ShopViewAppBar> {
   Widget build(BuildContext context) {
     return AppBar(
       automaticallyImplyLeading: false,
-      backgroundColor: Colors.transparent,
+      backgroundColor: serviceColor(),
       elevation: 0,
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -29,11 +30,21 @@ class _ShopViewAppBar extends State<ShopViewAppBar> {
               Navigator.pop(context);
             },
             child: Container(
-                width: 16, height: 32,
-                child: Center(child: SvgPicture.asset('asset/svgIcon/icoBack.svg', width: 8, height: 16,))
+              width: 16, height: 32,
+              child: Center(child: SvgPicture.asset('asset/svgIcon/icoBackWhite.svg', width: 8, height: 16,))
             )
           ),
-          Container(width: 16)
+          Image.asset('asset/image/logoSplash.png', width: 113),
+          GestureDetector(
+            behavior: HitTestBehavior.translucent,
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: Container(
+              width: 16, height: 32,
+              child: Center(child: Image.asset('asset/image/icoShareWhite.png', width: 21.2))
+            )
+          ),
         ]
       ),
     );

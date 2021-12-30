@@ -53,10 +53,9 @@ class _ShopView extends State<ShopView> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBodyBehindAppBar: true,
       appBar: ShopViewAppBar(shopNo: shopNo),
+      backgroundColor: Color(0xfffcfcfc),
       body: shopJson == null ? Container() : ListView(
-        padding: EdgeInsets.only(top: 0),
         scrollDirection: Axis.vertical,
         shrinkWrap: true,
         children: [
@@ -66,6 +65,7 @@ class _ShopView extends State<ShopView> with SingleTickerProviderStateMixin {
           positionBox(),
           SizedBox(height: 12),
           exportBox(),
+          spaceDivider(),
           ShopViewTabBar(controller: controller),
           shopTabBarView(controller: controller, shopJson: shopJson)
         ]
