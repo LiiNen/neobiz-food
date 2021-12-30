@@ -19,30 +19,56 @@ class _ShopView extends State<ShopView> with SingleTickerProviderStateMixin {
   int shopNo;
   String infoText;
   _ShopView({required this.shopNo, required this.infoText});
+
   var shopJson;
-  late TabController controller;
+  late TabController _tabController;
+  ScrollController _scrollController = ScrollController();
+  double _scrollPosition = 0.0;
+  bool _isScrolled = false;
+  GlobalKey _scrollInvisibleKey = GlobalKey();
+  late double _scrollInvisibleHeight;
 
   @override
   void initState() {
     super.initState();
     _getShopInfo();
-    controller = TabController(length: 3, vsync: this, initialIndex: 0);
-    controller.addListener(_controllerListener);
+    _tabController = TabController(length: 3, vsync: this, initialIndex: 0);
+    _tabController.addListener(_tabListener);
   }
   @override
   void dispose() {
-    controller.dispose();
+    _tabController.dispose();
     super.dispose();
   }
 
-  _controllerListener() {
-    if(controller.indexIsChanging) setState(() {});
+  _tabListener() {
+    if(_tabController.indexIsChanging) setState(() {
+      if(_isScrolled) _scrollController.jumpTo(0);
+    });
+  }
+  _scrollListener() {
+    setState(() {
+      _scrollPosition = _scrollController.position.pixels;
+      print(_scrollPosition);
+      if(!_isScrolled && _scrollPosition > _scrollInvisibleHeight) {
+        _isScrolled = true;
+      }
+      else if(_isScrolled && _scrollPosition < 0) {
+        _scrollController = ScrollController(initialScrollOffset: _scrollInvisibleHeight);
+        _scrollController.addListener(_scrollListener);
+        _isScrolled = false;
+      }
+    });
   }
 
   void _getShopInfo() async {
     var temp = await detailInfo(no: shopNo);
     setState(() {
       shopJson = temp;
+      WidgetsBinding.instance!.addPostFrameCallback((_) {
+        _scrollInvisibleHeight = getSizeWithKey(_scrollInvisibleKey).height;
+        _scrollController.addListener(_scrollListener);
+      });
     });
     for(final key in shopJson.keys) {
       print(key);
@@ -55,21 +81,50 @@ class _ShopView extends State<ShopView> with SingleTickerProviderStateMixin {
     return Scaffold(
       appBar: ShopViewAppBar(shopNo: shopNo),
       backgroundColor: Color(0xfffcfcfc),
-      body: shopJson == null ? Container() : ListView(
-        scrollDirection: Axis.vertical,
-        shrinkWrap: true,
+      body: shopJson == null ? Container() : !_isScrolled ? SingleChildScrollView(
+        controller: _scrollController,
+        child: Column(
+          children: [
+            scrollInvisibleColumn(),
+            scrollVisibleColumn(),
+          ]
+        )
+      ) : Column(
         children: [
-          shopPhotoSwiper(),
-          infoBox(),
-          lineDivider(),
-          positionBox(),
-          SizedBox(height: 12),
-          exportBox(),
-          spaceDivider(),
-          ShopViewTabBar(controller: controller),
-          shopTabBarView(controller: controller, shopJson: shopJson)
+          ShopViewTabBar(controller: _tabController),
+          Expanded(child: SingleChildScrollView(
+            controller: _scrollController,
+            child: Column(
+              children: [
+                shopTabBarView(controller: _tabController, shopJson: shopJson)
+              ]
+            )
+          ))
         ]
       )
+    );
+  }
+
+  scrollInvisibleColumn() {
+    return Column(
+      key: _scrollInvisibleKey,
+      children: [
+        shopPhotoSwiper(),
+        infoBox(),
+        lineDivider(),
+        positionBox(),
+        SizedBox(height: 12),
+        exportBox(),
+        spaceDivider(),
+      ]
+    );
+  }
+  scrollVisibleColumn() {
+    return Column(
+      children: [
+        ShopViewTabBar(controller: _tabController),
+        shopTabBarView(controller: _tabController, shopJson: shopJson)
+      ]
     );
   }
 
