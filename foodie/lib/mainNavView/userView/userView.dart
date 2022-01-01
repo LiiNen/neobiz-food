@@ -3,19 +3,22 @@ import 'package:foodie/collections/decorationContainers.dart';
 import 'package:foodie/collections/functions.dart';
 import 'package:foodie/collections/statelessAppBar.dart';
 
+import 'modifyInfoView.dart';
+
 class UserInfo {
   String category;
   String value;
-  UserInfo(this.category, this.value);
+  TextEditingController controller;
+  UserInfo(this.category, this.value, this.controller);
 }
 
 // set when login success
 var userInfoList = [
-  UserInfo('이름', '푸디'),
-  UserInfo('이메일', 'test@gmail.com'),
-  UserInfo('비밀번호', 'testPW'),
-  UserInfo('휴대전화', '010-0000-0000'),
-  UserInfo('주소', '서울특별시 강남구'),
+  UserInfo('이름', '푸디', TextEditingController()),
+  UserInfo('이메일', 'test@gmail.com', TextEditingController()),
+  UserInfo('비밀번호', 'testPW', TextEditingController()),
+  UserInfo('휴대전화', '010-0000-0000', TextEditingController()),
+  UserInfo('주소', '서울특별시 강남구', TextEditingController()),
 ];
 
 class UserView extends StatefulWidget {
@@ -62,7 +65,7 @@ class _UserView extends State<UserView> {
           subTitleContainer(title: '회원정보'),
           SizedBox(height: 18),
           modifyInfoBox(callback: () {
-            //todo route
+            navigatorPush(context: context, widget: ModifyInfoView());
           }),
           SizedBox(height: 29),
         ]

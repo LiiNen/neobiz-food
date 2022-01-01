@@ -8,6 +8,8 @@ import 'favoriteView/favoriteView.dart';
 import 'userView/userView.dart';
 
 class MainNavView extends StatefulWidget {
+  final int initState;
+  MainNavView({this.initState=0});
   @override
   State<MainNavView> createState() => _MainNavView();
 }
@@ -18,6 +20,7 @@ class _MainNavView extends State<MainNavView> {
   @override
   void initState() {
     super.initState();
+    _selectedIndex = widget.initState;
     _mainNavItemView = <Widget>[
       HomeView(searchRoute: _searchRoute),
       SearchView(),
