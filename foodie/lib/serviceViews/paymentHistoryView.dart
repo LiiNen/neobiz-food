@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodie/collections/decorationContainers.dart';
+import 'package:foodie/collections/functions.dart';
 import 'package:foodie/collections/statelessAppBar.dart';
 
 class PaymentHistoryView extends StatefulWidget {
@@ -43,16 +44,16 @@ class _PaymentHistoryView extends State<PaymentHistoryView> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('이용권 구매 30일'),
-                  Text('3900원'),
+                  Text('이용권 구매 30일', style: textStyle(weight: 500, size: 16.0)),
+                  Text('3900원', style: textStyle(color: Color(0xff505050), weight: 500, size: 16.0)),
                 ],
               ),
               SizedBox(height: 2),
               Row(
                 children: [
-                  Text('2021.09.30'),
+                  Text('2021.09.30', style: textStyle(color: Color(0xff8e8e8e), weight: 400, size: 15.0)),
                   SizedBox(width: 5,),
-                  Text('무통장 입금')
+                  Text('무통장 입금', style: textStyle(color: serviceColor(), weight: 500, size: 13.0))
                 ]
               )
             ]
