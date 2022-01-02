@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:foodie/collections/decorationContainers.dart';
 import 'package:foodie/collections/functions.dart';
+import 'package:foodie/serviceViews/reviewView/reviewContainer.dart';
 import 'package:foodie/shopView/shopViewReviewView.dart';
 
 class ShopViewTabReview extends StatefulWidget {
@@ -24,6 +25,16 @@ class _ShopViewTabReview extends State<ShopViewTabReview> {
 
   _getReview() async {
     // todo: get review from server
+    _reviewList = [
+      ReviewItem(userName: '김정훈', content: '리뷰 테스트', score: 5),
+      ReviewItem(userName: '김정훈', content: '긴글 리뷰 테스트, 긴글 리뷰 테스트, 긴글 리뷰 테스트, 긴글 리뷰 테스트, 긴글 리뷰 테스트, 긴글 리뷰 테스트, 긴글 리뷰 테스트, 긴글 리뷰 테스트, 긴글 리뷰 테스트, 긴글 리뷰 테스트, 긴글 리뷰 테스트, 긴글 리뷰 테스트, 긴글 리뷰 테스트 긴글 리뷰 테스트 ', score: 5),
+      ReviewItem(userName: '김정훈 긴 이름 테스트 긴 이름 테스트 긴 이름 테스트', content: '리뷰 테스트', score: 5),
+      ReviewItem(userName: '김정훈', content: '리뷰 테스트', score: 4),
+      ReviewItem(userName: '김정훈', content: '리뷰 테스트', score: 3),
+      ReviewItem(userName: '김정훈', content: '리뷰 테스트', score: 2),
+      ReviewItem(userName: '김정훈', content: '리뷰 테스트', score: 1),
+      ReviewItem(userName: '김정훈', content: '리뷰 테스트', score: 5),
+    ];
   }
 
   @override
@@ -87,36 +98,10 @@ class _ShopViewTabReview extends State<ShopViewTabReview> {
   }
 
   reviewBox() {
-    var reviewChildren = List<Widget>.generate(10, (index) {
-      return reviewBoxItem();
-    });
     return Column(
-      children: reviewChildren
-    );
-  }
-
-  reviewBoxItem() {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      margin: EdgeInsets.only(top: 20, left: 18, right: 18),
-      child: Column(
-        children: [
-          Container(
-            height: 34,
-            child: Row(
-              children: [
-                Text('이름', style: textStyle(weight: 500, size: 15.0))
-              ]
-            )
-          ),
-          SizedBox(height: 10),
-          Container(
-            width: MediaQuery.of(context).size.width,
-            margin: EdgeInsets.symmetric(vertical: 2),
-            child: Text('dkdkdkdkdkdkkdkdkdkkdkdkdkdkksksjksjksjksjksjksjksjksjkjskjsksd', style: textStyle(weight: 400, size: 14.0))
-          )
-        ]
-      )
+      children:  List.generate(_reviewList.length, (index) {
+        return ReviewContainer(reviewItem: _reviewList[index],);
+      })
     );
   }
 }
