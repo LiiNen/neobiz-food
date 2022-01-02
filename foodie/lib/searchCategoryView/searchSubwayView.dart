@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:foodie/collections/decorationContainers.dart';
 import 'package:foodie/collections/functions.dart';
-import 'package:foodie/collections/statelessAppBar.dart';
 import 'package:foodie/mainNavView/searchView/searchResultView.dart';
 import 'package:foodie/restApi/searchSubwayApi.dart';
 
@@ -76,6 +75,7 @@ class _SearchSubwayView extends State<SearchSubwayView> {
   subwayRegionContainer() {
     return Container(
       width: MediaQuery.of(context).size.width,
+      color: Color(0xfff8f8f8),
       padding: EdgeInsets.symmetric(horizontal: 20),
       child: Column(
         children: [
@@ -202,6 +202,7 @@ class _SearchSubwayView extends State<SearchSubwayView> {
         children: List.generate(_subwayLineList.length == 0 ? 0 : _subwayLineList.length * 2 - 1, (index) {
           if(index%2==1) return lineDivider();
           var itemIndex = (index/2).floor();
+          bool _selected = _selectedLine == _subwayLineList[itemIndex]['no'];
           return GestureDetector(
             behavior: HitTestBehavior.translucent,
             onTap: () {
@@ -211,8 +212,20 @@ class _SearchSubwayView extends State<SearchSubwayView> {
             child: Container(
               margin: EdgeInsets.symmetric(vertical: 17),
               height: 22,
-              child: Center(
-                child: Text(_subwayLineList[itemIndex]['name'], style: textStyle(weight: 500, size: 15.0))
+              child: Stack(
+                children: [
+                  Center(
+                    child: Text(_subwayLineList[itemIndex]['name'], style: textStyle(weight: 500, size: 15.0))
+                  ),
+                  _selected ? Align(
+                    alignment: Alignment.centerLeft,
+                    child: Container(
+                      width: 9, height: 9,
+                      margin: EdgeInsets.only(left: 9),
+                      color: serviceColor(),
+                    )
+                  ) : Container()
+                ]
               )
             )
           );

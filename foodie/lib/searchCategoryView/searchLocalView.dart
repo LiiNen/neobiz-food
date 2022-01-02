@@ -35,6 +35,7 @@ class _SearchLocalView extends State<SearchLocalView> {
     return Column(
       children: [
         localRegionContainer(),
+        lineDivider(),
         Expanded(child: SingleChildScrollView(
           child: localDetailContainer(),
         ))
@@ -45,6 +46,7 @@ class _SearchLocalView extends State<SearchLocalView> {
   localRegionContainer() {
     return Container(
       width: MediaQuery.of(context).size.width,
+      color: Color(0xfff8f8f8),
       padding: EdgeInsets.symmetric(horizontal: 20),
       child: Column(
         children: [
@@ -59,7 +61,7 @@ class _SearchLocalView extends State<SearchLocalView> {
               }) : [localListRow(0)]
             )
           ),
-          bottomTapButton(context, onTapExpanded)
+          bottomTapButton(context, onTapExpanded),
         ]
       )
     );
