@@ -114,8 +114,10 @@ class _ShopView extends State<ShopView> with SingleTickerProviderStateMixin {
         lineDivider(),
         positionBox(),
         SizedBox(height: 12),
+        actionBoxList(),
+        SizedBox(height: 17),
         exportBox(),
-        spaceDivider(),
+        SizedBox(height: 42),
       ]
     );
   }
@@ -154,7 +156,7 @@ class _ShopView extends State<ShopView> with SingleTickerProviderStateMixin {
 
   infoBox() {
     return Container(
-      color: Colors.white,
+      color: Color(0xfffcfcfc),
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 24),
         padding: EdgeInsets.only(left: 18, right: 13),
@@ -223,12 +225,47 @@ class _ShopView extends State<ShopView> with SingleTickerProviderStateMixin {
     );
   }
 
+  actionBoxList() {
+    var actionList = [
+      {'type': 'Navi', 'title': '네비게이션', 'src': '', 'callback': () {print('navi');}},
+      {'type': 'Taxi', 'title': '카카오 택시', 'src': '', 'callback': () {print('taxi');}},
+      {'type': 'Bus', 'title': '카카오 버스', 'src': '', 'callback': () {print('bus');}},
+      {'type': 'Favorite', 'title': '찜하기', 'src': '', 'callback': () {print('fav');}}
+    ];
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      margin: EdgeInsets.symmetric(horizontal: 18),
+      child: Row(
+        children: List.generate(actionList.length, (index) {
+          return actionBox(actionList[index]);
+        })
+      )
+    );
+  }
+
+  actionBox(action) {
+    return Expanded(
+      child: Column(
+        children: [
+          GestureDetector(
+            behavior: HitTestBehavior.translucent,
+            onTap: () {
+              action['callback'];
+            },
+            child: Image.asset('asset/image/info${action['type']}Button.png', width: 49),
+          ),
+          SizedBox(height: 11),
+          Text(action['title'], style: textStyle(weight: 500, size: 13.0))
+        ]
+      )
+    );
+  }
+
   exportBox() {
     return Container(
       color: Color(0xfffcfcfc),
       child: Container(
         width: MediaQuery.of(context).size.width,
-        padding: EdgeInsets.symmetric(vertical: 12),
         child: Column(
           children: [
             fullWidthShadowButton('전화걸기', callPhone)
