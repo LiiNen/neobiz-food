@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:foodie/collections/decorationContainers.dart';
 import 'package:foodie/collections/functions.dart';
 import 'package:foodie/collections/statelessAppBar.dart';
+import 'package:foodie/loginView/loginView.dart';
 import 'package:foodie/serviceViews/paymentHistoryView.dart';
 import 'package:foodie/serviceViews/paymentView/paymentView.dart';
 import 'package:foodie/serviceViews/reviewView/reviewView.dart';
@@ -31,8 +32,13 @@ class _HomeDrawer extends State<HomeDrawer> {
     HomeDrawerMenu(icon: Image.asset('asset/image/drawerPresentIcon.png', width: 18), title: '이용권 선물', route: PaymentView(isPresent: true)),
     HomeDrawerMenu(icon: Image.asset('asset/image/drawerPaymentIcon.png', width: 15), title: '결제내역', route: PaymentHistoryView()),
     HomeDrawerMenu(icon: Image.asset('asset/image/drawerInquiryIcon.png', width: 16), title: '1:1 문의', route: SupportView(supportId: 1,)),
-    HomeDrawerMenu(icon: Image.asset('asset/image/drawerLogoutIcon.png', width: 15), title: '로그아웃'),
+    HomeDrawerMenu(icon: Image.asset('asset/image/drawerLogoutIcon.png', width: 15), title: '로그아웃',)
   ];
+
+  logoutAction() {
+    //todo: logout
+    navigatorPush(context: context, widget: LoginView(), replacement: true, all: true);
+  }
 
   @override
   void initState() {
@@ -155,6 +161,7 @@ class _HomeDrawer extends State<HomeDrawer> {
       onTap: () {
         if(menu.action != null) menu.action();
         if(menu.route != null) navigatorPush(context: context, widget: menu.route);
+        if(menu.title == '로그아웃') logoutAction();
         print('click');
       },
       child: Container(
