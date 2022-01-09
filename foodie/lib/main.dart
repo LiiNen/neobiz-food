@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:foodie/collections/exitDialog.dart';
 import 'package:foodie/collections/functions.dart';
+import 'package:foodie/collections/sharedPreferences.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'loginView/loginView.dart';
 import 'mainNavView/mainNavView.dart';
+
+late UserInfo userInfo;
 
 void main() async{
   runApp(MyApp());
@@ -40,6 +43,7 @@ class _SplashView extends State<SplashView> {
 
   _checkLogin() async {
     _isLogin = false;
+    userInfo = await getUserInfo();
 
     if(_isLogin == true) {
       navigatorPushWithoutAnimation(context: context, widget: MainNavView());

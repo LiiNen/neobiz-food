@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:foodie/collections/decorationContainers.dart';
 import 'package:foodie/collections/functions.dart';
+import 'package:foodie/collections/sharedPreferences.dart';
 import 'package:foodie/collections/statelessAppBar.dart';
 import 'package:foodie/loginView/loginView.dart';
 import 'package:foodie/serviceViews/paymentHistoryView.dart';
@@ -35,8 +36,8 @@ class _HomeDrawer extends State<HomeDrawer> {
     HomeDrawerMenu(icon: Image.asset('asset/image/drawerLogoutIcon.png', width: 15), title: '로그아웃',)
   ];
 
-  logoutAction() {
-    //todo: logout
+  logoutAction() async {
+    await deleteUserInfo();
     navigatorPush(context: context, widget: LoginView(), replacement: true, all: true);
   }
 

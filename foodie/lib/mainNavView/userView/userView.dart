@@ -5,20 +5,20 @@ import 'package:foodie/collections/statelessAppBar.dart';
 
 import 'modifyInfoView.dart';
 
-class UserInfo {
+class TextUserInfo {
   String category;
   String value;
   TextEditingController controller;
-  UserInfo(this.category, this.value, this.controller);
+  TextUserInfo(this.category, this.value, this.controller);
 }
 
 // set when login success
 var userInfoList = [
-  UserInfo('이름', '푸디', TextEditingController()),
-  UserInfo('이메일', 'test@gmail.com', TextEditingController()),
-  UserInfo('비밀번호', 'testPW', TextEditingController()),
-  UserInfo('휴대전화', '010-0000-0000', TextEditingController()),
-  UserInfo('주소', '서울특별시 강남구', TextEditingController()),
+  TextUserInfo('이름', '푸디', TextEditingController()),
+  TextUserInfo('이메일', 'test@gmail.com', TextEditingController()),
+  TextUserInfo('비밀번호', 'testPW', TextEditingController()),
+  TextUserInfo('휴대전화', '010-0000-0000', TextEditingController()),
+  TextUserInfo('주소', '서울특별시 강남구', TextEditingController()),
 ];
 
 class UserView extends StatefulWidget {
