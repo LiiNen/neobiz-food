@@ -82,14 +82,15 @@ class _LoginView extends State<LoginView> {
 
   _loginAction() async {
     // todo: login with account
-    var _response = await getUser(id: 33);
-    if(_response != null) {
-      setUserInfo(id: _response['userId'], name: _response['name'], email: _response['email'], phone: _response['phone'], address: _response['address'], point: _response['point']);
-    }
-    else {
-      print('f');
-    }
-    // navigatorPush(context: context, widget: MainNavView(), replacement: true, all: true);
+    // check: login state
+    // var _response = await getUser(id: 33);
+    // if(_response != null) {
+    //   setUserInfo(id: _response['userId'], name: _response['name'], email: _response['email'], phone: _response['phone'], address: _response['address'], point: _response['point']);
+    // }
+    // else {
+    //   print('f');
+    // }
+    navigatorPush(context: context, widget: MainNavView(), replacement: true, all: true);
   }
 
   loginTextField(String type, TextEditingController loginController) {

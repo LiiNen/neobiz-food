@@ -4,7 +4,6 @@ import 'package:foodie/collections/functions.dart';
 import 'package:foodie/collections/statelessAppBar.dart';
 import 'package:foodie/mainNavView/favoriteView/favoriteDescriptionContainer.dart';
 
-import 'favoriteAppBar.dart';
 import 'favoriteList.dart';
 
 class FavoriteView extends StatefulWidget {

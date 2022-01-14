@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:foodie/collections/exitDialog.dart';
 import 'package:foodie/collections/functions.dart';
 import 'package:foodie/collections/sharedPreferences.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'loginView/loginView.dart';

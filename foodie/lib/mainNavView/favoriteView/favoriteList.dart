@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodie/collections/decorationContainers.dart';
 import 'package:foodie/mainNavView/favoriteView/favoriteItemSlidable.dart';
-import 'package:foodie/mainNavView/searchPositionView/searchPositionCard.dart';
 
 class FavoriteGreenList extends StatefulWidget {
   @override
