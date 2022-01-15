@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:foodie/collections/decorationContainers.dart';
 import 'package:foodie/collections/functions.dart';
 import 'package:foodie/collections/statelessAppBar.dart';
+import 'package:foodie/main.dart';
 
 import 'modifyInfoView.dart';
 
@@ -13,13 +14,7 @@ class TextUserInfo {
 }
 
 // set when login success
-var userInfoList = [
-  TextUserInfo('이름', '푸디', TextEditingController()),
-  TextUserInfo('이메일', 'test@gmail.com', TextEditingController()),
-  TextUserInfo('비밀번호', 'testPW', TextEditingController()),
-  TextUserInfo('휴대전화', '010-0000-0000', TextEditingController()),
-  TextUserInfo('주소', '서울특별시 강남구', TextEditingController()),
-];
+var userInfoList = [];
 
 class UserView extends StatefulWidget {
   @override
@@ -30,6 +25,16 @@ class _UserView extends State<UserView> {
   @override
   void initState() {
     super.initState();
+    _setTextUserInfoList();
+  }
+
+  void _setTextUserInfoList() {
+    userInfoList = [];
+    userInfoList.add(TextUserInfo('이름', userInfo.name, TextEditingController()));
+    userInfoList.add(TextUserInfo('이메일', userInfo.email, TextEditingController()));
+    userInfoList.add(TextUserInfo('비밀번호', '--', TextEditingController()));
+    userInfoList.add(TextUserInfo('휴대전화', userInfo.phone, TextEditingController()));
+    userInfoList.add(TextUserInfo('주소', userInfo.address, TextEditingController()));
   }
 
   @override

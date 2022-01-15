@@ -3,6 +3,7 @@ import 'package:foodie/collections/decorationContainers.dart';
 import 'package:foodie/collections/exitDialog.dart';
 import 'package:foodie/collections/functions.dart';
 import 'package:foodie/collections/sharedPreferences.dart';
+import 'package:foodie/main.dart';
 import 'package:foodie/mainNavView/mainNavView.dart';
 import 'package:foodie/restApi/userApi.dart';
 
@@ -83,14 +84,14 @@ class _LoginView extends State<LoginView> {
   _loginAction() async {
     // todo: login with account
     // check: login state
-    // var _response = await getUser(id: 33);
-    // if(_response != null) {
-    //   setUserInfo(id: _response['userId'], name: _response['name'], email: _response['email'], phone: _response['phone'], address: _response['address'], point: _response['point']);
-    // }
-    // else {
-    //   print('f');
-    // }
-    navigatorPush(context: context, widget: MainNavView(), replacement: true, all: true);
+    var _response = await getUser(id: 34);
+    if(_response != null) {
+      await setUserInfo(id: _response['userId'], name: _response['name'], email: _response['email'], phone: _response['phone'], address: _response['address'].toString().split('+')[1], point: _response['point']);
+      navigatorPush(context: context, widget: MainNavView(), replacement: true, all: true);
+    }
+    else {
+      print('f');
+    }
   }
 
   loginTextField(String type, TextEditingController loginController) {

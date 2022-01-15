@@ -4,6 +4,7 @@ import 'package:foodie/collections/functions.dart';
 import 'package:foodie/collections/sharedPreferences.dart';
 import 'package:foodie/collections/statelessAppBar.dart';
 import 'package:foodie/loginView/loginView.dart';
+import 'package:foodie/main.dart';
 import 'package:foodie/serviceViews/paymentHistoryView.dart';
 import 'package:foodie/serviceViews/paymentView/paymentView.dart';
 import 'package:foodie/serviceViews/reviewView/reviewView.dart';
@@ -104,7 +105,7 @@ class _HomeDrawer extends State<HomeDrawer> {
                   children: [
                     Align(
                       alignment: Alignment.topLeft,
-                      child: Text('username님', style: textStyle(weight: 700, size: 16.0)),
+                      child: Text('${userInfo.name}님', style: textStyle(weight: 700, size: 16.0)),
                     ),
                     Align(
                       alignment: Alignment.bottomLeft,
@@ -112,7 +113,7 @@ class _HomeDrawer extends State<HomeDrawer> {
                         children: [
                           Image.asset('asset/image/pointIcon.png', width: 16),
                           SizedBox(width: 3),
-                          Text('0000P', style: textStyle(color: serviceColor(), weight: 500, size: 16.0))
+                          Text('${userInfo.point}P', style: textStyle(color: serviceColor(), weight: 500, size: 16.0))
                         ]
                       )
                     ),

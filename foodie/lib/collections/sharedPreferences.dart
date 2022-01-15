@@ -1,3 +1,4 @@
+import 'package:foodie/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserInfo {
@@ -27,6 +28,7 @@ setUserInfo({required int id, required String name, required String email, requi
   pref.setString('phone', phone);
   pref.setString('address', address);
   pref.setInt('point', point);
+  userInfo = await getUserInfo();
 }
 deleteUserInfo() async {
   final pref = await SharedPreferences.getInstance();
