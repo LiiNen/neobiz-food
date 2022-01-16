@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:foodie/collections/decorationContainers.dart';
+import 'package:foodie/collections/functions.dart';
 import 'package:foodie/mainNavView/favoriteView/favoriteItemSlidable.dart';
+import 'package:foodie/shopView/shopView.dart';
 
 class FavoriteGreenList extends StatefulWidget {
   final List<dynamic> _favoriteList;
@@ -39,11 +41,17 @@ class _FavoriteRedList extends State<FavoriteRedList> {
             return FavoriteItemSlidable (
               shopId: _temp['shopId'], thumbnail: _temp['shopImage'],
               title: _temp['shopName'], genre: '장르', position: '서울 강남구',
-              rating: _temp['foodielogRating']
+              rating: _temp['foodielogRating'],
+              pushCallback: () {_shopViewRoute(_temp['shopId']);},
             );
           }
         })
       )
     );
+  }
+  
+  _shopViewRoute(int shopId) {
+    //todo: info text
+    navigatorPush(context: context, widget: ShopView(shopNo: shopId, infoText: '장르인듯?'));
   }
 }

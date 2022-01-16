@@ -27,7 +27,7 @@ class FavoriteItemSlidable extends StatelessWidget {
       secondaryActions: [_iconSlideAction()],
         child: GestureDetector(
           behavior: HitTestBehavior.translucent,
-          onTap: () {},
+          onTap: () {pushCallback();},
           child: Container(
             width: MediaQuery.of(context).size.width, height: 82,
             margin: EdgeInsets.symmetric(horizontal: 18, vertical: 15),
@@ -37,23 +37,27 @@ class FavoriteItemSlidable extends StatelessWidget {
                 children: [
                   AspectRatio(aspectRatio: 1.34, child: Image.network(thumbnail, width: 110, height: 82)),
                   SizedBox(width: 12),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(title, style: textStyle(weight: 500, size: 16.0)),
-                      SizedBox(height: 1),
-                      Text(genre, style: textStyle(weight: 400, size: 13.0)),
-                      SizedBox(height: 6),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text(position, style: textStyle(weight: 400, size: 13.0)),
-                          // button
-                        ]
-                      )
-                    ]
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(title, style: textStyle(weight: 500, size: 16.0)),
+                        SizedBox(height: 1),
+                        Text(genre, style: textStyle(weight: 400, size: 13.0)),
+                        SizedBox(height: 6),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              height: 20,
+                              child: Text(position, style: textStyle(weight: 400, size: 13.0), textAlign: TextAlign.left,)
+                            ),
+                            rating == '' ? Container() : Image.asset('asset/image/star${rating.length}.png', height: 20)
+                          ]
+                        )
+                      ]
+                    )
                   )
                 ]
               )
