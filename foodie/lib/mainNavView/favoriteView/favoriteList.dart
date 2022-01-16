@@ -3,6 +3,8 @@ import 'package:foodie/collections/decorationContainers.dart';
 import 'package:foodie/mainNavView/favoriteView/favoriteItemSlidable.dart';
 
 class FavoriteGreenList extends StatefulWidget {
+  final List<dynamic> _favoriteList;
+  FavoriteGreenList(this._favoriteList);
   @override
   State<FavoriteGreenList> createState() => _FavoriteGreenList();
 }
@@ -16,17 +18,30 @@ class _FavoriteGreenList extends State<FavoriteGreenList> {
 }
 
 class FavoriteRedList extends StatefulWidget {
+  final List<dynamic> _favoriteList;
+  FavoriteRedList(this._favoriteList);
   @override
   State<FavoriteRedList> createState() => _FavoriteRedList();
 }
 class _FavoriteRedList extends State<FavoriteRedList> {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    if(widget._favoriteList.length == 0) {
+      return Container();
+    }
+    else return Container(
       child: Column(
-        children: List.generate(10*2-1,(index) {
+        children: List.generate(widget._favoriteList.length*2-1, (index) {
           if(index%2==1) return lineDivider();
-          return FavoriteItemSlidable(title: '가온', genre: '한식 | 모던한식 | 오리', position: '서울 강남구');
+          else {
+            var _temp = widget._favoriteList[(index/2).floor()];
+            // todo: genre, position
+            return FavoriteItemSlidable (
+              shopId: _temp['shopId'], thumbnail: _temp['shopImage'],
+              title: _temp['shopName'], genre: '장르', position: '서울 강남구',
+              rating: _temp['foodielogRating']
+            );
+          }
         })
       )
     );

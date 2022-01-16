@@ -4,13 +4,17 @@ import 'package:foodie/collections/decorationContainers.dart';
 import 'package:foodie/collections/functions.dart';
 
 class FavoriteItemSlidable extends StatelessWidget {
+  final int shopId;
   final String title;
   final String genre;
   final String position;
+  final String thumbnail;
+  final String rating;
   final dynamic pushCallback;
   final dynamic shareCallback;
   final dynamic deleteCallback;
-  FavoriteItemSlidable({required String this.title, required String this.genre, required String this.position,
+  FavoriteItemSlidable({required int this.shopId, required String this.title,
+    required String this.genre, required String this.position, required this.thumbnail, required String this.rating,
     dynamic this.pushCallback, dynamic this.shareCallback, dynamic this.deleteCallback});
 
   @override
@@ -31,7 +35,7 @@ class FavoriteItemSlidable extends StatelessWidget {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  AspectRatio(aspectRatio: 1.34, child: Image.asset('asset/image/paymentKakao.png', width: 110, height: 82)),
+                  AspectRatio(aspectRatio: 1.34, child: Image.network(thumbnail, width: 110, height: 82)),
                   SizedBox(width: 12),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,

@@ -3,6 +3,7 @@ import 'package:foodie/collections/decorationContainers.dart';
 import 'package:foodie/collections/functions.dart';
 import 'package:foodie/collections/statelessAppBar.dart';
 import 'package:foodie/mainNavView/favoriteView/favoriteDescriptionContainer.dart';
+import 'package:foodie/restApi/favoriteApi.dart';
 
 import 'favoriteList.dart';
 
@@ -13,9 +14,17 @@ class FavoriteView extends StatefulWidget {
 class _FavoriteView extends State<FavoriteView> with SingleTickerProviderStateMixin{
   var _isRed = true;
 
+  var _favoriteList = [];
+
   @override
   void initState() {
     super.initState();
+    _getFavoriteList();
+  }
+
+  void _getFavoriteList() async {
+    _favoriteList = await getFavoriteShopList();
+    setState(() {});
   }
 
   @override
@@ -34,7 +43,7 @@ class _FavoriteView extends State<FavoriteView> with SingleTickerProviderStateMi
               child: Container(
                 child: Column(
                   children: [
-                    _isRed ? FavoriteRedList() : FavoriteGreenList(),
+                    _isRed ? FavoriteRedList(_favoriteList) : FavoriteGreenList(_favoriteList),
                     FavoriteDescriptionContainer(),
                   ]
                 )
