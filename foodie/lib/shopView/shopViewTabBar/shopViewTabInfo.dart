@@ -15,10 +15,10 @@ class _ShopViewTabInfo extends State<ShopViewTabInfo> {
   _ShopViewTabInfo(this.shopJson);
 
   List<String> _firstList = ['영업시간', '휴무일', '추천메뉴', '예산'];
-  List<String> _firstIndexList = ['time', 'rest_day', 'rec_menu', 'pre_cost'];
+  List<String> _firstIndexList = ['operationTime', 'holiday', 'recommandMenu', 'budget'];
 
   List<String> _secondList = ['홈페이지', '주차장'];
-  List<String> _secondIndexList = ['homepage', 'park'];
+  List<String> _secondIndexList = ['homepage', 'isParking'];
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +49,7 @@ class _ShopViewTabInfo extends State<ShopViewTabInfo> {
   //todo: fixing style
   descriptionContainer() {
     return Html(
-      data: shopJson['explain']
+      data: shopJson['history']
     );
     // return Text(htmlTagRemover(shopJson['explain']), style: textStyle(weight: 400, size: 14.0));
   }
@@ -57,7 +57,7 @@ class _ShopViewTabInfo extends State<ShopViewTabInfo> {
   detailContainer(nameList, indexList) {
     List<Widget> _childrenList = [];
     for(var i = 0; i < nameList.length; i++) {
-      if(shopJson[indexList[i]] != '') { // return data가 없는 경우
+      if(shopJson[indexList[i]] != null) { // return data가 없는 경우
         _childrenList.add(Text(nameList[i], style: textStyle(color: Color(0xff4d4d4d), weight: 500, size: 15.0),));
         _childrenList.add(SizedBox(height: 2));
         _childrenList.add(Text(shopJson[indexList[i]], style: textStyle(color: Color(0xff393939), weight: 400, size: 14.0),));

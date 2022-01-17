@@ -1,8 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:foodie/collections/decorationContainers.dart';
 import 'package:foodie/collections/functions.dart';
 import 'package:foodie/restApi/detailInfoApi.dart';
+import 'package:foodie/restApi/shopApi.dart';
 import 'package:foodie/shopView/shopViewAppBar.dart';
 
 import 'shopViewTabBar/shopViewTabBar.dart';
@@ -31,7 +34,7 @@ class _ShopView extends State<ShopView> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    _getShopInfo();
+    _getShop();
     _tabController = TabController(length: 3, vsync: this, initialIndex: 0);
     _tabController.addListener(_tabListener);
   }
@@ -59,6 +62,21 @@ class _ShopView extends State<ShopView> with SingleTickerProviderStateMixin {
         _isScrolled = false;
       }
     });
+  }
+
+  void _getShop() async {
+    var temp = await getShop(id: shopNo);
+    setState(() {
+      shopJson = temp;
+      WidgetsBinding.instance!.addPostFrameCallback((_) {
+        _scrollInvisibleHeight = getSizeWithKey(_scrollInvisibleKey).height;
+        _scrollController.addListener(_scrollListener);
+      });
+    });
+    for(final key in shopJson.keys) {
+      print(key);
+      print(shopJson[key]);
+    }
   }
 
   void _getShopInfo() async {
@@ -131,7 +149,7 @@ class _ShopView extends State<ShopView> with SingleTickerProviderStateMixin {
   }
 
   shopPhotoSwiper() {
-    var photoList = shopJson['photo'];
+    var photoList = [shopJson['shopImage']] + json.decode(shopJson['menuImages']);
     return Container(
       height: MediaQuery.of(context).size.width * 0.75,
       child: Swiper(
@@ -167,7 +185,7 @@ class _ShopView extends State<ShopView> with SingleTickerProviderStateMixin {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(shopJson['name'], style: textStyle(weight: 500, size: 18.0)),
+                Text(shopJson['shopName'], style: textStyle(weight: 500, size: 18.0)),
                 Image.asset('asset/image/star3.png', height: 30),
               ]
             ),
