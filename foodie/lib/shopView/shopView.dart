@@ -233,7 +233,23 @@ class _ShopView extends State<ShopView> with SingleTickerProviderStateMixin {
           Text('주소', style: textStyle(color: Color(0xff4d4d4d), weight: 500, size: 15.0)),
           SizedBox(height: 2),
           Text(shopJson['address'], style: textStyle(color: Color(0xff393939), weight: 400, size: 14.0)),
-          //todo : 도로명주소????
+          SizedBox(height: 4),
+          Row(
+            children: [
+              Container(
+                width: 56, height: 24,
+                child: Center(
+                  child: Text('도로명', style: textStyle(color: Colors.white, weight: 500, size: 12.0))
+                ),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(13)),
+                  color: Color(0xffbababa)
+                ),
+              ),
+              SizedBox(width: 5),
+              Text(shopJson['roadAddress'], style: textStyle(color: Color(0xff888888), weight: 400, size: 14.0))
+            ]
+          ),
           SizedBox(height: 9),
           Text('전화번호', style: textStyle(color: Color(0xff4d4d4d), weight: 500, size: 15.0)),
           SizedBox(height: 2),
