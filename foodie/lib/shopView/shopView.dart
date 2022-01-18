@@ -79,21 +79,6 @@ class _ShopView extends State<ShopView> with SingleTickerProviderStateMixin {
     }
   }
 
-  void _getShopInfo() async {
-    var temp = await detailInfo(no: shopNo);
-    setState(() {
-      shopJson = temp;
-      WidgetsBinding.instance!.addPostFrameCallback((_) {
-        _scrollInvisibleHeight = getSizeWithKey(_scrollInvisibleKey).height;
-        _scrollController.addListener(_scrollListener);
-      });
-    });
-    for(final key in shopJson.keys) {
-      print(key);
-      print(shopJson[key]);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -173,6 +158,7 @@ class _ShopView extends State<ShopView> with SingleTickerProviderStateMixin {
   }
 
   infoBox() {
+    var _star = shopJson['foodielogRating'].length;
     return Container(
       color: Color(0xfffcfcfc),
       child: Container(
@@ -186,7 +172,7 @@ class _ShopView extends State<ShopView> with SingleTickerProviderStateMixin {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(shopJson['shopName'], style: textStyle(weight: 500, size: 18.0)),
-                Image.asset('asset/image/star3.png', height: 30),
+                _star != 0 ? Image.asset('asset/image/star$_star.png', height: 30) : Container(),
               ]
             ),
             Text(infoText, style: textStyle(color: Color(0xff8e8e8e), weight: 500, size: 15.0)),
@@ -195,7 +181,7 @@ class _ShopView extends State<ShopView> with SingleTickerProviderStateMixin {
               children: [
                 Text('전문가 평점', style: textStyle(color: Color(0xff4d4d4d), weight: 400, size: 15.0)),
                 SizedBox(width: 8),
-                coloredBox('AAA'),
+                coloredBox(shopJson['foodielogRating'].toString()),
                 SizedBox(width: 22),
                 Text('방문자 평점', style: textStyle(color: Color(0xff4d4d4d), weight: 400, size: 15.0)),
                 SizedBox(width: 8),
