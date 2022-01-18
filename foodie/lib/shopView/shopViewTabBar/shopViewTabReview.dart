@@ -72,7 +72,7 @@ class _ShopViewTabReview extends State<ShopViewTabReview> {
               child: GestureDetector(
                 onTap: () {
                   //todo : pass with shop parameter
-                  navigatorPush(context: context, widget: ShopViewReviewView());
+                  navigatorPush(context: context, widget: ShopViewReviewView(shopJson['shopId']));
                 },
                 child: Container(
                   width: 88, height: 33,
