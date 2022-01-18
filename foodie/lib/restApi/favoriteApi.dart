@@ -14,3 +14,12 @@ getFavoriteShopList() async {
   else print('error');
   return null;
 }
+
+deleteFavorite(int reviewId) async {
+  var response = await http.delete(Uri.parse('$testUrl$pathFavorite/$reviewId'));
+  print('$testUrl$pathFavorite/$reviewId');
+  if(response.statusCode == 200) {
+    return true;
+  }
+  else return false;
+}

@@ -79,6 +79,10 @@ class FavoriteItemSlidable extends StatelessWidget {
             lineDivider(vertical: true),
             Expanded(
               child: GestureDetector(
+                behavior: HitTestBehavior.translucent,
+                onTap: () {
+                  shareCallback();
+                },
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -95,6 +99,10 @@ class FavoriteItemSlidable extends StatelessWidget {
             ),
             Expanded(
               child: GestureDetector(
+                behavior: HitTestBehavior.translucent,
+                onTap: () {
+                  deleteCallback();
+                },
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

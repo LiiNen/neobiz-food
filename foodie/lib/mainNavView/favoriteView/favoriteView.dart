@@ -24,6 +24,7 @@ class _FavoriteView extends State<FavoriteView> with SingleTickerProviderStateMi
 
   void _getFavoriteList() async {
     _favoriteList = await getFavoriteShopList();
+    print(_favoriteList);
     setState(() {});
   }
 
@@ -43,7 +44,7 @@ class _FavoriteView extends State<FavoriteView> with SingleTickerProviderStateMi
               child: Container(
                 child: Column(
                   children: [
-                    _isRed ? FavoriteRedList(_favoriteList) : FavoriteGreenList(_favoriteList),
+                    _isRed ? FavoriteRedList(_favoriteList, reload: _getFavoriteList,) : FavoriteGreenList(_favoriteList, reload: _getFavoriteList,),
                     FavoriteDescriptionContainer(),
                   ]
                 )
