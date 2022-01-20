@@ -5,6 +5,7 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:foodie/collections/decorationContainers.dart';
 import 'package:foodie/collections/functions.dart';
 import 'package:foodie/restApi/detailInfoApi.dart';
+import 'package:foodie/restApi/favoriteApi.dart';
 import 'package:foodie/restApi/shopApi.dart';
 import 'package:foodie/shopView/shopViewAppBar.dart';
 
@@ -73,10 +74,11 @@ class _ShopView extends State<ShopView> with SingleTickerProviderStateMixin {
         _scrollController.addListener(_scrollListener);
       });
     });
-    for(final key in shopJson.keys) {
-      print(key);
-      print(shopJson[key]);
-    }
+    checkFavorite();
+    // for(final key in shopJson.keys) {
+    //   print(key);
+    //   print(shopJson[key]);
+    // }
   }
 
   @override
@@ -250,7 +252,7 @@ class _ShopView extends State<ShopView> with SingleTickerProviderStateMixin {
       {'type': 'Navi', 'title': '네비게이션', 'src': '', 'callback': () {print('navi');}},
       {'type': 'Taxi', 'title': '카카오 택시', 'src': '', 'callback': () {print('taxi');}},
       {'type': 'Bus', 'title': '카카오 버스', 'src': '', 'callback': () {print('bus');}},
-      {'type': 'Favorite', 'title': '찜하기', 'src': '', 'callback': () {print('fav');}}
+      {'type': 'Favorite', 'title': isFavorite ? '찜해제':'찜하기', 'src': '', 'callback': () {actionFavorite();}}
     ];
     return Container(
       width: MediaQuery.of(context).size.width,
@@ -270,7 +272,7 @@ class _ShopView extends State<ShopView> with SingleTickerProviderStateMixin {
           GestureDetector(
             behavior: HitTestBehavior.translucent,
             onTap: () {
-              action['callback'];
+              action['callback']();
             },
             child: Image.asset('asset/image/info${action['type']}Button.png', width: 49),
           ),
@@ -279,6 +281,52 @@ class _ShopView extends State<ShopView> with SingleTickerProviderStateMixin {
         ]
       )
     );
+  }
+
+  bool isFavorite = false;
+  var favoriteIdList = [];
+
+  checkFavorite() async {
+    var response = await getFavorite(shopJson['shopId']);
+    print('here');
+    print(response);
+    if(response!=null && response.length > 0) {
+      setState(() {
+        isFavorite = true;
+        for(int i = 0; i < response.length; i++) {
+          favoriteIdList.add(response[i]['id']);
+        }
+        print(favoriteIdList);
+      });
+    }
+    else {
+      setState(() {
+        isFavorite = false;
+      });
+    }
+  }
+
+  actionFavorite() async {
+    print(isFavorite);
+    var response = false;
+    if(isFavorite) {
+      for(int i = 0; i < favoriteIdList.length; i++) {
+        response = await deleteFavorite(favoriteIdList[i]);
+        if(response == false) {
+          break;
+        }
+      }
+    }
+    else {
+      response = await postFavorite(shopJson['shopId']);
+    }
+    if(response) {
+      showToast(isFavorite ? '찜 해제!' : '찜!');
+    }
+    else {
+      showToast('네트워크 에러');
+    }
+    await checkFavorite();
   }
 
   exportBox() {

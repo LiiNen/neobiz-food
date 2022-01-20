@@ -15,9 +15,32 @@ getFavoriteShopList() async {
   return null;
 }
 
-deleteFavorite(int reviewId) async {
-  var response = await http.delete(Uri.parse('$testUrl$pathFavorite/$reviewId'));
-  print('$testUrl$pathFavorite/$reviewId');
+getFavorite(int shopId) async {
+  var response = await http.get(Uri.parse('$testUrl$pathFavorite/check/${userInfo.id}/$shopId'));
+  if(response.statusCode == 200) {
+    var responseBody = jsonDecode(response.body);
+    return responseBody;
+  }
+  else return null;
+}
+
+postFavorite(int shopId) async {
+  var requestBody = Map();
+  requestBody['userId'] = userInfo.id;
+  requestBody['shopId'] = shopId;
+  var response = await http.post(Uri.parse('$testUrl$pathFavorite'),
+      headers: {"Content-Type": "application/json"},
+      body: json.encode(requestBody)
+  );
+  if(response.statusCode == 200) {
+    return true;
+  }
+  else return false;
+}
+
+deleteFavorite(int favoriteId) async {
+  var response = await http.delete(Uri.parse('$testUrl$pathFavorite/$favoriteId'));
+  print('$testUrl$pathFavorite/$favoriteId');
   if(response.statusCode == 200) {
     return true;
   }
