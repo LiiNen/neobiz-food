@@ -86,7 +86,6 @@ class _LoginView extends State<LoginView> {
     // check: login state
     var _response = await getUser(id: 34);
     if(_response != null) {
-      await setUserInfo(id: _response['userId'], name: _response['name'], email: _response['email'], phone: _response['phone'], address: _response['address'].toString().split('+')[1], point: _response['point']);
       navigatorPush(context: context, widget: MainNavView(), replacement: true, all: true);
     }
     else {

@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:foodie/collections/decorationContainers.dart';
 import 'package:foodie/collections/functions.dart';
 import 'package:foodie/collections/statelessAppBar.dart';
+import 'package:foodie/main.dart';
 import 'package:foodie/mainNavView/mainNavView.dart';
 import 'package:foodie/mainNavView/userView/userView.dart';
+import 'package:foodie/restApi/userApi.dart';
 
 class ModifyInfoView extends StatefulWidget {
   @override
@@ -64,12 +66,23 @@ class _ModifyInfoView extends State<ModifyInfoView> {
     }).toList();
   }
 
-  _modifyInfoCallback() {
-    userInfoList.map((e) {
-      print(e.controller.text);
-      e.controller = TextEditingController(); // init
-    }).toList();
-    showToast('회원정보 수정 완료');
-    navigatorPush(context: context, widget: MainNavView(initState: 3,), replacement: true, all: true);
+  _modifyInfoCallback() async {
+    print(userInfoList[0].controller.text);
+    if(userInfoList[0].controller.text != '') {
+      var response = await patchUserName(name: userInfoList[0].controller.text);
+      if(response == true) {
+        showToast('회원정보 수정 완료');
+        userInfoList.map((e) {
+          print(e.controller.text);
+          e.controller = TextEditingController(); // init
+        }).toList();
+        await getUser(id: userInfo.id);
+        navigatorPush(context: context, widget: MainNavView(initState: 3,), replacement: true, all: true);
+      }
+      else showToast('네트워크 에러');
+    }
+    else {
+      showToast('입력 필수');
+    }
   }
 }
