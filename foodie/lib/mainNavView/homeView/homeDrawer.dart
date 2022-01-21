@@ -9,7 +9,8 @@ import 'package:foodie/serviceViews/paymentHistoryView.dart';
 import 'package:foodie/serviceViews/paymentView/paymentView.dart';
 import 'package:foodie/serviceViews/reviewView/reviewView.dart';
 import 'package:foodie/serviceViews/supportView.dart';
-import 'package:foodie/mainNavView/userView/userView.dart';
+
+import '../mainNavView.dart';
 
 class HomeDrawerMenu {
   dynamic icon;
@@ -29,7 +30,7 @@ class _HomeDrawer extends State<HomeDrawer> {
   var homeDrawerMenuList = [
     HomeDrawerMenu(icon: Image.asset('asset/image/drawerManageIcon.png', width: 17), title: '내 매장 관리하기'),
     HomeDrawerMenu(icon: Image.asset('asset/image/drawerReportIcon.png', width: 18), title: '맛집 | 여행지 제보하기', route: SupportView(supportId: 2,)),
-    HomeDrawerMenu(icon: Image.asset('asset/image/drawerReviewIcon.png', width: 16), title: '내가쓴글', route: ReviewView()),
+    HomeDrawerMenu(icon: Image.asset('asset/image/drawerReviewIcon.png', width: 16), title: '내가쓴글', route: ReviewView(id: userInfo.id, isUser: true,)),
     HomeDrawerMenu(icon: Image.asset('asset/image/drawerPremiumIcon.png', width: 18), title: '프리미엄 회원', route: PaymentView()),
     HomeDrawerMenu(icon: Image.asset('asset/image/drawerPresentIcon.png', width: 18), title: '이용권 선물', route: PaymentView(isPresent: true)),
     HomeDrawerMenu(icon: Image.asset('asset/image/drawerPaymentIcon.png', width: 15), title: '결제내역', route: PaymentHistoryView()),
@@ -121,7 +122,7 @@ class _HomeDrawer extends State<HomeDrawer> {
                 ),
                 Expanded(
                   child: GestureDetector(
-                    onTap: () { navigatorPush(context: context, widget: UserView()); },
+                    onTap: () { navigatorPush(context: context, widget: MainNavView(initState: 3,), replacement: true, all: true); },
                     behavior: HitTestBehavior.translucent,
                     child: Align(
                       alignment: Alignment.centerRight,
