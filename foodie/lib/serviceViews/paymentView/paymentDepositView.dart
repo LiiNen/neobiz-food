@@ -52,7 +52,7 @@ class _PaymentDepositView extends State<PaymentDepositView> {
           AspectRatio(
             aspectRatio: 3.45,
             child: Container(
-              padding: EdgeInsets.only(top: 10, bottom: 19, left: 7, right: 7),
+              padding: EdgeInsets.only(top: 10, bottom: 4, left: 7, right: 7),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(4)),
                 border: Border.all(color: const Color(0xffe0e0e0), width: 1),
@@ -69,8 +69,11 @@ class _PaymentDepositView extends State<PaymentDepositView> {
                   Text('입금계좌', style: textStyle(color: Color(0xff404040), weight: 500, size: 15.0)),
                   SizedBox(height: 6),
                   lineDivider(),
-                  SizedBox(height: 15),
-                  Text('국민은행 354602-04-043865 박기향', style: textStyle(color: serviceColor(), weight: 500, size: 15.0)),
+                  Expanded(
+                    child: Center(
+                      child: Text('국민은행 354602-04-043865 박기향', style: textStyle(color: serviceColor(), weight: 500, size: 15.0)),
+                    )
+                  )
                 ]
               )
             ),

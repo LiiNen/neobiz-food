@@ -50,7 +50,7 @@ class _PaymentPointView extends State<PaymentPointView> {
           AspectRatio(
             aspectRatio: 3.45,
             child: Container(
-              padding: EdgeInsets.only(top: 10, bottom: 19, left: 7, right: 7),
+              padding: EdgeInsets.only(top: 10, bottom: 4, left: 7, right: 7),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(4)),
                 border: Border.all(color: const Color(0xffe0e0e0), width: 1),
@@ -67,8 +67,16 @@ class _PaymentPointView extends State<PaymentPointView> {
                   Text('현재 나의 포인트는?', style: textStyle(color: Color(0xff404040), weight: 500, size: 15.0)),
                   SizedBox(height: 6),
                   lineDivider(),
-                  SizedBox(height: 15),
-                  Text('${userInfo.point}P', style: textStyle(color: serviceColor(), weight: 500, size: 15.0)),
+                  Expanded(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset('asset/image/pointIcon.png', width: 16),
+                        SizedBox(width: 3),
+                        Text('${userInfo.point}P', style: textStyle(color: serviceColor(), weight: 500, size: 15.0))
+                      ]
+                    ),
+                  )
                 ]
               )
             ),
