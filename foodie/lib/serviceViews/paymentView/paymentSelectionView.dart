@@ -4,6 +4,7 @@ import 'package:foodie/collections/functions.dart';
 import 'package:foodie/collections/statelessAppBar.dart';
 import 'package:foodie/serviceViews/paymentView/paymentCouponDialog.dart';
 import 'package:foodie/serviceViews/paymentView/paymentDepositView.dart';
+import 'package:foodie/serviceViews/paymentView/paymentPointView.dart';
 import 'package:foodie/serviceViews/paymentView/paymentPresentView.dart';
 import 'package:foodie/serviceViews/paymentView/paymentView.dart';
 
@@ -33,7 +34,7 @@ class _PaymentSelectionView extends State<PaymentSelectionView> {
       PaymentSelectionItem(title: '신용카드 결제'),
       PaymentSelectionItem(title: '무통장 입금', route: PaymentDepositView()),
       PaymentSelectionItem(title: '휴대폰 결제'),
-      PaymentSelectionItem(title: '포인트 결제'),
+      PaymentSelectionItem(title: '포인트 결제', route: PaymentPointView()),
       PaymentSelectionItem(img: Image.asset('asset/image/paymentKakao.png')),
       PaymentSelectionItem(img: Image.asset('asset/image/paymentNaver.png')),
       PaymentSelectionItem(title: '선물쿠폰 사용', callback: _showPaymentCouponDialog),

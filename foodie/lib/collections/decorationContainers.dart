@@ -87,7 +87,7 @@ fullWidthButton({required title, required action, double height=70}){
   );
 }
 
-fullWidthTextField(String hintText, TextEditingController controller, {double margin=28}) {
+fullWidthTextField(String hintText, TextEditingController controller, {double margin=28, bool isNumber=false}) {
   return Container(
     margin: EdgeInsets.only(bottom: margin),
     child: Column(
@@ -104,6 +104,7 @@ fullWidthTextField(String hintText, TextEditingController controller, {double ma
               hintStyle: textStyle(color: Color(0xff8e8e8e), weight: 500, size: 16.0),
             ),
             style: textStyle(color: Colors.black, weight: 500, size: 16.0),
+            keyboardType: TextInputType.number,
           ),
         ),
         // SizedBox(height: 8),
