@@ -160,6 +160,7 @@ class _SupportView extends State<SupportView> {
       }
       if(isSuccess) {
         showToast('문의가 성공적으로 접수되었습니다.');
+        Navigator.pop(context);
       } else {
         showToast('오류 발생. 네트워크를 확인해주세요.');
       }

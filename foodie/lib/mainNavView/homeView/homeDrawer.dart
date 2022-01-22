@@ -46,7 +46,7 @@ class _HomeDrawer extends State<HomeDrawer> {
   @override
   void initState() {
     super.initState();
-    if(true) { // todo: 매장 유저가 아닐경우
+    if(true) { /// 매장 유저가 아닐경우
       homeDrawerMenuList.removeAt(0);
     }
     WidgetsBinding.instance!.addPostFrameCallback((_) {
