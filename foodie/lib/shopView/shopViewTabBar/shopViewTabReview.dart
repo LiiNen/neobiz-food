@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:foodie/collections/decorationContainers.dart';
 import 'package:foodie/collections/functions.dart';
+import 'package:foodie/restApi/reviewApi.dart';
 import 'package:foodie/serviceViews/reviewView/reviewContainer.dart';
 import 'package:foodie/shopView/shopViewReviewView.dart';
 
@@ -24,17 +25,15 @@ class _ShopViewTabReview extends State<ShopViewTabReview> {
   }
 
   _getReview() async {
-    // todo: get review from server
-    _reviewList = [
-      ReviewItem(userName: '김정훈', content: '리뷰 테스트', score: 5),
-      ReviewItem(userName: '김정훈', content: '긴글 리뷰 테스트, 긴글 리뷰 테스트, 긴글 리뷰 테스트, 긴글 리뷰 테스트, 긴글 리뷰 테스트, 긴글 리뷰 테스트, 긴글 리뷰 테스트, 긴글 리뷰 테스트, 긴글 리뷰 테스트, 긴글 리뷰 테스트, 긴글 리뷰 테스트, 긴글 리뷰 테스트, 긴글 리뷰 테스트 긴글 리뷰 테스트 ', score: 5),
-      ReviewItem(userName: '김정훈 긴 이름 테스트 긴 이름 테스트 긴 이름 테스트', content: '리뷰 테스트', score: 5),
-      ReviewItem(userName: '김정훈', content: '리뷰 테스트', score: 4),
-      ReviewItem(userName: '김정훈', content: '리뷰 테스트', score: 3),
-      ReviewItem(userName: '김정훈', content: '리뷰 테스트', score: 2),
-      ReviewItem(userName: '김정훈', content: '리뷰 테스트', score: 1),
-      ReviewItem(userName: '김정훈', content: '리뷰 테스트', score: 5),
-    ];
+    print('ddd');
+    var _temp = await getReviewShop(shopId: shopJson['shopId']);
+    if(_temp != null) {
+      _reviewList = List.generate(_temp.length, (index) {
+        return ReviewItem(userName: _temp[index]['name'], content: _temp[index]['content'], score: int.parse(_temp[index]['starRating']));
+      });
+      setState(() {});
+    }
+    else showToast('network error');
   }
 
   @override

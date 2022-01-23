@@ -27,7 +27,7 @@ class _ReviewView extends State<ReviewView> {
     if(_temp != null) {
       setState(() {
         _reviewList = List.generate(_temp.length, (index) {
-          return ReviewItem(userName: 'username', content: _temp[index]['content'], score: int.parse(_temp[index]['starRating']), shopId: _temp[index]['shopId']);
+          return ReviewItem(userName: _temp[index]['name'], content: _temp[index]['content'], score: int.parse(_temp[index]['starRating']), shopId: _temp[index]['shopId']);
         });
       });
     }
