@@ -87,25 +87,32 @@ fullWidthButton({required title, required action, double height=70}){
   );
 }
 
-fullWidthTextField(String hintText, TextEditingController controller, {double margin=28, bool isNumber=false}) {
+fullWidthTextField(String hintText, TextEditingController controller, {double margin=28, bool isNumber=false, Widget? rightButton}) {
   return Container(
     margin: EdgeInsets.only(bottom: margin),
     child: Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Container(
-          height: 24,
-          child: TextField(
-            controller: controller,
-            obscureText: (hintText == '비밀번호' || hintText == '비밀번호 확인' ? true : false),
-            decoration: InputDecoration(
-              border: InputBorder.none,
-              hintText: hintText,
-              hintStyle: textStyle(color: Color(0xff8e8e8e), weight: 500, size: 16.0),
+        Row(
+          children: [
+            Expanded(
+              child: Container(
+                height: 24,
+                child: TextField(
+                  controller: controller,
+                  obscureText: (hintText == '비밀번호' || hintText == '비밀번호 확인' ? true : false),
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    hintText: hintText,
+                    hintStyle: textStyle(color: Color(0xff8e8e8e), weight: 500, size: 16.0),
+                  ),
+                  style: textStyle(color: Colors.black, weight: 500, size: 16.0),
+                  keyboardType: TextInputType.number,
+                ),
+              ),
             ),
-            style: textStyle(color: Colors.black, weight: 500, size: 16.0),
-            keyboardType: TextInputType.number,
-          ),
+            rightButton==null ? Container() : rightButton,
+          ]
         ),
         // SizedBox(height: 8),
         lineDivider()

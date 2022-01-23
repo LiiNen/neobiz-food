@@ -53,7 +53,7 @@ class _SignUpView extends State<SignUpView> {
                 fullWidthTextField('비밀번호', pwController),
                 fullWidthTextField('비밀번호 확인', pwConfirmController),
                 fullWidthTextField('휴대전화', phoneController),
-                fullWidthTextField('우편번호', addressController),
+                fullWidthTextField('우편번호', addressController, rightButton: findAddressButton()),
                 fullWidthTextField('상세주소', detailAddressController),
                 SizedBox(height: 12),
               ]
@@ -64,6 +64,27 @@ class _SignUpView extends State<SignUpView> {
           padding: EdgeInsets.all(0.0),
           child: loginNextButton(context: context, route: SubscribeInitView(), condition: checkSignUp()),
         ),
+      )
+    );
+  }
+
+  findAddressButton() {
+    return GestureDetector(
+      behavior: HitTestBehavior.translucent,
+      onTap: () {
+        //todo: find address
+        //
+      },
+      child: Container(
+        width: 73, height: 34,
+        margin: EdgeInsets.only(bottom: 10),
+        decoration: BoxDecoration(
+          color: const Color(0xfffff0e3),
+          borderRadius: BorderRadius.all(Radius.circular(24))
+        ),
+        child: Center(
+          child: Text('주소찾기', style: textStyle(color: serviceColor(), weight: 500, size: 14.0))
+        )
       )
     );
   }
