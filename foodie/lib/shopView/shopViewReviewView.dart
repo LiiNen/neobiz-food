@@ -97,6 +97,7 @@ class _ShopViewReviewView extends State<ShopViewReviewView> {
           hintStyle: textStyle(color: Color(0xff898989), weight: 500, size: 16.0),
           border: InputBorder.none,
         ),
+        onSubmitted: (context) {submitReview();},
         style: textStyle(weight: 500, size: 16.0),
         maxLines: 10,
       )

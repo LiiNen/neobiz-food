@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:foodie/collections/decorationContainers.dart';
 import 'package:foodie/collections/functions.dart';
+import 'package:foodie/shopView/shopView.dart';
 
 class ReviewItem {
   String userName;
   String content;
   int score;
   String? userProfile;
-  ReviewItem({required this.userName, required this.content, required this.score, this.userProfile});
+  int shopId;
+  ReviewItem({required this.userName, required this.content, required this.score, this.userProfile, this.shopId=-1});
 }
 
 class ReviewContainer extends StatelessWidget {
@@ -17,6 +19,10 @@ class ReviewContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      behavior: HitTestBehavior.translucent,
+      onTap: () {
+        if(reviewItem.shopId != -1) navigatorPush(context: context, widget: ShopView(shopNo: reviewItem.shopId, infoText: 'genre'));
+      },
       child: Container(
         width: MediaQuery.of(context).size.width,
         child: Column(
