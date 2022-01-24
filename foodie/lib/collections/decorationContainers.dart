@@ -87,7 +87,7 @@ fullWidthButton({required title, required action, double height=70}){
   );
 }
 
-fullWidthTextField(String hintText, TextEditingController controller, {double margin=28, bool isNumber=false, Widget? rightButton}) {
+fullWidthTextField(String hintText, TextEditingController controller, {double margin=28, bool isNumber=false, Widget? rightButton, bool enabled=true}) {
   return Container(
     margin: EdgeInsets.only(bottom: margin),
     child: Column(
@@ -103,11 +103,14 @@ fullWidthTextField(String hintText, TextEditingController controller, {double ma
                   obscureText: (hintText == '비밀번호' || hintText == '비밀번호 확인' ? true : false),
                   decoration: InputDecoration(
                     border: InputBorder.none,
+                    isDense: true,
+                    contentPadding: EdgeInsets.all(0),
                     hintText: hintText,
                     hintStyle: textStyle(color: Color(0xff8e8e8e), weight: 500, size: 16.0),
                   ),
                   style: textStyle(color: Colors.black, weight: 500, size: 16.0),
-                  keyboardType: TextInputType.number,
+                  keyboardType: isNumber ? TextInputType.number : TextInputType.text,
+                  enabled: enabled,
                 ),
               ),
             ),

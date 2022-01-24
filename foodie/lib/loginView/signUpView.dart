@@ -4,6 +4,8 @@ import 'package:foodie/collections/functions.dart';
 import 'package:foodie/collections/statelessAppBar.dart';
 import 'package:foodie/loginView/subscribeInitView.dart';
 import 'package:foodie/loginView/userTypeDialog.dart';
+import 'package:foodie/serviceViews/addressSelectionView.dart';
+import 'package:kpostal/kpostal.dart';
 
 class SignUpView extends StatefulWidget{
   @override
@@ -52,8 +54,8 @@ class _SignUpView extends State<SignUpView> {
                 fullWidthTextField('이메일', emailController),
                 fullWidthTextField('비밀번호', pwController),
                 fullWidthTextField('비밀번호 확인', pwConfirmController),
-                fullWidthTextField('휴대전화', phoneController),
-                fullWidthTextField('우편번호', addressController, rightButton: findAddressButton()),
+                fullWidthTextField('휴대전화', phoneController, isNumber: true),
+                fullWidthTextField('우편번호', addressController, rightButton: findAddressButton(), enabled: false),
                 fullWidthTextField('상세주소', detailAddressController),
                 SizedBox(height: 12),
               ]
@@ -71,9 +73,10 @@ class _SignUpView extends State<SignUpView> {
   findAddressButton() {
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
-      onTap: () {
-        //todo: find address
-        //
+      onTap: () async {
+        await Navigator.push(context, MaterialPageRoute(
+          builder: (_) => addressSelectionView(addressReturnCallback),
+        ));
       },
       child: Container(
         width: 73, height: 34,
@@ -87,6 +90,10 @@ class _SignUpView extends State<SignUpView> {
         )
       )
     );
+  }
+
+  addressReturnCallback(Kpostal result) {
+    addressController.text = result.postCode + ' ' + result.address + result.address;
   }
 
   bool checkSignUp() {
