@@ -48,7 +48,7 @@ spaceDivider({color: const Color(0xffededed)}) {
 swiperPagination() {
   return SwiperPagination(
     alignment: Alignment.bottomCenter,
-    margin: EdgeInsets.only(top: 25, bottom: 12),
+    margin: EdgeInsets.only(bottom: 0),
     builder: DotSwiperPaginationBuilder(
       color: Color(0xffededed), size: 7.0,
       activeColor: serviceColor(), activeSize: 7.0

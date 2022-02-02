@@ -20,27 +20,38 @@ class _HomeBannerContainer extends State<HomeBannerContainer> {
 
   @override
   Widget build(BuildContext context) {
+    var swiperWidth = MediaQuery.of(context).size.width * 5/6;
+    var swiperHeight = MediaQuery.of(context).size.width * 1/2;
     return Container(
       width: MediaQuery.of(context).size.width,
-      height: 183,
-      //todo : fix swiper issue
+      height: swiperHeight+32,
       child: Swiper(
+        layout: SwiperLayout.CUSTOM,
+        customLayoutOption:
+        new CustomLayoutOption(startIndex: -1, stateCount: _bannerItemList.length).addTranslate([
+          new Offset((swiperWidth+16) * (-1), 0),
+          new Offset(0, 0),
+          new Offset((swiperWidth+16), 0) //for right element
+        ]),
+        itemWidth: swiperWidth,
+        itemHeight: swiperHeight+32,
         pagination: swiperPagination(),
         autoplay: true,
-        viewportFraction: 0.83,
-        scale: 1.0,
         itemCount: _bannerItemList.length,
         itemBuilder: (BuildContext context, int index) {
-          return GestureDetector(
-            behavior: HitTestBehavior.translucent,
-            onTap: () {
+          return Align(
+            alignment: Alignment.topCenter,
+            child: GestureDetector(
+              behavior: HitTestBehavior.translucent,
+              onTap: () {
 
-            },
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(9)),
-              ),
-              child: Image.asset('asset/image/banner${index+1}.png', fit: BoxFit.fill,)
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(9)),
+                ),
+                child: Image.asset('asset/image/banner${index+1}.png', fit: BoxFit.fill,)
+              )
             )
           );
         }
