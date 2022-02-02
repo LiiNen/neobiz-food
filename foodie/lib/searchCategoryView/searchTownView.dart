@@ -3,6 +3,7 @@ import 'package:foodie/collections/functions.dart';
 import 'package:foodie/collections/statelessAppBar.dart';
 import 'package:foodie/mainNavView/searchView/searchResultView.dart';
 import 'package:foodie/restApi/presetRequestBody.dart';
+import 'package:foodie/restApi/regionApi.dart';
 import 'package:foodie/restApi/searchTownApi.dart';
 
 class SearchTownView extends StatefulWidget {
@@ -19,10 +20,13 @@ class _SearchTownView extends State<SearchTownView> {
   }
 
   _getTown() async {
-    var temp = await searchTown(townNo: -1, mode: 'region', presetBody: presetSearchRequest());
-    setState(() {
-      _townList = temp;
-    });
+    var _temp = await getRegionTown();
+    print(_townList);
+    if(_temp != null) {
+      setState(() {
+        _townList = _temp;
+      });
+    }
   }
 
   @override
@@ -53,12 +57,14 @@ class _SearchTownView extends State<SearchTownView> {
       child: GestureDetector(
         behavior: HitTestBehavior.translucent,
         onTap: () {
+
+          //todo: push with id
           navigatorPush(
             context: context,
             widget: SearchResultView(
-              title: _townList[index]['name'],
+              title: _townList[index]['districtName'],
               searchType: 'town',
-              requestItem: {'townNo': _townList[index]['no']}
+              requestItem: {'townNo': _townList[index]['regionId']}
             )
           );
         },
@@ -82,9 +88,9 @@ class _SearchTownView extends State<SearchTownView> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(_townList[index]['name'], style: textStyle(color: Colors.black, weight: 500, size: 14.0)),
+                  Text(_townList[index]['districtName'], style: textStyle(color: Colors.black, weight: 500, size: 14.0)),
                   SizedBox(width: 4),
-                  Text(_townList[index]['count'].toString(), style: textStyle(color: Color(0xffc4c4c4), weight: 700, size: 14.0))
+                  Text(_townList[index]['districtCount'].toString(), style: textStyle(color: Color(0xffc4c4c4), weight: 700, size: 14.0))
                 ]
               )
             )

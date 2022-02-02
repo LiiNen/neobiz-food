@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:foodie/collections/decorationContainers.dart';
 import 'package:foodie/collections/functions.dart';
 import 'package:foodie/mainNavView/searchView/searchResultView.dart';
+import 'package:foodie/restApi/regionApi.dart';
 import 'package:foodie/restApi/searchSubwayApi.dart';
 
 Map subwayQuery({int areaNo=-1, int lineNo=-1, int stationNo=-1, int curPage=-1}) {
@@ -27,7 +28,7 @@ class _SearchSubwayView extends State<SearchSubwayView> {
   var _subwayStationList = [];
 
   int _selectedRegion = 0;
-  int _selectedLine = 0;
+  int _selectedLine = -1;
   int _selectedStation = 0;
 
   @override
@@ -48,23 +49,23 @@ class _SearchSubwayView extends State<SearchSubwayView> {
   }
 
   _getSubway() async {
-    var temp = await searchSubway(subwayQueryData: subwayQuery(), mode: 'region');
+    var temp = await getRegionSubway();
     setState(() {
       _subwayRegionList = temp;
     });
   }
   _getSubwayLine() async {
-    var temp = await searchSubway(subwayQueryData: subwayQuery(areaNo: _selectedRegion), mode: 'region');
+    var temp = await getRegionSubwayProvince(_subwayRegionList[_selectedRegion]['provinceName']);
     setState(() {
       _subwayLineList = temp;
     });
   }
   _getSubwayStation() async {
-    var temp = await searchSubway(subwayQueryData: subwayQuery(lineNo: _selectedLine), mode: 'region');
-    _subwayStationList = temp;
-    setState(() {});
+    var temp = await getRegionSubwayProvinceDistrict(_subwayRegionList[_selectedRegion]['provinceName'], _subwayLineList[_selectedLine]['districtName']);
+    setState(() {
+      _subwayStationList = temp;
+    });
   }
-
 
   onTapExpanded() {
     setState(() {
@@ -135,9 +136,9 @@ class _SearchSubwayView extends State<SearchSubwayView> {
             _selectedIndex = index;
             _subwayLineList = [];
             _subwayStationList = [];
-            _selectedLine = 0;
+            _selectedLine = -1;
             _selectedStation = 0;
-            _selectedRegion = _subwayRegionList[index]['no'];
+            _selectedRegion = index;
             _getSubwayLine();
           },
           child: Container(
@@ -152,7 +153,7 @@ class _SearchSubwayView extends State<SearchSubwayView> {
               color: _selected ? serviceColor() : Colors.white,
             ),
             child: Center(
-              child: Text(_subwayRegionList[index]['name'], style: _selected ?
+              child: Text(_subwayRegionList[index]['provinceName'], style: _selected ?
                 textStyle(color: Colors.white, weight: 700, size: 14.0) :
                 textStyle(weight: 500, size: 14.0)
               ),
@@ -202,11 +203,11 @@ class _SearchSubwayView extends State<SearchSubwayView> {
         children: List.generate(_subwayLineList.length == 0 ? 0 : _subwayLineList.length * 2 - 1, (index) {
           if(index%2==1) return lineDivider();
           var itemIndex = (index/2).floor();
-          bool _selected = _selectedLine == _subwayLineList[itemIndex]['no'];
+          bool _selected = _selectedLine == itemIndex;
           return GestureDetector(
             behavior: HitTestBehavior.translucent,
             onTap: () {
-              _selectedLine = _subwayLineList[itemIndex]['no'];
+              _selectedLine = itemIndex;
               _getSubwayStation();
             },
             child: Container(
@@ -215,7 +216,7 @@ class _SearchSubwayView extends State<SearchSubwayView> {
               child: Stack(
                 children: [
                   Center(
-                    child: Text(_subwayLineList[itemIndex]['name'], style: textStyle(weight: 500, size: 15.0))
+                    child: Text(_subwayLineList[itemIndex]['districtName'], style: textStyle(weight: 500, size: 15.0))
                   ),
                   _selected ? Align(
                     alignment: Alignment.centerLeft,
@@ -245,8 +246,10 @@ class _SearchSubwayView extends State<SearchSubwayView> {
           return GestureDetector(
             behavior: HitTestBehavior.translucent,
             onTap: () {
-              _selectedStation = _subwayStationList[itemIndex]['no'];
-              navigatorPush(context: context, widget: SearchResultView(title: '${_subwayStationList[itemIndex]['name']}역', searchType: 'subway', requestItem: subwayQuery(areaNo: _selectedRegion, lineNo: _selectedLine, stationNo: _selectedStation)));
+              _selectedStation = _subwayStationList[itemIndex]['regionId'];
+
+              //todo: navigator push with id
+              // navigatorPush(context: context, widget: SearchResultView(title: '${_subwayStationList[itemIndex]['subwayName']}역', searchType: 'subway', requestItem: subwayQuery(areaNo: _selectedRegion, lineNo: _selectedLine, stationNo: _selectedStation)));
             },
             child: Container(
               margin: EdgeInsets.symmetric(vertical: 17),
@@ -255,8 +258,8 @@ class _SearchSubwayView extends State<SearchSubwayView> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(_subwayStationList[itemIndex]['name'], style: textStyle(weight: 500, size: 15.0)),
-                  Text(_subwayStationList[itemIndex]['count'].toString(), style: textStyle(color: Color(0xff8e8e8e), weight: 400, size: 15.0)),
+                  Text(_subwayStationList[itemIndex]['subwayName'], style: textStyle(weight: 500, size: 15.0)),
+                  Text(_subwayStationList[itemIndex]['districtCount'].toString(), style: textStyle(color: Color(0xff8e8e8e), weight: 400, size: 15.0)),
                 ]
               )
             )

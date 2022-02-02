@@ -53,7 +53,6 @@ class _ShopView extends State<ShopView> with SingleTickerProviderStateMixin {
   _scrollListener() {
     setState(() {
       _scrollPosition = _scrollController.position.pixels;
-      print(_scrollPosition);
       if(!_isScrolled && _scrollPosition > _scrollInvisibleHeight) {
         _isScrolled = true;
       }
@@ -288,15 +287,12 @@ class _ShopView extends State<ShopView> with SingleTickerProviderStateMixin {
 
   checkFavorite() async {
     var response = await getFavorite(shopJson['shopId']);
-    print('here');
-    print(response);
     if(response!=null && response.length > 0) {
       setState(() {
         isFavorite = true;
         for(int i = 0; i < response.length; i++) {
           favoriteIdList.add(response[i]['id']);
         }
-        print(favoriteIdList);
       });
     }
     else {
@@ -307,7 +303,6 @@ class _ShopView extends State<ShopView> with SingleTickerProviderStateMixin {
   }
 
   actionFavorite() async {
-    print(isFavorite);
     var response = false;
     if(isFavorite) {
       for(int i = 0; i < favoriteIdList.length; i++) {

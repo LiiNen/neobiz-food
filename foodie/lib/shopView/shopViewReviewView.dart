@@ -7,7 +7,8 @@ import 'package:foodie/restApi/reviewApi.dart';
 
 class ShopViewReviewView extends StatefulWidget {
   final int shopId;
-  ShopViewReviewView(this.shopId);
+  final dynamic completeAction;
+  ShopViewReviewView(this.shopId, {this.completeAction});
   @override
   State<ShopViewReviewView> createState() => _ShopViewReviewView(); 
 }
@@ -110,6 +111,7 @@ class _ShopViewReviewView extends State<ShopViewReviewView> {
       if(response == true) {
         print('success');
         Navigator.pop(context);
+        widget.completeAction();
       }
       else {
         print('fail');

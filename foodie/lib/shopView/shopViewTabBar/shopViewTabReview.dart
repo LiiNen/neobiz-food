@@ -28,10 +28,9 @@ class _ShopViewTabReview extends State<ShopViewTabReview> {
     print('ddd');
     var _temp = await getReviewShop(shopId: shopJson['shopId']);
     if(_temp != null) {
-      _reviewList = List.generate(_temp.length, (index) {
-        return ReviewItem(userName: _temp[index]['name'], content: _temp[index]['content'], score: int.parse(_temp[index]['starRating']));
+      setState(() {
+        _reviewList = _temp;
       });
-      setState(() {});
     }
     else showToast('network error');
   }
@@ -71,7 +70,7 @@ class _ShopViewTabReview extends State<ShopViewTabReview> {
               child: GestureDetector(
                 onTap: () {
                   //todo : pass with shop parameter
-                  navigatorPush(context: context, widget: ShopViewReviewView(shopJson['shopId']));
+                  navigatorPush(context: context, widget: ShopViewReviewView(shopJson['shopId'], completeAction: () {_getReview();}));
                 },
                 child: Container(
                   width: 88, height: 33,

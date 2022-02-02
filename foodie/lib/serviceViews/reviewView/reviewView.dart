@@ -26,9 +26,7 @@ class _ReviewView extends State<ReviewView> {
     var _temp = widget.isUser ? await getReviewUser(userId: widget.id) : await getReviewShop(shopId: widget.id);
     if(_temp != null) {
       setState(() {
-        _reviewList = List.generate(_temp.length, (index) {
-          return ReviewItem(userName: _temp[index]['name'], content: _temp[index]['content'], score: int.parse(_temp[index]['starRating']), shopId: _temp[index]['shopId']);
-        });
+        _reviewList = _temp;
       });
     }
     else {
