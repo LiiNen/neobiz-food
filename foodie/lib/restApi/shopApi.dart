@@ -13,3 +13,12 @@ getShop({required int id}) async {
   else print('error');
   return null;
 }
+
+getShopByRegion({required int id, required String region}) async {
+  var response = await http.get(Uri.parse('$testUrl$pathShop/${region}Id/$id'));
+  if(response.statusCode == 200) {
+    var responseBody = json.decode(response.body);
+    return responseBody;
+  }
+  return null;
+}
