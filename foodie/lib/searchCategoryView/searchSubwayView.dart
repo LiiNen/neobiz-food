@@ -249,7 +249,7 @@ class _SearchSubwayView extends State<SearchSubwayView> {
               _selectedStation = _subwayStationList[itemIndex]['regionId'];
 
               //todo: navigator push with id
-              // navigatorPush(context: context, widget: SearchResultView(title: '${_subwayStationList[itemIndex]['subwayName']}역', searchType: 'subway', requestItem: subwayQuery(areaNo: _selectedRegion, lineNo: _selectedLine, stationNo: _selectedStation)));
+              navigatorPush(context: context, widget: SearchResultView(title: '${_subwayStationList[itemIndex]['subwayName']}역', searchType: 'subway', requestItem: null, regionId: _selectedStation));
             },
             child: Container(
               margin: EdgeInsets.symmetric(vertical: 17),

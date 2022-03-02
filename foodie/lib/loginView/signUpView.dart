@@ -117,11 +117,14 @@ loginStep({required int step, required String title}) {
 
 loginNextButton({String title='다음', required BuildContext context, required Widget route, dynamic dialog, bool condition=true, bool isReplace=false}) {
   return GestureDetector(
-    onTap: () {
+    onTap: () async {
       if(dialog != null) dialog(context).then(
         ((_) {navigatorPush(context: context, widget: route, replacement: isReplace);})
       );
-      else if(condition) navigatorPush(context: context, widget: route, replacement: isReplace);
+      else if(condition) {
+        //todo: check phone, email
+        navigatorPush(context: context, widget: route, replacement: isReplace);
+      }
     },
     behavior: HitTestBehavior.translucent,
     child: Container(

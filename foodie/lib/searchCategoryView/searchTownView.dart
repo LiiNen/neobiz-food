@@ -57,16 +57,16 @@ class _SearchTownView extends State<SearchTownView> {
       child: GestureDetector(
         behavior: HitTestBehavior.translucent,
         onTap: () {
-
+          navigatorPush(context: context, widget: SearchResultView(title: _townList[index]['districtName'], searchType: 'town', requestItem: null, regionId: _townList[index]['regionId'],));
           //todo: push with id
-          navigatorPush(
-            context: context,
-            widget: SearchResultView(
-              title: _townList[index]['districtName'],
-              searchType: 'town',
-              requestItem: {'townNo': _townList[index]['regionId']}
-            )
-          );
+          // navigatorPush(
+          //   context: context,
+          //   widget: SearchResultView(
+          //     title: _townList[index]['districtName'],
+          //     searchType: 'town',
+          //     requestItem: {'townNo': _townList[index]['regionId']}
+          //   )
+          // );
         },
         child: Container(
           margin: EdgeInsets.only(bottom: 21),

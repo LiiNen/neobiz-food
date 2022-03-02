@@ -19,12 +19,12 @@ class _ShopListContainer extends State<ShopListContainer> {
       child: Column(
         children: List.generate(shopObjectList.length, (index) {
           var _shopObject = shopObjectList[index];
-          var _infoText = '${_shopObject['kind']}';
-          if(_shopObject['food'] != null) _infoText = _infoText + ' | ${_shopObject['food']}';
-          if(_shopObject['food_2nd'] != null) _infoText = _infoText + ' | ${_shopObject['food_2nd']}';
+          var _infoText = '${_shopObject['bigCategoryName']}';
+          if(_shopObject['middleCategoryName'] != null) _infoText = _infoText + ' | ${_shopObject['middleCategoryName']}';
+          if(_shopObject['smallCategoryName'] != null) _infoText = _infoText + ' | ${_shopObject['smallCategoryName']}';
           return GestureDetector(
             behavior: HitTestBehavior.translucent,
-            onTap: () {navigatorPush(context: context, widget: ShopView(shopNo: _shopObject['no'], infoText: _infoText));},
+            onTap: () {navigatorPush(context: context, widget: ShopView(shopNo: _shopObject['shopId'], infoText: _infoText));},
             child: Container(
               width: MediaQuery.of(context).size.width,
               height: 113,
@@ -40,7 +40,7 @@ class _ShopListContainer extends State<ShopListContainer> {
                           border: Border.all(color: Color(0xffededed), width: 1),
                           color: Color(0xffededed),
                         ),
-                        child: _shopObject['photo'] != null ? Image.network(_shopObject['photo'], fit: BoxFit.fill) : Container()
+                        child: _shopObject['shopImage'] != null ? Image.network(_shopObject['shopImage'], fit: BoxFit.fill) : Container()
                       )
                     ),
                     SizedBox(width: 12),
@@ -48,7 +48,7 @@ class _ShopListContainer extends State<ShopListContainer> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(_shopObject['name'], style: textStyle(weight: 500, size: 16.0)),
+                        Text(_shopObject['shopName'], style: textStyle(weight: 500, size: 16.0)),
                         Text(_infoText, style: textStyle(color: Color(0xff383838), weight: 400, size: 13.0)),
                         SizedBox(height: 5),
                         Row(

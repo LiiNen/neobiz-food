@@ -28,53 +28,51 @@ class _LoginView extends State<LoginView> {
         onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
         child: Scaffold(
           backgroundColor: Colors.white,
-          body: SingleChildScrollView(
-            child: Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: 18),
-                    child: Column(
-                      children: [
-                        SizedBox(height: MediaQuery.of(context).size.height * 0.135),
-                        Image.asset('asset/image/logo.png', width: 186, height: 62),
-                        SizedBox(height: 58),
-                        loginTextField('email', emailController),
-                        SizedBox(height: 22),
-                        loginTextField('pw', pwController),
-                        SizedBox(height: 26),
-                        loginRowMenu(),
-                        SizedBox(height: 26),
-                        loginButton(action: _loginAction),
-                        SizedBox(height: 19),
-                        socialLoginContainer()
-                      ]
-                    )
-                  ),
-                  Column(
+          body: Container(
+            width: MediaQuery.of(context).size.width,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 18),
+                  child: Column(
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text('아직 회원이 아니신가요?', style: textStyle(color: Color(0xff8e8e8e), weight: 400, size: 13.0)),
-                          SizedBox(width: 5),
-                          GestureDetector(
-                            behavior: HitTestBehavior.translucent,
-                            onTap: () {navigatorPush(context: context, widget: SignUpView());},
-                            child: Text('회원가입 하기', style: textStyle(color: serviceColor(), weight: 400, size: 13.0)),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 11),
-                      Image.asset('asset/image/loginBottomLogo.png', width: MediaQuery.of(context).size.width),
-                      SizedBox(height: 20)
+                      SizedBox(height: MediaQuery.of(context).size.height * 0.135),
+                      Image.asset('asset/image/logo.png', width: 186, height: 62),
+                      SizedBox(height: 58),
+                      loginTextField('email', emailController),
+                      SizedBox(height: 22),
+                      loginTextField('pw', pwController),
+                      SizedBox(height: 26),
+                      loginRowMenu(),
+                      SizedBox(height: 26),
+                      loginButton(action: _loginAction),
+                      SizedBox(height: 19),
+                      socialLoginContainer()
                     ]
                   )
-                ],
-              )
+                ),
+                Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text('아직 회원이 아니신가요?', style: textStyle(color: Color(0xff8e8e8e), weight: 400, size: 13.0)),
+                        SizedBox(width: 5),
+                        GestureDetector(
+                          behavior: HitTestBehavior.translucent,
+                          onTap: () {navigatorPush(context: context, widget: SignUpView());},
+                          child: Text('회원가입 하기', style: textStyle(color: serviceColor(), weight: 400, size: 13.0)),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 11),
+                    Image.asset('asset/image/loginBottomLogo.png', width: MediaQuery.of(context).size.width),
+                    SizedBox(height: 20)
+                  ]
+                )
+              ],
             )
           )
         )
@@ -85,17 +83,17 @@ class _LoginView extends State<LoginView> {
   _loginAction() async {
     // todo: login with account
     // check: login state
-    var _response = await checkEmail('kjeonghoon065@gmail.ccc');
-    var _response2 = await checkPhone('010-9394-1087');
-    print(_response);
-    print(_response2);
-    // var _response = await getUser(id: 34);
-    // if(_response != null) {
-    //   navigatorPush(context: context, widget: MainNavView(), replacement: true, all: true);
-    // }
-    // else {
-    //   print('f');
-    // }
+    // var _response = await checkEmail('kjeonghoon065@gmail.ccc');
+    // var _response2 = await checkPhone('010-9394-1087');
+    // print(_response);
+    // print(_response2);
+    var _response = await getUser(id: 34);
+    if(_response != null) {
+      navigatorPush(context: context, widget: MainNavView(), replacement: true, all: true);
+    }
+    else {
+      print('f');
+    }
   }
 
   loginTextField(String type, TextEditingController loginController) {

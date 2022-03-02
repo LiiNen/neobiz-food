@@ -6,6 +6,7 @@ import 'package:foodie/restApi/presetRequestBody.dart';
 import 'package:foodie/restApi/searchLocalApi.dart';
 import 'package:foodie/restApi/searchSubwayApi.dart';
 import 'package:foodie/restApi/searchTownApi.dart';
+import 'package:foodie/restApi/shopApi.dart';
 import 'package:foodie/serviceViews/supportView.dart';
 import 'package:foodie/shopContainerView/shopListContainer.dart';
 import 'package:foodie/shopView/shopView.dart';
@@ -14,16 +15,18 @@ class SearchResultView extends StatefulWidget {
   final String title;
   final String searchType;
   final dynamic requestItem;
-  SearchResultView({required this.title, required this.searchType, required this.requestItem});
+  final int regionId;
+  SearchResultView({required this.title, required this.searchType, required this.requestItem, this.regionId=-1});
 
   @override
-  State<SearchResultView> createState() => _SearchResultView(title: title, searchType: searchType, requestItem: requestItem);
+  State<SearchResultView> createState() => _SearchResultView(title: title, searchType: searchType, requestItem: requestItem, regionId: regionId);
 }
 class _SearchResultView extends State<SearchResultView> with SingleTickerProviderStateMixin {
   String title;
   String searchType;
   dynamic requestItem;
-  _SearchResultView({required this.title, required this.searchType, required this.requestItem});
+  int regionId;
+  _SearchResultView({required this.title, required this.searchType, required this.requestItem, required this.regionId});
 
   var _searchItemList = [];
 
@@ -80,14 +83,26 @@ class _SearchResultView extends State<SearchResultView> with SingleTickerProvide
     });
   }
   _getSubwaySearchList() async {
-    var temp = await searchSubway(subwayQueryData: requestItem, mode: 'shop', presetBody: presetSearchRequest());
+    var temp;
+    if(regionId != -1) {
+      temp = await getShopByRegion(id: regionId, region: 'subway');
+    }
+    else {
+      temp = await searchSubway(subwayQueryData: requestItem, mode: 'shop', presetBody: presetSearchRequest());
+    }
     setState(() {
       print(temp);
       _searchItemList = temp;
     });
   }
   _getTownSearchList() async {
-    var temp = await searchTown(townNo: requestItem['townNo'], mode: 'shop', presetBody: presetSearchRequest());
+    var temp;
+    if(regionId != -1) {
+      temp = await getShopByRegion(id: regionId, region: 'village');
+    }
+    else {
+      temp = await searchTown(townNo: requestItem['townNo'], mode: 'shop', presetBody: presetSearchRequest());
+    }
     setState(() {
       _searchItemList = temp;
     });
@@ -111,7 +126,7 @@ class _SearchResultView extends State<SearchResultView> with SingleTickerProvide
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: _searchItemList.length != 0 ? [
-                      recommendContainer(),
+                      _searchItemList.length >= 4 ? recommendContainer() : Container(),
                       SizedBox(height: 28),
                       addShopButton(),
                       SizedBox(height: 28),
@@ -224,9 +239,9 @@ class _SearchResultView extends State<SearchResultView> with SingleTickerProvide
   }
   recommendBox(int index) {
     var _item = _searchItemList[index];
-    String _infoText = '${_item['kind']}';
-    if(_item['food'] != null) _infoText = _infoText + ' | ${_item['food']}';
-    if(_item['food_2nd'] != null) _infoText = _infoText + ' | ${_item['food_2nd']}';
+    var _infoText = '${_item['bigCategoryName']}';
+    if(_item['middleCategoryName'] != null) _infoText = _infoText + ' | ${_item['middleCategoryName']}';
+    if(_item['smallCategoryName'] != null) _infoText = _infoText + ' | ${_item['smallCategoryName']}';
 
     return Expanded(child: GestureDetector(
       behavior: HitTestBehavior.translucent,
@@ -244,11 +259,11 @@ class _SearchResultView extends State<SearchResultView> with SingleTickerProvide
                   border: Border.all(color: Color(0xffededed), width: 1),
                   color: Color(0xffededed),
                 ),
-                child: _item['photo'] != null ? Image.network(_item['photo'], fit: BoxFit.fill) : Container()
+                child: _item['shopImage'] != null ? Image.network(_item['shopImage'], fit: BoxFit.fill) : Container()
               )
             ),
             SizedBox(height: 7),
-            Text(_item['name'], style: textStyle(color: Color(0xff8e8e8e), weight: 500, size: 16.0)),
+            Text(_item['shopName'], style: textStyle(color: Color(0xff8e8e8e), weight: 500, size: 16.0)),
             SizedBox(height: 2),
             Text(_infoText, style: textStyle(color: Color(0xff8e8e8e), weight: 400, size: 13.0)),
             // button?
