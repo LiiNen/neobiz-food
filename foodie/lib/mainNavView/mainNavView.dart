@@ -54,7 +54,7 @@ class _MainNavView extends State<MainNavView> {
             ),
             BottomNavigationBarItem(label: '검색', icon: Container(
               margin: EdgeInsets.only(bottom: 6, top: 6),
-              child: _selectedIndex == 1 ? Image.asset('asset/image/navHomeSelect.png', width: 23.5) : Image.asset('asset/image/navHomeUnselect.png', width: 23.5))
+              child: _selectedIndex == 1 ? Image.asset('asset/image/navSearchSelect.png', width: 23.5) : Image.asset('asset/image/navSearchUnselect.png', width: 23.5))
             ),
             BottomNavigationBarItem(label: '내주변', icon: Container(
               margin: EdgeInsets.only(bottom: 6, top: 6),
@@ -66,7 +66,7 @@ class _MainNavView extends State<MainNavView> {
             ),
             BottomNavigationBarItem(label: '찜', icon: Container(
               margin: EdgeInsets.only(bottom: 6, top: 6),
-              child: _selectedIndex == 4 ? Image.asset('asset/image/navFavoriteUnselect.png', width: 16.5) : Image.asset('asset/image/navFavoriteUnselect.png', width: 16.5))
+              child: _selectedIndex == 4 ? Image.asset('asset/image/navFavoriteSelect.png', width: 16.5) : Image.asset('asset/image/navFavoriteUnselect.png', width: 16.5))
             )
           ],
           selectedItemColor: Color(0xffff851c),
