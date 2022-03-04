@@ -60,7 +60,7 @@ class _ShopListContainer extends State<ShopListContainer> {
                                 Text('', style: textStyle(weight: 400, size: 13.0)),
                               ]
                             ),
-                            Image.asset('asset/image/star3.png', height: 20),
+                            _shopObject['foodielogRating'] == '' ? Container() : Image.asset('asset/image/star${_shopObject['foodielogRating'].length}.png', height: 20)
                           ]
                         )
                       ]

@@ -40,15 +40,18 @@ class _FavoriteRedList extends State<FavoriteRedList> {
           if(index%2==1) return lineDivider();
           else {
             var _temp = widget._favoriteList[(index/2).floor()];
-            // todo: genre, position
+            // todo: position
             var _shopId = _temp['shopId'];
-            print(_temp);
             var _reviewId = _temp['id'];
+            var _infoText = '${_temp['bigCategoryName']}';
+            if(_temp['middleCategoryName'] != null) _infoText = _infoText + ' | ${_temp['middleCategoryName']}';
+            if(_temp['smallCategoryName'] != null) _infoText = _infoText + ' | ${_temp['smallCategoryName']}';
+            var _position = _temp['roadAddress'].split(' ')[0] + ' ' + _temp['roadAddress'].split(' ')[1];
             return FavoriteItemSlidable (
               shopId: _temp['shopId'], thumbnail: _temp['shopImage'],
-              title: _temp['shopName'], genre: '장르', position: '서울 강남구',
+              title: _temp['shopName'], genre: _infoText, position: _position,
               rating: _temp['foodielogRating'],
-              pushCallback: () {_shopViewRoute(_shopId);},
+              pushCallback: () {_shopViewRoute(_shopId, _infoText);},
               shareCallback: () {},
               deleteCallback: () {_deleteCallback(_reviewId);},
             );
@@ -58,9 +61,9 @@ class _FavoriteRedList extends State<FavoriteRedList> {
     );
   }
   
-  _shopViewRoute(int shopId) {
+  _shopViewRoute(int shopId, String _infoText) {
     //todo: info text
-    navigatorPush(context: context, widget: ShopView(shopNo: shopId, infoText: '장르인듯?'));
+    navigatorPush(context: context, widget: ShopView(shopNo: shopId, infoText: _infoText));
   }
 
   _shareCallback(int shopId) {

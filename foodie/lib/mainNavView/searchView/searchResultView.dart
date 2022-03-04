@@ -245,7 +245,7 @@ class _SearchResultView extends State<SearchResultView> with SingleTickerProvide
 
     return Expanded(child: GestureDetector(
       behavior: HitTestBehavior.translucent,
-      onTap: () {navigatorPush(context: context, widget: ShopView(shopNo: _item['no'], infoText: _infoText,));},
+      onTap: () {navigatorPush(context: context, widget: ShopView(shopNo: _item['shopId'], infoText: _infoText,));},
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 12),
         child: Column(
@@ -266,7 +266,8 @@ class _SearchResultView extends State<SearchResultView> with SingleTickerProvide
             Text(_item['shopName'], style: textStyle(color: Color(0xff8e8e8e), weight: 500, size: 16.0)),
             SizedBox(height: 2),
             Text(_infoText, style: textStyle(color: Color(0xff8e8e8e), weight: 400, size: 13.0)),
-            // button?
+            SizedBox(height: 5),
+            _item['foodielogRating'] == '' ? Container() : Image.asset('asset/image/star${_item['foodielogRating'].length}.png', height: 20)
           ]
         )
       )

@@ -1,6 +1,6 @@
 import 'restApi.dart';
 import 'package:http/http.dart' as http;
-
+import 'dart:convert';
 
 //check : true if validate
 checkEmail(String email) async {
@@ -17,4 +17,14 @@ checkPhone(String phone) async {
     return response.body.toString()=='0';
   }
   else return null;
+}
+
+signUpApi() async {
+  var requestBody = Map();
+  requestBody['name'] = 'test';
+
+  var response = await http.post(Uri.parse('$baseIp/auth/register'),
+      headers: {"Content-Type": "application/json"},
+      body: json.encode(requestBody)
+  );
 }
