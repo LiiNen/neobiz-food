@@ -36,7 +36,6 @@ class _SearchPositionGoogleView extends State<SearchPositionGoogleView> {
     ).then((Position position) async {
       setState(() {
         _position = position;
-        print(_position!);
       });
     });
   }

@@ -16,20 +16,17 @@ searchTown({required int townNo, required String mode, int curPage=-1, Map? pres
 searchTownApi({required String query, required Map requestBody}) async {
   var response = await http.post(Uri.parse('$baseUrl$path_town$query'),
       body: requestBody);
-  print('$baseUrl$path_town$query');
-  print(requestBody);
+
   if(response.statusCode == 200) {
     var responseBody = json.decode(response.body);
-    print(responseBody);
+
     if(responseBody['townlist'] != null) return responseBody['townlist'];
     else if(responseBody['unpaid_list'] != null) return responseBody['unpaid_list'];
     else {
-      print('error');
       return [];
     }
   }
   else {
-    print('error');
     return [];
   }
 }

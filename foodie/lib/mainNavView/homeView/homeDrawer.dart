@@ -165,7 +165,6 @@ class _HomeDrawer extends State<HomeDrawer> {
         if(menu.action != null) menu.action();
         if(menu.route != null) navigatorPush(context: context, widget: menu.route);
         if(menu.title == '로그아웃') logoutAction();
-        print('click');
       },
       child: Container(
         margin: EdgeInsets.symmetric(horizontal: 21),

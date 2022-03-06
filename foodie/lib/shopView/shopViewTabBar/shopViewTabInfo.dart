@@ -219,7 +219,6 @@ class _ShopViewTabInfo extends State<ShopViewTabInfo> {
               behavior: HitTestBehavior.translucent,
               onTap: () {
                 //todo: 직접관리 페이지
-                print('todo 직접관리');
               },
               child: Container(
                 height: 47,

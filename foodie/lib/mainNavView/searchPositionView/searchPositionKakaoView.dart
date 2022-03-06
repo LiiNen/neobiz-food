@@ -41,7 +41,6 @@ import 'package:flutter/cupertino.dart';
 //         _position = position;
 //         _mapPosition = MapPoint(_position!.latitude, _position!.longitude);
 //         _cameraPosition = CameraPosition(target: MapPoint(_position!.latitude, _position!.longitude), zoom: 5);
-//         print(_position!);
 //       });
 //     });
 //   }

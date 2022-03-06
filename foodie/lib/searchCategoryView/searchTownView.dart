@@ -21,7 +21,6 @@ class _SearchTownView extends State<SearchTownView> {
 
   _getTown() async {
     var _temp = await getRegionTown();
-    print(_townList);
     if(_temp != null) {
       setState(() {
         _townList = _temp;

@@ -11,7 +11,6 @@ getFavoriteShopList() async {
     var responseBody = jsonDecode(response.body.replaceAll('\\r', ''));
     return responseBody;
   }
-  else print('error');
   return null;
 }
 
@@ -40,7 +39,6 @@ postFavorite(int shopId) async {
 
 deleteFavorite(int favoriteId) async {
   var response = await http.delete(Uri.parse('$testUrl$pathFavorite/$favoriteId'));
-  print('$testUrl$pathFavorite/$favoriteId');
   if(response.statusCode == 200) {
     return true;
   }

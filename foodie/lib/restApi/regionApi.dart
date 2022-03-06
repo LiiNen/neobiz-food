@@ -50,10 +50,8 @@ getRegionSubwayProvinceDistrict(String provinceName, String districtName) async 
 
 getRegionTown() async {
   var response = await http.get(Uri.parse('$testUrl$pathRegionTown'));
-  print(response.statusCode);
   if(response.statusCode == 200) {
     var responseBody = json.decode(response.body);
-    print(responseBody);
     return responseBody;
   }
   return null;

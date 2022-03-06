@@ -4,7 +4,6 @@ import 'package:foodie/collections/decorationContainers.dart';
 import 'package:foodie/collections/functions.dart';
 import 'package:foodie/mainNavView/searchView/searchResultView.dart';
 import 'package:foodie/restApi/regionApi.dart';
-import 'package:foodie/restApi/searchSubwayApi.dart';
 
 Map subwayQuery({int areaNo=-1, int lineNo=-1, int stationNo=-1, int curPage=-1}) {
   return {

@@ -18,7 +18,6 @@ createInquiryApi({required String query, required requestBody}) async {
       headers: {"Content-Type": "application/json"},
       body: requestBody);
 
-  print(response);
   if(response.statusCode == 200) {
     return true;
   } else return false;

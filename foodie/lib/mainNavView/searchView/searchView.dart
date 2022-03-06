@@ -30,7 +30,6 @@ class _SearchView extends State<SearchView> {
     final pref = await SharedPreferences.getInstance();
     setState(() {
       currentSearchList = pref.getStringList('currentSearchList') ?? [];
-      print(currentSearchList);
     });
   }
 

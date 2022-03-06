@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:foodie/collections/decorationContainers.dart';
 import 'package:foodie/collections/functions.dart';
-import 'package:foodie/restApi/detailInfoApi.dart';
 import 'package:foodie/restApi/favoriteApi.dart';
 import 'package:foodie/restApi/shopApi.dart';
 import 'package:foodie/shopView/shopViewAppBar.dart';
@@ -339,6 +338,6 @@ class _ShopView extends State<ShopView> with SingleTickerProviderStateMixin {
   }
 
   callPhone() {
-    print('todo: phone call');
+    //todo: phone call
   }
 }

@@ -24,7 +24,6 @@ class _FavoriteView extends State<FavoriteView> with SingleTickerProviderStateMi
 
   void _getFavoriteList() async {
     _favoriteList = await getFavoriteShopList();
-    print(_favoriteList);
     setState(() {});
   }
 

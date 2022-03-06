@@ -76,7 +76,6 @@ class _SearchResultView extends State<SearchResultView> with SingleTickerProvide
   }
 
   _getLocalSearchList() async {
-    print(requestItem);
     var temp = await searchLocal(doNum: requestItem['doNum'], siName: requestItem['siName'], mode: 'shop', presetBody: presetSearchRequest());
     setState(() {
       _searchItemList = temp;
@@ -91,7 +90,6 @@ class _SearchResultView extends State<SearchResultView> with SingleTickerProvide
       temp = await searchSubway(subwayQueryData: requestItem, mode: 'shop', presetBody: presetSearchRequest());
     }
     setState(() {
-      print(temp);
       _searchItemList = temp;
     });
   }
@@ -393,8 +391,6 @@ class _SearchResultView extends State<SearchResultView> with SingleTickerProvide
     var filterRowList = List.generate((filterItemList.length/3).floor() * 2 - 1, (index) {
       if(index%2==1) return SizedBox(height: 10);
       var itemIndex = (index/2).floor()*3;
-      print(filterItemList);
-      print(itemIndex);
       return Row(
         children: [
           filterDetailBox(filterItemList[itemIndex], setState),

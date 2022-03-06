@@ -25,7 +25,6 @@ class _ShopViewTabReview extends State<ShopViewTabReview> {
   }
 
   _getReview() async {
-    print('ddd');
     var _temp = await getReviewShop(shopId: shopJson['shopId']);
     if(_temp != null) {
       setState(() {

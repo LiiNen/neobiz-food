@@ -10,11 +10,9 @@ getUser({required int id}) async {
   var response = await http.get(Uri.parse('$testUrl$pathUser/userId/$id'));
   if(response.statusCode == 200) {
     var responseBody = json.decode(response.body);
-    print(responseBody);
     await setUserInfo(id: responseBody['userId'], name: responseBody['name'], email: responseBody['email'], phone: responseBody['phone'], address: responseBody['address'], point: responseBody['point']);
     return responseBody;
   }
-  else print('error');
   return null;
 }
 
@@ -26,7 +24,6 @@ patchUserName({required String name}) async {
       headers: {"Content-Type": "application/json"},
       body: json.encode(requestBody)
   );
-  print(response.statusCode);
   if(response.statusCode == 200) {
     return true;
   }

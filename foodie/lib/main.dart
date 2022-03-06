@@ -12,7 +12,6 @@ late UserInfo userInfo;
 void main() async{
   runApp(MyApp());
   await dotenv.load(fileName: '.env');
-  print(dotenv.env['he']);
 }
 
 class MyApp extends StatelessWidget {

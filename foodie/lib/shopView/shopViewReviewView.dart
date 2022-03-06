@@ -109,12 +109,10 @@ class _ShopViewReviewView extends State<ShopViewReviewView> {
     if(selectedIndex != -1) {
       var response = await postReview(shopId: widget.shopId, userId: userInfo.id, rating: 5-selectedIndex, content: _reviewController.text);
       if(response == true) {
-        print('success');
         Navigator.pop(context);
         widget.completeAction();
       }
       else {
-        print('fail');
         showToast('network error');
       }
     }

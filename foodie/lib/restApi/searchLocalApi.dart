@@ -17,11 +17,9 @@ searchLocal({required int doNum, required String siName, required String mode, i
 searchLocalApi({required String query, required Map requestBody}) async {
   var response = await http.post(Uri.parse('$baseUrl$path_region_list$query'),
       body: requestBody);
-  print('$baseUrl$path_region_list$query');
-  print(requestBody);
+
   if(response.statusCode == 200) {
     var responseBody = json.decode(response.body);
-    print(responseBody);
 
     var _type = responseBody['type'];
     if(_type == 'region') {

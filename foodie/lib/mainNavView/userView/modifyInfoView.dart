@@ -67,13 +67,11 @@ class _ModifyInfoView extends State<ModifyInfoView> {
   }
 
   _modifyInfoCallback() async {
-    print(userInfoList[0].controller.text);
     if(userInfoList[0].controller.text != '') {
       var response = await patchUserName(name: userInfoList[0].controller.text);
       if(response == true) {
         showToast('회원정보 수정 완료');
         userInfoList.map((e) {
-          print(e.controller.text);
           e.controller = TextEditingController(); // init
         }).toList();
         await getUser(id: userInfo.id);

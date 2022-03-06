@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:foodie/collections/decorationContainers.dart';
 import 'package:foodie/collections/exitDialog.dart';
 import 'package:foodie/collections/functions.dart';
-import 'package:foodie/collections/sharedPreferences.dart';
-import 'package:foodie/main.dart';
 import 'package:foodie/mainNavView/mainNavView.dart';
-import 'package:foodie/restApi/loginApi.dart';
 import 'package:foodie/restApi/userApi.dart';
 
 import 'signUpView.dart';
@@ -85,14 +82,12 @@ class _LoginView extends State<LoginView> {
     // check: login state
     // var _response = await checkEmail('kjeonghoon065@gmail.ccc');
     // var _response2 = await checkPhone('010-9394-1087');
-    // print(_response);
-    // print(_response2);
     var _response = await getUser(id: 34);
     if(_response != null) {
       navigatorPush(context: context, widget: MainNavView(), replacement: true, all: true);
     }
     else {
-      print('f');
+      showToast('error');
     }
   }
 
